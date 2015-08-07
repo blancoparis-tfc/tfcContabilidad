@@ -1,0 +1,3 @@
+allprojects {
+  task hola << { task -> println "Soy $task.project.name"}
+}
