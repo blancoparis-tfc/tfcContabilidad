@@ -1,3 +1,6 @@
 hola.doLast {
   println "             - Soy el proyecto donde vamos a definir el modelo de dominio";
 }
+task inverso(dependsOn: ":service:inverso") <<{
+  println " El ultimo es el bom";
+}

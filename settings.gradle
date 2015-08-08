@@ -1,1 +1,1 @@
-include 'bom','service'
+include 'service','bom'
