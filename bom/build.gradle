@@ -1,0 +1,3 @@
+hola.doLast {
+  println "             - Soy el proyecto donde vamos a definir el modelo de dominio";
+}
