@@ -1,0 +1,12 @@
+.gradle/2.2.1/taskArtifacts/cache.properties
+.gradle/2.2.1/taskArtifacts/fileHashes.bin
+build/libs/MultiJavaGradle2-1.0.jar
+.gradle/2.2.1/taskArtifacts/cache.properties.lock
+.gradle/2.2.1/taskArtifacts/fileSnapshots.bin
+.gradle/2.2.1/taskArtifacts/taskArtifacts.bin
+.gradle/2.2.1/taskArtifacts/outputFileStates.bin
+build/tmp/jar/MANIFEST.MF
+service/build/libs/service-1.0.jar
+service/build/tmp/jar/MANIFEST.MF
+bom/build/libs/bom-1.0.jar
+bom/build/tmp/jar/MANIFEST.MF
