@@ -10,3 +10,9 @@ service/build/libs/service-1.0.jar
 service/build/tmp/jar/MANIFEST.MF
 bom/build/libs/bom-1.0.jar
 bom/build/tmp/jar/MANIFEST.MF
+/build/
+
+.project
+.settings/gradle/org.springsource.ide.eclipse.gradle.core.import.prefs
+.settings/gradle/org.springsource.ide.eclipse.gradle.core.prefs
+.settings/gradle/org.springsource.ide.eclipse.gradle.refresh.prefs
