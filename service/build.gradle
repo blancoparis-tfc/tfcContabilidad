@@ -1,0 +1,8 @@
+dependencies {
+	compile project(":bom")
+	//transitive = true
+	compile 'org.springframework:spring-context:4.2.4.RELEASE'//+versionSpring
+ 	compile 'org.springframework:spring-orm:4.2.4.RELEASE'//+versionSpring
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile 'org.springframework:spring-test:4.2.0.RELEASE'
+}

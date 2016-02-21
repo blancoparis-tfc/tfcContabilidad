@@ -7,3 +7,4 @@ bom/build
 .gradle
 bom/.classpath
 service/.classpath
+/webapp/src/main/webapp/WEB-INF/cliente/node_modules

@@ -1,0 +1,36 @@
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+eclipse{
+	wtp{
+		facet{
+		facet name: 'jst.web', version: '3.0'
+		}
+	}
+}
+
+dependencies {
+	compile project(":service")
+
+	compile ('org.springframework:spring-webmvc:4.2.4.RELEASE')
+	// Spring security 
+	compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'
+	compile 'org.springframework.security:spring-security-config:4.0.3.RELEASE'
+
+	// Orientacion a aspectos
+	compile 'org.aspectj:aspectjrt:1.8.5'
+	compile 'org.aspectj:aspectjweaver:1.8.5'
+	// Jackson
+	compile 'com.fasterxml.jackson.core:jackson-core:2.7.1'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
+	// Jackson soporte xml
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.1'
+	compile 'org.codehaus.woodstox:woodstox-core-asl:4.4.1'
+	// Jackson integracion con el JSR-310 (Para las fechas)
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.3'
+	compile 'org.apache.commons:commons-lang3:3.4'	
+	// Jstl
+	compile 'javax.servlet:jstl:1.2'
+	compile 'taglibs:standard:1.1.2'
+	providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+}

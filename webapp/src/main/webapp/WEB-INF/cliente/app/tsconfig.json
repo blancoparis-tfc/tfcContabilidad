@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "filesGlob": [
+        "**/*.ts",
+        "**/*.tsx",
+        "!node_modules/**"
+    ],
+    "compileOnSave": true,
+    "buildOnSave": true,
+    "files": [
+        "app.component.ts",
+        "boot.ts",
+        "component/comun/cabecera.component.ts",
+        "component/comun/cuerpo.component.ts",
+        "component/comun/pie.component.ts",
+        "component/pantallas/about.component.ts",
+        "component/pantallas/contact.component.ts",
+        "component/pantallas/formulario.component.ts",
+        "model/formulario.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}
