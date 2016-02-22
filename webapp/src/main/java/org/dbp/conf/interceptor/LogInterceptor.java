@@ -11,22 +11,22 @@ public class LogInterceptor
 implements HandlerInterceptor{
 
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-		MDC.put("MarcaTiempo", ""+System.currentTimeMillis());
+	public boolean preHandle(final HttpServletRequest request,
+			final HttpServletResponse response, final Object handler) throws Exception {
+		MDC.put("MarcaTiempo", ""+System.currentTimeMillis());//NOPMD
 		return true;
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(final HttpServletRequest request,
+			final HttpServletResponse response,final Object handler,
+			final ModelAndView modelAndView) throws Exception {
 		MDC.remove("MarcaTiempo");
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
+	public void afterCompletion(final HttpServletRequest request,
+			final HttpServletResponse response,final Object handler,final Exception exception)
 			throws Exception {
 	}
 

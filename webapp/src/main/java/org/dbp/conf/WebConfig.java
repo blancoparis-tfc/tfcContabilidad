@@ -60,22 +60,22 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	 */
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/pages/");
         resolver.setSuffix(".jsp");
         return resolver;
     }
 
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+	public void addInterceptors(final InterceptorRegistry registry) {
 		super.addInterceptors(registry);
 		registry.addInterceptor(new LogInterceptor());
 	}
 	
 	
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		String entorno=env.getActiveProfiles()[0];
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		final String entorno=env.getActiveProfiles()[0];
 		registry
 	      .addResourceHandler("/resources/**")
 	      .addResourceLocations("/resources/")
@@ -107,34 +107,38 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 
 
 
+	@SuppressWarnings("serial")
 	private  class LocalDateDeserializerEs  extends LocalDateDeserializer{
 		private LocalDateDeserializerEs(){
 			super(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 	}
 	
+	@SuppressWarnings("serial")
 	private class LocalDateSerializerEs extends LocalDateSerializer{
 		private  LocalDateSerializerEs(){
 			super(false,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 	}
 	
+	@SuppressWarnings("serial")
 	private class JSR310ModuleEs extends SimpleModule{
 		public JSR310ModuleEs() {
 			super(PackageVersion.VERSION);
-	        addDeserializer(LocalDate.class,new LocalDateDeserializerEs());
-	        addSerializer(LocalDate.class, new LocalDateSerializerEs());
+	        addDeserializer(LocalDate.class,new LocalDateDeserializerEs()); //NOPMD
+	        addSerializer(LocalDate.class, new LocalDateSerializerEs()); //NOPMD
 		}
 	}
 
 	@Override
+	
 	public void configureMessageConverters(
-			List<HttpMessageConverter<?>> converters) {
+			final List<HttpMessageConverter<?>> converters) {
 		super.configureMessageConverters(converters);
-		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+		final Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
 	    builder
 	    	.indentOutput(true)
-	    	.dateFormat(new SimpleDateFormat("dd-MM-yyyy")
+	    	.dateFormat(new SimpleDateFormat("dd-MM-yyyy") // NOPMD (Por que es una configuración y no procede).
 	    	);
 	    converters.add(new MappingJackson2HttpMessageConverter(
 	    				builder
@@ -147,7 +151,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	}
 
 	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
+	public void addViewControllers(final ViewControllerRegistry registry) {
 		super.addViewControllers(registry);
 		registry.addViewController("/login").setViewName("login");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);

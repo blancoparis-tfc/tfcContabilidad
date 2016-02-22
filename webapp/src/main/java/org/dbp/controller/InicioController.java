@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @RequestMapping("inicio")
 public class InicioController {
 
-	private static Logger logger = LoggerFactory.getLogger(InicioController.class);
+	private static final Logger logger = LoggerFactory.getLogger(InicioController.class); // NOPMD
 	@DbpLog
 	@RequestMapping
 	public String inicio(){
@@ -34,7 +34,7 @@ public class InicioController {
 
 	
 	@RequestMapping("excepcion/{param}")
-	public String excepcion(HttpServletRequest  request,@PathVariable(value="param") String param) throws Exception{
+	public String excepcion( final HttpServletRequest  request,final @PathVariable(value="param") String param) throws Exception{
 		throw new Exception("Error de prueba");
 	}
 	@DbpLog
@@ -64,7 +64,7 @@ public class InicioController {
 	}
 	
 	private EjemploJson mockEjemplo() {
-		EjemploJson valdev=new EjemploJson();
+		final EjemploJson valdev=new EjemploJson();
 		valdev.setNumero(1L);
 		valdev.setCadena("cadena");
 		valdev.setDescripcion("descripcion");

@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class LogAspect {
 
-	private static Logger logger=LoggerFactory.getLogger(LogAspect.class);
+	private static Logger logger=LoggerFactory.getLogger(LogAspect.class); //NOPMD
 	/**
 	 * 
 	 * Antes de ejecutar el método.
@@ -47,7 +47,7 @@ public class LogAspect {
 			pointcut="execution(* *(..)) && @annotation(org.dbp.conf.aop.log.DbpLog)"
 			,returning="valdev"
 			)
-	public void despuesReturn(final JoinPoint joinPoint,Object valdev){
+	public void despuesReturn(final JoinPoint joinPoint,final Object valdev){
 		logger.debug(" [{}] valdev: [{}]"
 					,joinPoint.getSignature().toString()
 					,valdev);
@@ -72,19 +72,19 @@ public class LogAspect {
 	 * Se ejecutara siempre que tengamos una exceptión, para el paquete controller.
 	 * 
 	 * @param joinPoint	Es el punto de union.
-	 * @param ex		La excpeción que se ha ejecutado.
+	 * @param exception		La excpeción que se ha ejecutado.
 	 */
 	@AfterThrowing(
 			pointcut="execution(* org.dbp.controller.*.*(..))  "
-			,throwing="ex"
+			,throwing="exception"
 			)
-	public void despuesExcepcion(final JoinPoint joinPoint,final Throwable ex){
+	public void despuesExcepcion(final JoinPoint joinPoint,final Throwable exception){
 		logger.warn(" [{}] argumentos [{}] "
 				,joinPoint.getSignature().toString()
 				,Arrays.toString(joinPoint.getArgs()));
 		logger.error(" Error [{}] "
 				,joinPoint.getSignature().toString()
-				,ex);
+				,exception);
 	}
 	
 }

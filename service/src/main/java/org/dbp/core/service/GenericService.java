@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface GenericService <E extends Serializable,Id>{
 
-		public E obtenerId(Id id); //NOPMD
+		 E obtenerId(Id identificador); 
 
-		public void eliminar(E entidad); //NOPMD
+		 void eliminar(E entidad); 
 		
-		public void crear(E entidad); //NOPMD
+		 void crear(E entidad); 
 		
-		public E actualizar(E entidad); //NOPMD
+		 E actualizar(E entidad);
 		
-		public List<E> obtenerTodos(); //NOPMD
+		 List<E> obtenerTodos(); 
 
 }

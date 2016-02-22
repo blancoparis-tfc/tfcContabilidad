@@ -21,23 +21,23 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(classes = TestConfiguracion.class)
 public class ConfigurationJpaTest {
 
-	@PersistenceContext EntityManager em;
+	@PersistenceContext private EntityManager entiyManager;
 	
 	@Test
 	public void testRecuperarUnUsuario(){
-		Usuario usuario=em.find(Usuario.class, 1L);
-		assertEquals("El id del usuario 1",new Long(1L),usuario.getId());
+		final Usuario usuario=entiyManager.find(Usuario.class, 1L);
+		assertEquals("El id del usuario 1",Long.valueOf(1L),usuario.getId());
 		assertEquals("El login del usaurio","dblanco",usuario.getLogin());
 		assertEquals("El nombre","david blanco paris",usuario.getNombre());
 	}
 	
 	@Test
-	public void testInsertarUsuario(){
-		Usuario usuario=new Usuario();
+	public void testInsertarUsuario(){//NOPMD
+		final Usuario usuario=new Usuario();
 		usuario.setId(2L);
 		usuario.setLogin("perico");
 		usuario.setNombre("Perico el de los palotes");
-		em.persist(usuario);
+		entiyManager.persist(usuario);
 	}
 	
 }

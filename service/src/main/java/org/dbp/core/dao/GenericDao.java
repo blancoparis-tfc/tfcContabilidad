@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface GenericDao <E extends Serializable,ID>{
 
-	public E obtenerId(ID id);
+	 E obtenerId(ID identificador); 
 
-	public void eliminar(E entidad);
+	 void eliminar(E entidad); 
 	
-	public void crear(E entidad);
+	 void crear(E entidad); 
 	
-	public E actualizar(E entidad);
+	 E actualizar(E entidad); 
 	
-	public List<E> obtenerTodos();
+	 List<E> obtenerTodos(); 
 	
 }

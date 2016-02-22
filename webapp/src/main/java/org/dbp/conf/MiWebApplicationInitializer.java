@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.dbp.conf.profiles.ProfilesAplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
  
 @Configuration
@@ -16,7 +15,7 @@ public class MiWebApplicationInitializer
 	implements WebApplicationInitializer {
 	
 	@Override
-	public void onStartup(ServletContext servletContext)
+	public void onStartup(final ServletContext servletContext)
 			throws ServletException {
 		String entornoActivo=System.getProperty("spring.profiles.active");
 		if(StringUtils.isBlank(entornoActivo)){

@@ -22,20 +22,20 @@ public class UsuarioDaoTest {
 	
 	@Test
 	public void testRecuperarTodos(){
-		List<Usuario> usuarios=usuarioDao.obtenerTodos();
+		final List<Usuario> usuarios=usuarioDao.obtenerTodos();
 		assertEquals("Miramos el número de elementos",1,usuarios.size());
 	}
 	@Test
 	public void testObtenerPorId(){
-		Usuario usuario=usuarioDao.obtenerId(1L);
-		assertEquals("Validamos el ID:",new Long(1L),usuario.getId());
+		final Usuario usuario=usuarioDao.obtenerId(1L);
+		assertEquals("Validamos el ID:",Long.valueOf(1L),usuario.getId());
 		assertEquals("Validamos el loging","dblanco",usuario.getLogin());
 	}
 
 	@Test
 	public void testObtenerLogin(){
-		Usuario usuario=usuarioDao.obtenerLogin("dblanco");
-		assertEquals("Validamos el ID:",new Long(1L),usuario.getId());
+		final Usuario usuario=usuarioDao.obtenerLogin("dblanco");
+		assertEquals("Validamos el ID:",Long.valueOf(1L),usuario.getId());
 		assertEquals("Validamos el loging","dblanco",usuario.getLogin());
 	}
 }

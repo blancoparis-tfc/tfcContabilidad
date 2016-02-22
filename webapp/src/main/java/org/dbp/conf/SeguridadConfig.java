@@ -11,14 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SeguridadConfig extends WebSecurityConfigurerAdapter  {
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception { //NOPMD
 		auth
 			.inMemoryAuthentication()
 				.withUser("user").password("password").roles("USER");
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(final HttpSecurity http) throws Exception  { //NOPMD
 		super.configure(http);
 		http.authorizeRequests()	// Le indicamos que la autorizacion va a ser a nivel de request.
 			.anyRequest().authenticated()  // Le indicamos que cada solicitud requiere que el usuario de autentique.
@@ -30,7 +30,7 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter  {
 	
 	
     @Override
-	public void configure(WebSecurity web) throws Exception {
+	public void configure(final WebSecurity web) throws Exception { //NOPMD
     	web
     		.ignoring()
     		.antMatchers("/resources/**")

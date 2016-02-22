@@ -13,15 +13,15 @@ public class UsuarioDaoImpl
 	extends GenericDaoImpl<Usuario,Long> 
 	implements UsuarioDao{
 
-	@PersistenceContext private EntityManager em;
+	@PersistenceContext private EntityManager entityManager;
 	
 	public UsuarioDaoImpl() {
 		super(Usuario.class);
 	}
 	
 	@Override
-	public Usuario obtenerLogin(String login){
-		return em.createQuery("from Usuario u where u.login = :login",Usuario.class)
+	public Usuario obtenerLogin(final String login){
+		return entityManager.createQuery("from Usuario u where u.login = :login",Usuario.class)
 		.setParameter("login", login)
 		.getSingleResult();
 	}

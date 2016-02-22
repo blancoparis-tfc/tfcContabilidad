@@ -11,5 +11,5 @@ public interface UsuarioDao extends GenericDao<Usuario,Long> {
 	 * @param login	Es el login del usuario
 	 * @return
 	 */
-	public Usuario obtenerLogin(String login);
+	Usuario obtenerLogin(String login); 
 }

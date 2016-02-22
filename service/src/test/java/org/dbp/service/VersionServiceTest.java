@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(classes = TestConfiguracion.class)
 public class VersionServiceTest {
 
-	@Autowired VersionService versionService;
+	@Autowired private VersionService versionService;
 	
 	@Test
 	public void testVersion(){
