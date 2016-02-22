@@ -31,7 +31,8 @@
         "component/pantallas/about.component.ts",
         "component/pantallas/contact.component.ts",
         "component/pantallas/formulario.component.ts",
-        "model/formulario.ts"
+        "model/formulario.ts",
+        "../node_modules/angular2/typings/browser.d.ts"
     ],
     "atom": {
         "rewriteTsconfig": true
