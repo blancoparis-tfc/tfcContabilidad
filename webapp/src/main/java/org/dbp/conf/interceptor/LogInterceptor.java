@@ -27,7 +27,7 @@ implements HandlerInterceptor{
 	@Override
 	public void afterCompletion(final HttpServletRequest request,
 			final HttpServletResponse response,final Object handler,final Exception exception)
-			throws Exception {
+			throws Exception {//NOPMD
 	}
 
 }
