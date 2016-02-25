@@ -20,7 +20,8 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter  {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception  { //NOPMD
 		super.configure(http);
-		http.authorizeRequests()	// Le indicamos que la autorizacion va a ser a nivel de request.
+		http.csrf().disable() // Para las peticiones aya
+			.authorizeRequests()	// Le indicamos que la autorizacion va a ser a nivel de request.
 			.anyRequest().authenticated()  // Le indicamos que cada solicitud requiere que el usuario de autentique.
 			.and()
 		.formLogin()	// Configurar el formato de login.

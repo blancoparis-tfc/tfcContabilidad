@@ -7,11 +7,13 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.dbp.conf.aop.log.DbpLog;
-import org.dbp.controller.json.EjemploJson;
-import org.dbp.controller.json.EjemploJson.Resumen;
-import org.dbp.controller.json.EjemploJson.Resumen2;
+import org.dbp.json.EjemploJson;
+import org.dbp.json.EjemploJson.Resumen;
+import org.dbp.json.EjemploJson.Resumen2;
+import org.dbp.service.VersionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class InicioController {
 
 	private static final Logger logger = LoggerFactory.getLogger(InicioController.class); // NOPMD
+	
+	@Autowired VersionService versionService;
+	
 	@DbpLog
 	@RequestMapping
 	public String inicio(){

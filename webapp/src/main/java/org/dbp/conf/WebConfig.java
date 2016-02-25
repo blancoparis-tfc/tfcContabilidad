@@ -42,7 +42,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 				,"org.dbp.service"		// Los servicios.
 				}
 		)
-@Import({SeguridadConfig.class}) 
+@Import({SeguridadConfig.class,JpaConfig.class}) 
 public class WebConfig extends WebMvcConfigurerAdapter{
 
 	@Autowired private Environment env;

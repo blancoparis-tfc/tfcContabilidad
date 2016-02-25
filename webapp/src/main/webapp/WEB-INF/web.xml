@@ -15,7 +15,9 @@
    </context-param>
    <context-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>org.dbp.conf.WebConfig</param-value>
+      <param-value>
+      		org.dbp.conf.WebConfig
+      </param-value>
    </context-param>
 		<listener>
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

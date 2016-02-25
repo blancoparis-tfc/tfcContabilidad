@@ -1,7 +1,10 @@
 apply plugin: 'war'
-apply plugin: 'eclipse-wtp'
+
 
 eclipse{
+	project {
+      natures 'org.eclipse.wst.common.modulecore.ModuleCoreNature'
+     }
 	wtp{
 		facet{
 		facet name: 'jst.web', version: '3.0'
@@ -11,8 +14,13 @@ eclipse{
 
 dependencies {
 	compile project(":service")
+	compile ('org.springframework:spring-core:4.2.4.RELEASE')
 
 	compile ('org.springframework:spring-webmvc:4.2.4.RELEASE')
+	compile ('org.springframework:spring-context:4.2.4.RELEASE')
+	compile ('org.springframework:spring-tx:4.2.4.RELEASE')
+	
+	
 	// Spring security 
 	compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'
 	compile 'org.springframework.security:spring-security-config:4.0.3.RELEASE'
@@ -21,10 +29,10 @@ dependencies {
 	compile 'org.aspectj:aspectjrt:1.8.5'
 	compile 'org.aspectj:aspectjweaver:1.8.5'
 	// Jackson
-	compile 'com.fasterxml.jackson.core:jackson-core:2.7.1'
-	compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.6.5'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.6.5'
 	// Jackson soporte xml
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.1'
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.6.5'
 	compile 'org.codehaus.woodstox:woodstox-core-asl:4.4.1'
 	// Jackson integracion con el JSR-310 (Para las fechas)
 	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.3'

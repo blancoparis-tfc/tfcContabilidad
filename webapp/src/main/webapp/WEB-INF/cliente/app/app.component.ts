@@ -6,11 +6,14 @@ import {PieComponent} from './component/comun/pie.component';
 import {AboutComponent} from './component/pantallas/about.component';
 import {ContactComponent} from './component/pantallas/contact.component';
 import {FormularioComponent} from './component/pantallas/formulario.component';
+import {CuentaContableComponent} from "./component/pantallas/contabilidad/cuentaContable.component";
 
 @RouteConfig([
   {path: '/About', component: AboutComponent, as:'About'},
   {path: '/Contacto', component: ContactComponent,as:'Contacto'},
-  {path: '/Formulario', component: FormularioComponent,as:'Formulario'}
+  {path: '/Formulario', component: FormularioComponent,as:'Formulario'},
+  {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'}
+
 ])
 @Component({
   selector:'my-app',

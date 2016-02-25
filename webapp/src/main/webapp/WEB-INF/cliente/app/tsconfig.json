@@ -15,7 +15,11 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
-
+    "filesGlob": [
+        "**/*.ts",
+        "**/*.tsx",
+        "!node_modules/**"
+    ],
     "compileOnSave": true,
     "buildOnSave": true,
     "files": [
@@ -25,10 +29,12 @@
         "component/comun/cuerpo.component.ts",
         "component/comun/pie.component.ts",
         "component/pantallas/about.component.ts",
+        "component/pantallas/contabilidad/cuentaContable.component.ts",
         "component/pantallas/contact.component.ts",
         "component/pantallas/formulario.component.ts",
         "core/keycode.ts",
         "core/modal/dialogo.ts",
+        "model/contabilidad/cuentaContable.ts",
         "model/formulario.ts",
         "typings/browser.d.ts",
         "typings/es6-collections/es6-collections.d.ts",

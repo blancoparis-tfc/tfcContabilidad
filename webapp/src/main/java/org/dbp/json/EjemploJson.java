@@ -1,4 +1,4 @@
-package org.dbp.controller.json;
+package org.dbp.json;
 
 import java.io.Serializable;
 import java.time.LocalDate;
