@@ -2,7 +2,7 @@ import {Component,ElementRef,DynamicComponentLoader,Injector,provide} from 'angu
 import {Http,Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
-
+import {CuentaContableService} from '../../../service/contabilidad/cuentaContableService';
 @Component({
   selector:'contact',
   templateUrl:'app/component/pantallas/contabilidad/cuentaContable.component.html'
@@ -15,28 +15,17 @@ export class CuentaContableComponent{
                 ,private dialogo:DbpDialogo
                 ,private cargador: DynamicComponentLoader
                 ,private injector: Injector
+                ,private cuentaContableService:CuentaContableService
   ){
-    this.modelo = new CuentaContable(null,null);
-    http.get('app/mock/contabilidad/cuentaContable.json')
-    .map((res: Response)=> res.json())
-    .subscribe(res =>{
-       this.modelo.cuenta=res.clave;
-       this.modelo.descripcion=res.descripcion;
-     });
+    this.modelo = new CuentaContable("","");
   }
 
   onSubmit(){
     console.info('Modelo',this.modelo);
     this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
-            console.info(' Se creara la cuenta contable');
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-
-            this.http.put('contabilidad/cuentaContable',JSON.stringify(this.modelo),{headers: headers})
-            .map((res: Response)=> res.json())
-            .subscribe(res =>{
-                console.info('Los datos',res)
+            this.cuentaContableService.crear(this.modelo).subscribe(res=>{
+                console.info('Los datos son',res);
             });
           });
         dialogoComponent.instance.cuandoCancelar.then((_)=>{

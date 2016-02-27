@@ -36,6 +36,7 @@
         "core/modal/dialogo.ts",
         "model/contabilidad/cuentaContable.ts",
         "model/formulario.ts",
+        "service/contabilidad/cuentaContableService.ts",
         "typings/browser.d.ts",
         "typings/es6-collections/es6-collections.d.ts",
         "typings/es6-promise/es6-promise.d.ts"
