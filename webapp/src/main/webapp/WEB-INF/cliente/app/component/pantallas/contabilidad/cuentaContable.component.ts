@@ -28,10 +28,10 @@ export class CuentaContableComponent{
     this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
             this.cuentaContableService.crear(this.modelo).subscribe(res=>{
-                this.mensajeria.success('Se han guardado los datos correctamente.');
+                this.mensajeria.success(this.elemento,'Se han guardado los datos correctamente.');
             },
             err=>{
-                this.mensajeria.error(''+err);
+                this.mensajeria.error(this.elemento,''+err);
             });
           });
         dialogoComponent.instance.cuandoCancelar.then((_)=>{

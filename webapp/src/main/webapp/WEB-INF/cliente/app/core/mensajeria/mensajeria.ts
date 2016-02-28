@@ -1,18 +1,54 @@
-import {Injectable} from 'angular2/core';
-
+import {Injectable,ElementRef,Component,DynamicComponentLoader} from 'angular2/core';
+import {PromiseWrapper,Promise} from 'angular2/src/facade/async';
 @Injectable()
 export class Mensajeria{
 
-  public success(mensaje:string){
-      alert('success:'+mensaje);
+  private intervalo:number=10000;
+
+  constructor(private cargador: DynamicComponentLoader){}
+
+  public success(elemento:ElementRef,mensaje:string){
+      this.cargador.loadNextToLocation(DbpMensajeSuccess,elemento).then(containerRef=>{
+        containerRef.instance.mensaje=mensaje;
+        setTimeout(()=>{containerRef.dispose();},this.intervalo);
+      });
   }
 
-  public warning(mensaje:string){
-      alert('warning'+mensaje);
+  public warning(elemento:ElementRef,mensaje:string){
+    this.cargador.loadNextToLocation(DbpMensajeWarning,elemento).then(containerRef=>{
+      containerRef.instance.mensaje=mensaje;
+      setTimeout(()=>{containerRef.dispose();},this.intervalo);
+    });
   }
 
-  public error(mensaje:string){
-      alert('error:'+mensaje)
+  public error(elemento:ElementRef,mensaje:string){
+    this.cargador.loadNextToLocation(DbpMensajeError,elemento).then(containerRef=>{
+      containerRef.instance.mensaje=mensaje;
+      setTimeout(()=>{containerRef.dispose();},this.intervalo);
+    });
   }
-  
+}
+
+@Component({
+  selector:'dbp-mensaje-success',
+  template:'<div class="alert alert-success" role="alert">{{mensaje}}</div>'
+})
+export class DbpMensajeSuccess{
+  mensaje:String;
+}
+
+@Component({
+  selector:'dbp-mensaje-error',
+  template:'<div class="alert alert-danger" role="alert">{{mensaje}}</div>'
+})
+export class DbpMensajeError{
+  mensaje:String;
+}
+
+@Component({
+  selector:'dbp-mensaje-warning',
+  template:'<div class="alert alert-warning" role="alert">{{mensaje}}</div>'
+})
+export class DbpMensajeWarning{
+  mensaje:String;
 }
