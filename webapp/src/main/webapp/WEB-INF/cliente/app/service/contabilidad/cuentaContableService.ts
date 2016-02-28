@@ -12,7 +12,7 @@ export class CuentaContableService {
       this.genericService=new GenericService<CuentaContable,String>(http,this.url);
   }
 
-  public crear(cuentaContable:CuentaContable):Observable<CuentaContable>{
+  public crear(cuentaContable:CuentaContable):Observable<Response>{
     return this.genericService.crear(cuentaContable);
   }
 

@@ -20,6 +20,8 @@ dependencies {
 	compile ('org.springframework:spring-context:4.2.4.RELEASE')
 	compile ('org.springframework:spring-tx:4.2.4.RELEASE')
 	
+	// HATEOAS Si lo monto me da errores.
+	//compile 'org.springframework.hateoas:spring-hateoas:0.19.0.RELEASE'
 	
 	// Spring security 
 	compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'

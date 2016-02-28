@@ -33,6 +33,7 @@
         "component/pantallas/contact.component.ts",
         "component/pantallas/formulario.component.ts",
         "core/keycode.ts",
+        "core/mensajeria/mensajeria.ts",
         "core/modal/dialogo.ts",
         "model/contabilidad/cuentaContable.ts",
         "model/formulario.ts",

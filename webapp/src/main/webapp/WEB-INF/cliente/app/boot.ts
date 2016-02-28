@@ -8,7 +8,9 @@ import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2
 import {provide} from 'angular2/core';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {DbpDialogo} from './core/modal/dialogo';
+import {Mensajeria} from './core/mensajeria/mensajeria';
 import {CuentaContableService} from './service/contabilidad/cuentaContableService';
+
 
 bootstrap(AppComponent,[
     , ROUTER_PROVIDERS // proveedor del modulo de router.
@@ -16,5 +18,6 @@ bootstrap(AppComponent,[
     , provide(LocationStrategy, {useClass: HashLocationStrategy}) // La estrategia de cargar usaremos la #.
     , DbpDialogo
     , CuentaContableService
+    , Mensajeria
     ]
 );

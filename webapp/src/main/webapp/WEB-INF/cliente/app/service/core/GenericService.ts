@@ -8,10 +8,9 @@ export class GenericService <E,ID>{
         });
     }
 
-    public crear(cuentaContable:E):Observable<E>{
+    public crear(cuentaContable:E):Observable<Response>{
       return this.http
-            .put(this.url,JSON.stringify(cuentaContable),{headers:this.headers})
-            .map((res:Response) => res.json());
+        .post(this.url,JSON.stringify(cuentaContable),{headers:this.headers});
     }
 
 }

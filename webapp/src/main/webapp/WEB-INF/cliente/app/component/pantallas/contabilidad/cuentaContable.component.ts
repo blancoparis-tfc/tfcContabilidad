@@ -2,6 +2,8 @@ import {Component,ElementRef,DynamicComponentLoader,Injector,provide} from 'angu
 import {Http,Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
+import {Mensajeria} from '../../../core/mensajeria/mensajeria';
+
 import {CuentaContableService} from '../../../service/contabilidad/cuentaContableService';
 @Component({
   selector:'contact',
@@ -13,6 +15,7 @@ export class CuentaContableComponent{
   constructor(private http:Http,
                 private elemento:ElementRef
                 ,private dialogo:DbpDialogo
+                ,private mensajeria:Mensajeria
                 ,private cargador: DynamicComponentLoader
                 ,private injector: Injector
                 ,private cuentaContableService:CuentaContableService
@@ -25,7 +28,10 @@ export class CuentaContableComponent{
     this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
             this.cuentaContableService.crear(this.modelo).subscribe(res=>{
-                console.info('Los datos son',res);
+                this.mensajeria.success('Se han guardado los datos correctamente.');
+            },
+            err=>{
+                this.mensajeria.error(''+err);
             });
           });
         dialogoComponent.instance.cuandoCancelar.then((_)=>{
