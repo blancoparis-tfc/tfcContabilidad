@@ -31,10 +31,14 @@ export class Mensajeria{
 
 @Component({
   selector:'dbp-mensaje-success',
-  template:'<div class="alert alert-success" role="alert">{{mensaje}}</div>'
+  template:`<div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarMensaje()"><span aria-hidden="true">&times;</span></button>
+            {{mensaje}}
+            </div>`
 })
 export class DbpMensajeSuccess{
   mensaje:String;
+  cerrarMensaje(){}
 }
 
 @Component({

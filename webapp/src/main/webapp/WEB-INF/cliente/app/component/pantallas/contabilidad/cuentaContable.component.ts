@@ -21,6 +21,7 @@ export class CuentaContableComponent{
                 ,private cuentaContableService:CuentaContableService
   ){
     this.modelo = new CuentaContable("","");
+    this.cuentaContableService.setElemento(elemento);
   }
 
   onSubmit(){
@@ -31,6 +32,7 @@ export class CuentaContableComponent{
                 this.mensajeria.success(this.elemento,'Se han guardado los datos correctamente.');
             },
             err=>{
+                console.info('Procesar el error de segundas');
                 this.mensajeria.error(this.elemento,''+err);
             });
           });
