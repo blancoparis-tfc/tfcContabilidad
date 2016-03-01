@@ -13,12 +13,8 @@ export class CuentaContableService {
       this.genericService=new GenericService<CuentaContable,String>(http,this.url,mensajeria);
   }
 
-  public setElemento(elemento:ElementRef){
-      this.genericService.setElemento(elemento);
-  }
-
-  public crear(cuentaContable:CuentaContable):Observable<Response>{
-    return this.genericService.crear(cuentaContable);
+  public crear(cuentaContable:CuentaContable,elemento:ElementRef):Observable<Response>{
+    return this.genericService.crear(cuentaContable,elemento);
   }
 
 }

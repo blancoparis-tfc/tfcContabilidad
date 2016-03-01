@@ -21,14 +21,13 @@ export class CuentaContableComponent{
                 ,private cuentaContableService:CuentaContableService
   ){
     this.modelo = new CuentaContable("","");
-    this.cuentaContableService.setElemento(elemento);
   }
 
   onSubmit(){
     console.info('Modelo',this.modelo);
     this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
-            this.cuentaContableService.crear(this.modelo).subscribe(res=>{
+            this.cuentaContableService.crear(this.modelo,this.elemento).subscribe(res=>{
                 this.mensajeria.success(this.elemento,'Se han guardado los datos correctamente.');
             },
             err=>{

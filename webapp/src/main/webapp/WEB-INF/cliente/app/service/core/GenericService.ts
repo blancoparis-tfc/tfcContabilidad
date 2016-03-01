@@ -12,11 +12,7 @@ export class GenericService <E,ID>{
         });
     }
 
-    public setElemento(elemento:ElementRef){
-        this.elemento=elemento;
-    }
-
-    public crear(cuentaContable:E):Observable<Response>{
+    public crear(cuentaContable:E,elemento:ElementRef):Observable<Response>{
       return this.http
         .post(this.url,JSON.stringify(cuentaContable),{headers:this.headers})
         .catch(this.handleError);
