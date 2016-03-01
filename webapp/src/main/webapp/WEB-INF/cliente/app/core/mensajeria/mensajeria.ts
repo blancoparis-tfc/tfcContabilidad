@@ -1,4 +1,4 @@
-import {Injectable,ElementRef,Component,DynamicComponentLoader} from 'angular2/core';
+import {Injectable,ElementRef,Component,DynamicComponentLoader,ComponentRef} from 'angular2/core';
 import {PromiseWrapper,Promise} from 'angular2/src/facade/async';
 @Injectable()
 export class Mensajeria{
@@ -8,22 +8,28 @@ export class Mensajeria{
   constructor(private cargador: DynamicComponentLoader){}
 
   public success(elemento:ElementRef,mensaje:string){
-      this.cargador.loadNextToLocation(DbpMensajeSuccess,elemento).then(containerRef=>{
+      this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{
         containerRef.instance.mensaje=mensaje;
+        containerRef.instance.clase='alert-success';
+        containerRef.instance.elemento=containerRef;
         setTimeout(()=>{containerRef.dispose();},this.intervalo);
       });
   }
 
   public warning(elemento:ElementRef,mensaje:string){
-    this.cargador.loadNextToLocation(DbpMensajeWarning,elemento).then(containerRef=>{
+    this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{
       containerRef.instance.mensaje=mensaje;
+      containerRef.instance.clase='alert-warning';
+      containerRef.instance.elemento=containerRef;
       setTimeout(()=>{containerRef.dispose();},this.intervalo);
     });
   }
 
   public error(elemento:ElementRef,mensaje:string){
-    this.cargador.loadNextToLocation(DbpMensajeError,elemento).then(containerRef=>{
+    this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{
       containerRef.instance.mensaje=mensaje;
+      containerRef.instance.clase='alert-danger';
+      containerRef.instance.elemento=containerRef;
       setTimeout(()=>{containerRef.dispose();},this.intervalo);
     });
   }
@@ -31,28 +37,18 @@ export class Mensajeria{
 
 @Component({
   selector:'dbp-mensaje-success',
-  template:`<div class="alert alert-success" role="alert">
+  template:`<div class="alert {{clase}}"  role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarMensaje()"><span aria-hidden="true">&times;</span></button>
             {{mensaje}}
             </div>`
 })
-export class DbpMensajeSuccess{
+export class DbpMensaje{
   mensaje:String;
-  cerrarMensaje(){}
-}
+  clase:String;
+  elemento:ComponentRef;
+  cerrarMensaje(){
+    console.info('Cerramos el elemento');
+    this.elemento.dispose();
+  }
 
-@Component({
-  selector:'dbp-mensaje-error',
-  template:'<div class="alert alert-danger" role="alert">{{mensaje}}</div>'
-})
-export class DbpMensajeError{
-  mensaje:String;
-}
-
-@Component({
-  selector:'dbp-mensaje-warning',
-  template:'<div class="alert alert-warning" role="alert">{{mensaje}}</div>'
-})
-export class DbpMensajeWarning{
-  mensaje:String;
 }
