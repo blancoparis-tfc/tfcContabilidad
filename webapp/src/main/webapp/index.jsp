@@ -27,7 +27,7 @@
                   '${contexto}/node_modules/rxjs': { defaultExtension: 'js' }
                 },
                 paths: {
-                    'rxjs/observable/*' : '${contexto}/node_modules/rxjs/add/observable/*.js',
+                    'rxjs/observable/*' : '${contexto}/node_modules/rxjs/observable/*.js',
                     'rxjs/operator/*': '${contexto}/node_modules/rxjs/add/operator/*.js',
                     'rxjs/*': '${contexto}/node_modules/rxjs/*.js'
                 }

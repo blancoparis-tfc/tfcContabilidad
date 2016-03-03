@@ -1,5 +1,5 @@
 import {Injectable,ElementRef,Component,DynamicComponentLoader,ComponentRef} from 'angular2/core';
-import {PromiseWrapper,Promise} from 'angular2/src/facade/async';
+import {PromiseWrapper} from 'angular2/src/facade/promise';
 @Injectable()
 export class Mensajeria{
 
@@ -24,6 +24,7 @@ export class Mensajeria{
       setTimeout(()=>{containerRef.dispose();},this.intervalo);
     });
   }
+
 
   public error(elemento:ElementRef,mensaje:string){
     this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{

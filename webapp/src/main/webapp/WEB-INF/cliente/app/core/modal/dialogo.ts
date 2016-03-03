@@ -2,7 +2,7 @@ import {
      DynamicComponentLoader,Directive,Host,SkipSelf,forwardRef,Injectable,
      ElementRef,Injector,provide,ViewEncapsulation,Component,ComponentRef,Provider}
      from 'angular2/core';
-import {PromiseWrapper,Promise} from 'angular2/src/facade/async';
+import {PromiseWrapper} from 'angular2/src/facade/promise';
 import {Type,isPresent} from 'angular2/src/facade/lang';
 import { KeyboardEvent} from 'angular2/src/facade/browser';
 import {CONST} from 'angular2/src/facade/lang';
