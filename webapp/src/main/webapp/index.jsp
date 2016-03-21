@@ -6,8 +6,8 @@
       <c:url value="/" var="contexto" />
 	  <base href="${contexto}">
       <!-- 1. Cargamos las librerias -->
-      <script src="node_modules/es6-shim/es6-shim.js"></script>
       <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+      <script src="node_modules/es6-shim/es6-shim.js"></script>
       <script src="node_modules/systemjs/dist/system.src.js"></script>
       <script src="node_modules/rxjs/bundles/Rx.js"></script>
       <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
