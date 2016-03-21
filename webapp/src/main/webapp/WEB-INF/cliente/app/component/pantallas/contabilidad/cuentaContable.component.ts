@@ -1,17 +1,22 @@
-import {Component,ElementRef,DynamicComponentLoader,Injector,provide} from 'angular2/core';
+import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit} from 'angular2/core';
 import {Http,Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Mensajeria} from '../../../core/mensajeria/mensajeria';
 
+import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
+import {Grid} from '../../comun/grid/grid';
+
 import {CuentaContableService} from '../../../service/contabilidad/cuentaContableService';
 @Component({
   selector:'contact',
-  templateUrl:'app/component/pantallas/contabilidad/cuentaContable.component.html'
+  templateUrl:'app/component/pantallas/contabilidad/cuentaContable.component.html',
+  directives:[Grid]
 })
-export class CuentaContableComponent{
+export class CuentaContableComponent implements OnInit{
   modelo:CuentaContable;
-
+  lineas:Array<CuentaContable>;
+  columnas:Array<Columna>;
   constructor(private http:Http,
                 private elemento:ElementRef
                 ,private dialogo:DbpDialogo
@@ -20,7 +25,52 @@ export class CuentaContableComponent{
                 ,private injector: Injector
                 ,private cuentaContableService:CuentaContableService
   ){
+    console.info('construir');
     this.modelo = new CuentaContable("","");
+    this.columnas=this.getColumnas();
+    this.lineas = [
+  //    new CuentaContable('0001','p1'),
+  //    new CuentaContable('0002','p2')
+    ];
+  }
+
+  ngOnInit() {
+      console.info('ngOnInit');
+      this.cuentaContableService.obtenerTodos(this.elemento).subscribe(res=>{
+          this.lineas=res.json();
+      });
+  }
+
+  private getColumnas():Array<Columna>{
+    return [
+        new Columna('cuenta','cuenta',TIPO_NO_EDITABLE),
+        new Columna('descripcion','descripcion',TIPO_EDITABLE)
+    ];
+  }
+
+  consultar(){
+      //TODO: Falta por asociarlo a un servicio.
+      this.lineas.push(new CuentaContable('0001','p1'));
+      this.lineas.push(new CuentaContable('0002','p2'));
+      this.lineas.push(new CuentaContable('0003','p3'));
+  }
+
+  eliminar(elemento:any){
+
+      var idx = this.lineas.indexOf(elemento);
+      console.info('eliminar',elemento);
+      console.info('posicion',idx);
+
+
+      if(idx != -1){
+        this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quieres eliminar la cuenta ('+elemento.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
+            dialogoComponent.instance.cuandoOk.then((_)=>{
+                this.cuentaContableService.eliminar(elemento.cuenta,this.elemento).subscribe(res=>{
+                    this.lineas.splice(idx,1);
+                });
+            });
+          });
+      }
   }
 
   onSubmit(){
@@ -28,11 +78,13 @@ export class CuentaContableComponent{
     this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
             this.cuentaContableService.crear(this.modelo,this.elemento).subscribe(res=>{
+                this.lineas.push(res.json());
+                console.info('nos ha devuelto esto ', res.json());
                 this.mensajeria.success(this.elemento,'Se han guardado los datos correctamente.');
             },
             err=>{
                 console.info('Procesar el error de segundas');
-                this.mensajeria.error(this.elemento,''+err);
+                //this.mensajeria.error(this.elemento,''+err);
             });
           });
         dialogoComponent.instance.cuandoCancelar.then((_)=>{

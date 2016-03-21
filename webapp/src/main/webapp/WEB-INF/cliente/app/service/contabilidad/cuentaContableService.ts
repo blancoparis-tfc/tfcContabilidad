@@ -14,7 +14,16 @@ export class CuentaContableService {
   }
 
   public crear(cuentaContable:CuentaContable,elemento:ElementRef):Observable<Response>{
-    return this.genericService.crear(cuentaContable,elemento);
+      return this.genericService.crear(cuentaContable,elemento);
   }
+
+  public eliminar(id:String,elemento:ElementRef):Observable<Response>{
+      return this.genericService.eliminar(id,elemento);
+  }
+
+  public obtenerTodos(elemento:ElementRef):Observable<Response>{
+      return this.genericService.obtenerTodos(elemento);
+  }
+
 
 }

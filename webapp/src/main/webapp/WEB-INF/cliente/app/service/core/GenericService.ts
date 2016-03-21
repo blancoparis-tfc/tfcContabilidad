@@ -15,13 +15,28 @@ export class GenericService <E,ID>{
     public crear(cuentaContable:E,elemento:ElementRef):Observable<Response>{
       return this.http
         .post(this.url,JSON.stringify(cuentaContable),{headers:this.headers})
-        .catch(this.handleError);
+        .catch((error)=>{return this.handleError(error,elemento);});
     }
 
-    private handleError (error:Response){
+    public eliminar(id:ID,elemento:ElementRef):Observable<Response>{
+      return this.http
+        .delete(this.parserUrlId(id),{headers:this.headers})
+        .catch((error)=>{return this.handleError(error,elemento);});
+    }
+
+    public obtenerTodos(elemento:ElementRef):Observable<Response>{
+      return this.http
+          .get(this.url)
+          .catch((error)=>{return this.handleError(error,elemento);});
+    }
+
+    private handleError (error:Response,elemento:ElementRef){
       console.info('Error de generico ',error);
-      this.mensajeria.error(this.elemento,error.statusText)
+      this.mensajeria.error(elemento,error.text());
       return Observable.throw(error);
     }
 
+    private parserUrlId(id:ID){
+      return this.url + "/"+id;
+    }
 }

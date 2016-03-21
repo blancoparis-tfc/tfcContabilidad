@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,7 +61,7 @@ public class GenericRestController <E extends Serializable,ID>{
 	public E actualizar (@RequestBody E entidad){
 		return service.actualizar(entidad);
 	}
-	
+	@Transactional(rollbackFor=Exception.class)
 	@RequestMapping(value="/{identificador}",method=RequestMethod.DELETE)
 	public void eliminar(@PathVariable final ID identificador){
 		service.eliminar(service.obtenerId(identificador));
