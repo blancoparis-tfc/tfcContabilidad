@@ -39,6 +39,7 @@
         "core/mensajeria/mensajeria.ts",
         "core/modal/dialogo.ts",
         "model/contabilidad/cuentaContable.ts",
+        "model/core/filaGrid.ts",
         "model/formulario.ts",
         "service/contabilidad/cuentaContableService.ts",
         "service/core/GenericService.ts",

@@ -61,6 +61,13 @@ public class GenericRestController <E extends Serializable,ID>{
 	public E actualizar (@RequestBody E entidad){
 		return service.actualizar(entidad);
 	}
+
+	@RequestMapping(value="/lista",method=RequestMethod.PUT)
+	public List<E> actualizar (@RequestBody List<E> entidad){
+		return service.actualizar(entidad);
+	}
+
+	
 	@Transactional(rollbackFor=Exception.class)
 	@RequestMapping(value="/{identificador}",method=RequestMethod.DELETE)
 	public void eliminar(@PathVariable final ID identificador){

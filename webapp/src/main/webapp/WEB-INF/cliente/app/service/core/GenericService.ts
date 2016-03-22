@@ -24,6 +24,19 @@ export class GenericService <E,ID>{
         .catch((error)=>{return this.handleError(error,elemento);});
     }
 
+    public actualizarLista(cuentasContables:Array<E>,elemento:ElementRef):Observable<Response>{
+      return this.http
+          .put(this.url+'/lista',JSON.stringify(cuentasContables),{headers:this.headers})
+          .catch((error)=>{return this.handleError(error,elemento);});
+    }
+
+    public actualizar(cuentaContable:E,elemento:ElementRef):Observable<Response>{
+      return this.http
+          .put(this.url,JSON.stringify(cuentaContable),{headers:this.headers})
+          .catch((error)=>{return this.handleError(error,elemento);});
+    }
+
+
     public obtenerTodos(elemento:ElementRef):Observable<Response>{
       return this.http
           .get(this.url)

@@ -2,6 +2,7 @@ package org.dbp.core.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.dbp.core.dao.GenericDao;
 import org.dbp.core.service.GenericService;
@@ -37,6 +38,14 @@ public class GenericServiceImpl <E extends Serializable,Id> implements GenericSe
 		return dao.actualizar(entidad);
 	}
 
+	
+	@Override
+	public List<E> actualizar(final List<E> entidades) {
+		return entidades.stream()
+				.map(entidad->actualizar(entidad))
+				.collect(Collectors.toList());
+	}
+	
 	@Override
 	public List<E> obtenerTodos() {
 		return dao.obtenerTodos();

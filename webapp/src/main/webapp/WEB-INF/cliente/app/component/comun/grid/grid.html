@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
       <tr>
-          <th> Operaciones</th>
+
           <th *ngFor="#columna of columnas">
               <a (click)="ordenar(columna)" >{{columna.descripcion}}
               <span
@@ -13,15 +13,22 @@
                   aria-hidden="true"></span>
               </a>
           </th>
+          <th> Operaciones</th>
+          <th> Estado </th>
       </tr>
     </thead>
     <tr *ngFor="#fila of filas">
+        <td *ngFor="#columna of columnas">
+          <span  *ngIf="columna.tipo==='noEditable'">{{fila[columna.nombre]}}</span>
+          <input *ngIf="columna.tipo==='Editable'" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"
+            (change)="onCambio(fila)"/>
+        </td>
         <td>
           <span class="glyphicon glyphicon-trash" (click)="onEliminar(fila)"></span>
         </td>
-        <td *ngFor="#columna of columnas">
-          <span  *ngIf="columna.tipo==='noEditable'">{{fila[columna.nombre]}}</span>
-          <input *ngIf="columna.tipo==='Editable'" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"/>
+        <td>
+          Estado
+           {{fila.estado}}
         </td>
     </tr>
 </table>

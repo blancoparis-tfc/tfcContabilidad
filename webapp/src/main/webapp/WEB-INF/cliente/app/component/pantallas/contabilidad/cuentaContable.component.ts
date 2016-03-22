@@ -1,4 +1,4 @@
-import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit} from 'angular2/core';
+import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy} from 'angular2/core';
 import {Http,Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
@@ -13,7 +13,7 @@ import {CuentaContableService} from '../../../service/contabilidad/cuentaContabl
   templateUrl:'app/component/pantallas/contabilidad/cuentaContable.component.html',
   directives:[Grid]
 })
-export class CuentaContableComponent implements OnInit{
+export class CuentaContableComponent implements OnInit,OnDestroy{
   modelo:CuentaContable;
   lineas:Array<CuentaContable>;
   columnas:Array<Columna>;
@@ -28,10 +28,7 @@ export class CuentaContableComponent implements OnInit{
     console.info('construir');
     this.modelo = new CuentaContable("","");
     this.columnas=this.getColumnas();
-    this.lineas = [
-  //    new CuentaContable('0001','p1'),
-  //    new CuentaContable('0002','p2')
-    ];
+    this.lineas = [];
   }
 
   ngOnInit() {
@@ -40,6 +37,21 @@ export class CuentaContableComponent implements OnInit{
           this.lineas=res.json();
       });
   }
+
+  ngOnDestroy(){
+      console.info('se va a destruir');
+      this.actualizar();
+  }
+
+  private actualizar(){
+        var lineasActualizadas:Array<CuentaContable>;
+        lineasActualizadas=this.lineas.filter(elemento=>elemento.estado === 'MODIFICADO');
+        console.info('Las lineas',lineasActualizadas);
+        this.cuentaContableService.actualizarLista(lineasActualizadas,this.elemento).subscribe(res=>{
+            console.info('Se ha actualizado correctamente');
+        });
+  }
+
 
   private getColumnas():Array<Columna>{
     return [
@@ -56,12 +68,9 @@ export class CuentaContableComponent implements OnInit{
   }
 
   eliminar(elemento:any){
-
       var idx = this.lineas.indexOf(elemento);
       console.info('eliminar',elemento);
       console.info('posicion',idx);
-
-
       if(idx != -1){
         this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quieres eliminar la cuenta ('+elemento.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
             dialogoComponent.instance.cuandoOk.then((_)=>{
@@ -84,7 +93,6 @@ export class CuentaContableComponent implements OnInit{
             },
             err=>{
                 console.info('Procesar el error de segundas');
-                //this.mensajeria.error(this.elemento,''+err);
             });
           });
         dialogoComponent.instance.cuandoCancelar.then((_)=>{

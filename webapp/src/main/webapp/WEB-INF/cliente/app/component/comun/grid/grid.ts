@@ -17,15 +17,16 @@ export class Grid implements OnInit{
 
   ngOnInit() {
       console.info('Entro en el grid');
-      console.info('Eliminar:',this.eliminar.asObservable());
-      console.info('dato',this.eliminar.observers);
-      console.info('isUnsubcribed',this.eliminar.isUnsubscribed);
-      console.info('Contador',this.eliminar.count);
   }
 
   onEliminar(item:any){
       console.info('Operacion de eliminar',item);
       this.eliminar.next(item);
+  }
+
+  onCambio(item:any){
+      console.info('Ha cambiado el estado',item);
+      item.estado='MODIFICADO';
   }
 
   ordenar(columna:Columna){
