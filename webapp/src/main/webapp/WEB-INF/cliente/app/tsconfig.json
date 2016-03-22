@@ -32,6 +32,7 @@
         "component/comun/grid/ordernar.ts",
         "component/comun/pie.component.ts",
         "component/pantallas/about.component.ts",
+        "component/pantallas/contabilidad/asiento.component.ts",
         "component/pantallas/contabilidad/cuentaContable.component.ts",
         "component/pantallas/contact.component.ts",
         "component/pantallas/formulario.component.ts",

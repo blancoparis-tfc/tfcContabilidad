@@ -7,13 +7,14 @@ import {AboutComponent} from './component/pantallas/about.component';
 import {ContactComponent} from './component/pantallas/contact.component';
 import {FormularioComponent} from './component/pantallas/formulario.component';
 import {CuentaContableComponent} from "./component/pantallas/contabilidad/cuentaContable.component";
+import {AsientoComponent} from './component/pantallas/contabilidad/asiento.component';
 
 @RouteConfig([
   {path: '/About', component: AboutComponent, as:'About'},
   {path: '/Contacto', component: ContactComponent,as:'Contacto'},
   {path: '/Formulario', component: FormularioComponent,as:'Formulario'},
-  {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'}
-
+  {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'},
+  {path: '/Asiento', component: AsientoComponent, as:"Asiento"}
 ])
 @Component({
   selector:'my-app',
