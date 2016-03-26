@@ -3,11 +3,14 @@ package org.dbp.core.controller;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.PersistenceException;
 
 import org.dbp.core.service.GenericService;
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +88,25 @@ public class GenericRestController <E extends Serializable,ID>{
         return "Duplicado";
     }
 	
+	@ResponseStatus(HttpStatus.CONFLICT)  // 409
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    public String handleConflictNoHayReferencias(InvalidDataAccessApiUsageException e) {
+		//Throwable cause = e.getCause();
+		Optional<TransientPropertyValueException> causeTransientoPropertyValue = buscarCause(e,TransientPropertyValueException.class);
+		if(causeTransientoPropertyValue.isPresent()){
+        	return "No existe la fererencia del campo ("+causeTransientoPropertyValue.get().getPropertyName()+")";
+		}else{
+			return "Error desconocido hable con el administrador";
+		}
+    }
+	
+	private <T extends Throwable> Optional<T> buscarCause(Throwable e,Class<T> clase){
+		if(e.getCause()==null || e.getCause().getClass().equals(clase)){
+			return  Optional.ofNullable((T)e.getCause());
+		}else{
+			return buscarCause(e.getCause(), clase);
+		}
+	}
 	
 	@ResponseStatus(HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(PersistenceException.class)
