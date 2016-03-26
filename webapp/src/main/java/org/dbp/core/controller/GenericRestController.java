@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.persistence.PersistenceException;
 
 import org.dbp.core.service.GenericService;
+import org.dbp.utils.ExceptionUtils;
 import org.hibernate.TransientPropertyValueException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -81,15 +82,10 @@ public class GenericRestController <E extends Serializable,ID>{
 	}
 	
 	// Procesamiento de los errores.
-	//DataIntegrityViolationException
 	@ResponseStatus(HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
     public String handleConflict(DataIntegrityViolationException e) {
-		//ConstraintViolationException
-		
-		// clave única
-		// clave foránea
-		Optional<ConstraintViolationException> constraint =buscarCause(e,ConstraintViolationException.class);
+		Optional<ConstraintViolationException> constraint =ExceptionUtils.getInstancia().buscarCause(e,ConstraintViolationException.class);
 		if(constraint.isPresent()){
 			// códigos de error de HSQLDB ... http://grepcode.com/file/repo1.maven.org/maven2/org.hsqldb/hsqldb/2.3.1/org/hsqldb/error/ErrorCode.java
 			switch(constraint.get().getErrorCode()){
@@ -100,15 +96,13 @@ public class GenericRestController <E extends Serializable,ID>{
 		}else{
 			return "Error desconocido hable con el administrador";
 		}
-		//VndErrors;
-        
     }
 	
 	@ResponseStatus(HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(InvalidDataAccessApiUsageException.class)
     public String handleConflictNoHayReferencias(InvalidDataAccessApiUsageException e) {
 		//Throwable cause = e.getCause();
-		Optional<TransientPropertyValueException> causeTransientoPropertyValue = buscarCause(e,TransientPropertyValueException.class);
+		Optional<TransientPropertyValueException> causeTransientoPropertyValue = ExceptionUtils.getInstancia().buscarCause(e,TransientPropertyValueException.class);
 		if(causeTransientoPropertyValue.isPresent()){
         	return "No existe la fererencia del campo ("+causeTransientoPropertyValue.get().getPropertyName()+")";
 		}else{
@@ -116,21 +110,11 @@ public class GenericRestController <E extends Serializable,ID>{
 		}
     }
 	
-	private <T extends Throwable> Optional<T> buscarCause(Throwable e,Class<T> clase){
-		if(e.getCause()==null || e.getCause().getClass().equals(clase)){
-			return  Optional.ofNullable((T)e.getCause());
-		}else{
-			return buscarCause(e.getCause(), clase);
-		}
-	}
-	
 	@ResponseStatus(HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(PersistenceException.class)
     public String handleConflictCreado() {
 		//VndErrors;
         return "El registro ya fue creado";
     }
-	
-	
 	
 }
