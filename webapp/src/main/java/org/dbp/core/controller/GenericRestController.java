@@ -9,6 +9,7 @@ import javax.persistence.PersistenceException;
 
 import org.dbp.core.service.GenericService;
 import org.hibernate.TransientPropertyValueException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
@@ -83,9 +84,24 @@ public class GenericRestController <E extends Serializable,ID>{
 	//DataIntegrityViolationException
 	@ResponseStatus(HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public String handleConflict() {
+    public String handleConflict(DataIntegrityViolationException e) {
+		//ConstraintViolationException
+		
+		// clave única
+		// clave foránea
+		Optional<ConstraintViolationException> constraint =buscarCause(e,ConstraintViolationException.class);
+		if(constraint.isPresent()){
+			// códigos de error de HSQLDB ... http://grepcode.com/file/repo1.maven.org/maven2/org.hsqldb/hsqldb/2.3.1/org/hsqldb/error/ErrorCode.java
+			switch(constraint.get().getErrorCode()){
+			case -104:	return "Duplicado";
+			case -8: return "Tiene dependencias";
+			}
+			return "Duplicado";
+		}else{
+			return "Error desconocido hable con el administrador";
+		}
 		//VndErrors;
-        return "Duplicado";
+        
     }
 	
 	@ResponseStatus(HttpStatus.CONFLICT)  // 409
