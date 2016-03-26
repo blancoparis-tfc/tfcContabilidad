@@ -7,12 +7,22 @@ import javax.persistence.Id;
 
 @SuppressWarnings("serial")
 @Entity
-public class CuentaContable implements Serializable{ //NOPMD
+public class CuentaContable implements Serializable{ 
 	
 	@Id
 	private String cuenta;
 	
 	private String descripcion;
+	
+	public CuentaContable() {
+		super();
+	}
+	
+	public CuentaContable(String cuenta, String descripcion) {
+		super();
+		this.cuenta = cuenta;
+		this.descripcion = descripcion;
+	}
 
 	public String getCuenta() {
 		return cuenta;

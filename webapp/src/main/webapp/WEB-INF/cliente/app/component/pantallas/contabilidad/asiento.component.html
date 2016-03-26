@@ -3,3 +3,25 @@
 </div>
 <div #mensajeria></div>
 <p class="lead">Esta la operación del asiento.</p>
+<form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
+  <div class="row">
+      <div class="form-group" class="col-md-6">
+          <label>id</label>
+          <p class="form-control-static">{{modelo.id}}</p>
+      </div>
+      <div class="form-group" class="col-md-6">
+          <label>Descripción</label>
+          <input type="text" class="form-control"
+          [(ngModel)]="modelo.descripcion"
+          />
+      </div>
+  </div>
+  <button type="submit" class="btn btn-success">{{etiquetaEstado}}</button>
+  <button *ngIf="isModificar()" type="button" class="btn btn-danger" (click)="eliminar(modelo.id)"> eliminar </button>
+  <dbp-grid [columnas]="columnas" [filas]="modelo.lineas"
+      (crearNuevaLinea)="crearNuevaLinea()"
+      (accion)="accion($event)"
+      (eliminar)="eliminarLinea($event)">
+  </dbp-grid>
+
+</form>

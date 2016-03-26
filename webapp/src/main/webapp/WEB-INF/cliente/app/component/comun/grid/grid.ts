@@ -1,5 +1,5 @@
 import {Component,Input,Output,EventEmitter,OnInit} from 'angular2/core';
-import {Columna} from './columna';
+import {Columna,TiposEditables} from './columna';
 import {Ordenar} from './ordernar';
 @Component({
     selector: 'dbp-grid',
@@ -8,7 +8,10 @@ import {Ordenar} from './ordernar';
 export class Grid implements OnInit{
   @Input() columnas:Array<Columna>;
   @Input() filas:Array<any>;
+  //@Input() crearNuevaLinea:()=>void;
 
+  @Output() crearNuevaLinea= new EventEmitter();
+  @Output() accion=new EventEmitter();
   @Output() eliminar = new EventEmitter();
 
   columnaActiva:Columna;
@@ -17,6 +20,7 @@ export class Grid implements OnInit{
 
   ngOnInit() {
       console.info('Entro en el grid');
+      //this.crearNuevaLinea=()=>{};
   }
 
   onEliminar(item:any){
@@ -36,6 +40,26 @@ export class Grid implements OnInit{
 
   esColumnaActiva(columna:Columna){
     return this.columnaActiva===columna;
+  }
+
+  esInput(columna:Columna){
+    return columna.tipo==='Editable' && columna.tipoEditables == TiposEditables.INPUT;
+  }
+
+  esSelect(columna:Columna){
+    return columna.tipo==='Editable' && columna.tipoEditables == TiposEditables.SELECT;
+  }
+
+  nuevaLinea(columna:Columna){
+      console.info('Pulso el enter');
+      this.crearNuevaLinea.next(columna);
+  }
+
+  accionF6(columna:Columna,item:any){
+    let valor:[Columna,any];
+    valor=[columna,item];
+    console.info('Los datos 2',valor);
+    this.accion.next(valor);
   }
 
 }

@@ -20,8 +20,12 @@
     <tr *ngFor="#fila of filas">
         <td *ngFor="#columna of columnas">
           <span  *ngIf="columna.tipo==='noEditable'">{{fila[columna.nombre]}}</span>
-          <input *ngIf="columna.tipo==='Editable'" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"
-            (change)="onCambio(fila)"/>
+          <input *ngIf="esInput(columna)" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"
+            (change)="onCambio(fila)" (keyup.control.enter)="nuevaLinea(columna)"
+                (keyup.control.F6)="accionF6(columna,fila)"/>
+          <select *ngIf="esSelect(columna)"  class="form-control" [(ngModel)]="fila[columna.nombre]">
+              <option *ngFor="#elemento of columna.valores" value="{{elemento}}">{{elemento}}</option>
+          </select>
         </td>
         <td>
           <span class="glyphicon glyphicon-trash" (click)="onEliminar(fila)"></span>

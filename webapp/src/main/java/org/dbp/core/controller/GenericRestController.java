@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import org.dbp.core.service.GenericService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
@@ -81,6 +83,14 @@ public class GenericRestController <E extends Serializable,ID>{
     public String handleConflict() {
 		//VndErrors;
         return "Duplicado";
+    }
+	
+	
+	@ResponseStatus(HttpStatus.CONFLICT)  // 409
+    @ExceptionHandler(PersistenceException.class)
+    public String handleConflictCreado() {
+		//VndErrors;
+        return "El registro ya fue creado";
     }
 	
 	

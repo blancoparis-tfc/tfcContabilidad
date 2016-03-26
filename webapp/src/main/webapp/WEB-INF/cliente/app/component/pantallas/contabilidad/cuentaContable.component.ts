@@ -1,5 +1,5 @@
 import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy} from 'angular2/core';
-import {Http,Response,Headers} from 'angular2/http';
+import {Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Mensajeria} from '../../../core/mensajeria/mensajeria';
@@ -17,8 +17,8 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
   modelo:CuentaContable;
   lineas:Array<CuentaContable>;
   columnas:Array<Columna>;
-  constructor(private http:Http,
-                private elemento:ElementRef
+  constructor(
+                 private elemento:ElementRef
                 ,private dialogo:DbpDialogo
                 ,private mensajeria:Mensajeria
                 ,private cargador: DynamicComponentLoader

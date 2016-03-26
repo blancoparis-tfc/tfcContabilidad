@@ -2,7 +2,6 @@ package org.dbp.core.service;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public interface GenericService <E extends Serializable,Id>{
 

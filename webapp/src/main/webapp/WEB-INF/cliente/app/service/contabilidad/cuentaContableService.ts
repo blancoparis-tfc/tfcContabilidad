@@ -7,7 +7,7 @@ import {Mensajeria} from '../../core/mensajeria/mensajeria';
 
 @Injectable()
 export class CuentaContableService {
-  private url="contabilidad/cuentaContable";
+  private url:string="contabilidad/cuentaContable";
   private genericService:GenericService<CuentaContable,String>;
   constructor(private http:Http,private mensajeria:Mensajeria)  {
       this.genericService=new GenericService<CuentaContable,String>(http,this.url,mensajeria);

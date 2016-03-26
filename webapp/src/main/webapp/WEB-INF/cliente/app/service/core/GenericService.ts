@@ -3,9 +3,16 @@ import {Http,Headers,Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Mensajeria} from '../../core/mensajeria/mensajeria';
 
-export class GenericService <E,ID>{
+export interface IGenericService <E,ID>{
+     crear(cuentaContable:E,elemento:ElementRef):Observable<Response>;
+     eliminar(id:ID,elemento:ElementRef):Observable<Response>;
+     actualizarLista(cuentasContables:Array<E>,elemento:ElementRef):Observable<Response>;
+     actualizar(cuentaContable:E,elemento:ElementRef):Observable<Response>;
+     obtenerTodos(elemento:ElementRef):Observable<Response>;
+}
+
+export class GenericService <E,ID> implements GenericService<E,ID>{
     private headers;
-    private elemento:ElementRef;
     constructor(private http:Http,private url,private mensajeria:Mensajeria){
       this.headers  = new Headers({
           'Content-Type': 'application/json'
