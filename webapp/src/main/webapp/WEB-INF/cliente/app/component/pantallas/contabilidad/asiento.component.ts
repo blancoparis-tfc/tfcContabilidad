@@ -1,14 +1,16 @@
 import {Component,ElementRef} from 'angular2/core';
 import {Asiento} from '../../../model/contabilidad/asiento';
 import {AsientoService} from '../../../service/contabilidad/asientoService';
-import {DbpDialogo,DbpDialogoConfirmarConf} from '../../../core/modal/dialogo';
+import {DbpDialogo,DbpDialogoBaseConf,DbpDialogoConfirmarConf} from '../../../core/modal/dialogo';
 import {Mensajeria} from '../../../core/mensajeria/mensajeria';
 import {OperacionesUtils,Estado} from '../../../core/utils/components/operacionesUtil';
 import {Grid} from '../../comun/grid/grid';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE,TiposEditables,Acciones} from '../../comun/grid/columna';
 import {LineaAsiento} from '../../../model/contabilidad/lineaAsiento';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
+import {CuentaContableComponent} from './cuentaContable.component';
 import {Response} from 'angular2/http';
+
 
 
 @Component({
@@ -24,12 +26,8 @@ export class AsientoComponent {
     operacionesAsiento:OperacionesUtils<Asiento,number>;
     columnas:Array<Columna>;
 
-    constructor(
-                 private asientoService:AsientoService
-               , private elemento:ElementRef
-               , private dialogo:DbpDialogo
-               , private mensajeria:Mensajeria
-                ){
+    constructor(private asientoService:AsientoService, private elemento:ElementRef
+               , private dialogo:DbpDialogo, private mensajeria:Mensajeria){
         this.transitarCrear();
         this.columnas=this.getColumnas();
         this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService);
@@ -45,6 +43,14 @@ export class AsientoComponent {
 
     accion(evento:[Columna,any]){
       console.info('En el asiento', evento);
+      this.dialogo.abrir(CuentaContableComponent,this.elemento,new DbpDialogoBaseConf('Ejemplo para')).then(dialogoRef=>{
+        console.info('Componente de dentro',dialogoRef.componenteDentro);
+        dialogoRef.cuandoCerramos.then((_)=>{
+          //console.info('Se cerro el componente',dialogoRef.componenteDentro.instance.modelo);
+          evento[1].cuenta=dialogoRef.componenteDentro.instance.modelo;
+        });
+        return dialogoRef;
+      });
     }
 
     private getColumnas():Array<Columna>{

@@ -13,6 +13,7 @@ export class Grid implements OnInit{
   @Output() crearNuevaLinea= new EventEmitter();
   @Output() accion=new EventEmitter();
   @Output() eliminar = new EventEmitter();
+  @Output() seleccionar = new EventEmitter();
 
   columnaActiva:Columna;
 
@@ -23,13 +24,16 @@ export class Grid implements OnInit{
       //this.crearNuevaLinea=()=>{};
   }
 
+  onSeleccionar(item:any){
+    console.info('Seleecionada esta fila',item);
+    this.seleccionar.next(item);
+  }
+
   onEliminar(item:any){
-      console.info('Operacion de eliminar',item);
       this.eliminar.next(item);
   }
 
   onCambio(item:any){
-      console.info('Ha cambiado el estado',item);
       item.estado='MODIFICADO';
   }
 

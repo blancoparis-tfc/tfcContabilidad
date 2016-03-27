@@ -24,6 +24,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
                 ,private cargador: DynamicComponentLoader
                 ,private injector: Injector
                 ,private cuentaContableService:CuentaContableService
+                ,private dbpDialogoRef:DbpDialogoRef
   ){
     console.info('construir');
     this.modelo = new CuentaContable("","");
@@ -58,6 +59,12 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
         new Columna('cuenta','cuenta',TIPO_NO_EDITABLE),
         new Columna('descripcion','descripcion',TIPO_EDITABLE)
     ];
+  }
+
+  seleccionar(fila:any){
+      console.info('Seleccionar un elemento en la cuenta contable',fila);
+      this.modelo=fila;
+      this.dbpDialogoRef.cerrar();
   }
 
   consultar(){

@@ -25,5 +25,7 @@
     </div>
     <button type="button" class="btn btn-default" (click)="consultar()"> Consultar </button>
     <button type="submit" class="btn btn-default"> Crear </button>
-    <dbp-grid [columnas]="columnas" [filas]="lineas" (eliminar)="eliminar($event)"></dbp-grid>
+    <dbp-grid [columnas]="columnas" [filas]="lineas"
+      (eliminar)="eliminar($event)"
+      (seleccionar)="seleccionar($event)"></dbp-grid>
 </form>

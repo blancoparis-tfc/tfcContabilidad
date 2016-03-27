@@ -17,7 +17,7 @@
           <th> Estado </th>
       </tr>
     </thead>
-    <tr *ngFor="#fila of filas">
+    <tr *ngFor="#fila of filas" (dblclick)="onSeleccionar(fila)">
         <td *ngFor="#columna of columnas">
           <span  *ngIf="columna.tipo==='noEditable'">{{fila[columna.nombre]}}</span>
           <input *ngIf="esInput(columna)" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"
