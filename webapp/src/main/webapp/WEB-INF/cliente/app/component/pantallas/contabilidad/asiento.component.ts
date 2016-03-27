@@ -42,15 +42,14 @@ export class AsientoComponent {
     }
 
     accion(evento:[Columna,any]){
-      console.info('En el asiento', evento);
-      this.dialogo.abrir(CuentaContableComponent,this.elemento,new DbpDialogoBaseConf('Ejemplo para')).then(dialogoRef=>{
-        console.info('Componente de dentro',dialogoRef.componenteDentro);
-        dialogoRef.cuandoCerramos.then((_)=>{
-          //console.info('Se cerro el componente',dialogoRef.componenteDentro.instance.modelo);
-          evento[1].cuenta=dialogoRef.componenteDentro.instance.modelo;
+      if(evento[0].nombre==='cuentaContable'){
+        this.dialogo.abrir(CuentaContableComponent,this.elemento,new DbpDialogoBaseConf('Cuenta contable')).then(dialogoRef=>{
+          dialogoRef.cuandoCerramos.then((_)=>{
+            evento[1].cuenta=dialogoRef.componenteDentro.instance.modelo;
+          });
+          return dialogoRef;
         });
-        return dialogoRef;
-      });
+      }
     }
 
     private getColumnas():Array<Columna>{

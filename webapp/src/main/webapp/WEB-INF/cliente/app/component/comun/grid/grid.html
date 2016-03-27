@@ -18,11 +18,14 @@
       </tr>
     </thead>
     <tr *ngFor="#fila of filas" (dblclick)="onSeleccionar(fila)">
-        <td *ngFor="#columna of columnas">
+        <td *ngFor="#columna of columnas"
+          (keyup.control.F6)="accionF6(columna,fila)"
+          (keyup.control.Delete)="onEliminar(fila)"
+          (keyup.control.F1)="onHelp()"
+          >
           <span  *ngIf="columna.tipo==='noEditable'">{{fila[columna.nombre]}}</span>
           <input *ngIf="esInput(columna)" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"
-            (change)="onCambio(fila)" (keyup.control.enter)="nuevaLinea(columna)"
-                (keyup.control.F6)="accionF6(columna,fila)"/>
+            (change)="onCambio(fila)" (keyup.control.enter)="nuevaLinea(columna)" />
           <select *ngIf="esSelect(columna)"  class="form-control" [(ngModel)]="fila[columna.nombre]">
               <option *ngFor="#elemento of columna.valores" value="{{elemento}}">{{elemento}}</option>
           </select>
