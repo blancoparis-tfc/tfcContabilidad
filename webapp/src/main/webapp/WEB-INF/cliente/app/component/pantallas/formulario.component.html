@@ -10,6 +10,7 @@
             [(ngModel)]="modelo.id"
             required
             ngControl="id"  #id="ngForm"
+            autofocus
             />
             {{id.valid}} / {{id.pristine}}
             <div [hidden]="id.valid || id.pristine" class="alert alert-danger">

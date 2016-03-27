@@ -10,8 +10,8 @@
             <input type="text" class="form-control"
             [(ngModel)]="modelo.cuenta"
             required
+            [autofocus]
             ngControl="cuenta"  #cuenta="ngForm"
-            autofocus
             />
             <div [hidden]="cuenta.valid || cuenta.pristine" class="alert alert-danger">
                 El nombre es obligatorio

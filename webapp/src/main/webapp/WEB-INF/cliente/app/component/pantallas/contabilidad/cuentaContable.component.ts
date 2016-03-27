@@ -1,4 +1,5 @@
 import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy} from 'angular2/core';
+import {FormBuilder} from 'angular2/common';
 import {Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
@@ -6,12 +7,13 @@ import {Mensajeria} from '../../../core/mensajeria/mensajeria';
 
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {Grid} from '../../comun/grid/grid';
+import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 
 import {CuentaContableService} from '../../../service/contabilidad/cuentaContableService';
 @Component({
   selector:'contact',
   templateUrl:'app/component/pantallas/contabilidad/cuentaContable.component.html',
-  directives:[Grid]
+  directives:[Grid,AutoFocus]
 })
 export class CuentaContableComponent implements OnInit,OnDestroy{
   modelo:CuentaContable;
@@ -24,7 +26,8 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
                 ,private cargador: DynamicComponentLoader
                 ,private injector: Injector
                 ,private cuentaContableService:CuentaContableService
-                ,private dbpDialogoRef:DbpDialogoRef=null
+                ,private formBuilder:FormBuilder
+                ,private dbpDialogoRef:DbpDialogoRef
   ){
     console.info('construir');
     this.modelo = new CuentaContable("","");
@@ -64,7 +67,9 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
   seleccionar(fila:any){
       console.info('Seleccionar un elemento en la cuenta contable',fila);
       this.modelo=fila;
-      this.dbpDialogoRef.cerrar();
+      if(this.dbpDialogoRef!=null){
+          this.dbpDialogoRef.cerrar();
+      }
   }
 
   consultar(){
