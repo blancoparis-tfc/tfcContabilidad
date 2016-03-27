@@ -24,7 +24,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
                 ,private cargador: DynamicComponentLoader
                 ,private injector: Injector
                 ,private cuentaContableService:CuentaContableService
-                ,private dbpDialogoRef:DbpDialogoRef
+                ,private dbpDialogoRef:DbpDialogoRef=null
   ){
     console.info('construir');
     this.modelo = new CuentaContable("","");

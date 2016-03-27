@@ -11,6 +11,7 @@
             [(ngModel)]="modelo.cuenta"
             required
             ngControl="cuenta"  #cuenta="ngForm"
+            autofocus
             />
             <div [hidden]="cuenta.valid || cuenta.pristine" class="alert alert-danger">
                 El nombre es obligatorio
