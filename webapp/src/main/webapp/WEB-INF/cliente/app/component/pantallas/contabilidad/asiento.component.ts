@@ -10,13 +10,14 @@ import {LineaAsiento} from '../../../model/contabilidad/lineaAsiento';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {CuentaContableComponent} from './cuentaContable.component';
 import {Response} from 'angular2/http';
+import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 
 
 
 @Component({
     selector:'asiento',
     templateUrl:'app/component/pantallas/contabilidad/asiento.component.html',
-    directives:[Grid]
+    directives:[Grid,AutoFocus]
 })
 export class AsientoComponent {
 

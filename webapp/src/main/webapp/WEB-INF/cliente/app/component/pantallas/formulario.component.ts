@@ -1,9 +1,11 @@
 import {Component} from 'angular2/core';
 import {Http,Response} from 'angular2/http';
 import {Formulario} from '../../model/formulario';
+import {AutoFocus} from '../../core/directivas/autofocus.directive';
 @Component({
   selector:'formularioDbp',
-  templateUrl:'app/component/pantallas/formulario.component.html'
+  templateUrl:'app/component/pantallas/formulario.component.html',
+  directives:[AutoFocus]
 })
 export class FormularioComponent{
   modelo:Formulario;
