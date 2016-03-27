@@ -7,6 +7,7 @@ import {Type,isPresent} from 'angular2/src/facade/lang';
 import { KeyboardEvent} from 'angular2/src/facade/browser';
 import {CONST} from 'angular2/src/facade/lang';
 import {KeyCodes} from '../keycode';
+import {AutoFocus} from '../directivas/autofocus.directive';
 
 
 @Injectable()
@@ -139,7 +140,8 @@ export class DialogoAlertComponent extends AbstractDialogoComponent{
 @Component({
   selector:'dbp-dialogo-confirmar',
   templateUrl:'app/core/modal/dialogo.confirmar.html',
-  host:{'(body:keydown)':'documentKeypress($event)'}
+  host:{'(body:keydown)':'documentKeypress($event)'},
+  directives:[AutoFocus]
 })
 export class DialogoConfirarComponent extends AbstractDialogoComponent{
 
