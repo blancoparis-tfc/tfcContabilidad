@@ -132,7 +132,7 @@ export class AsientoComponent {
     }
 
     volver(){
-      this.router.navigate(['/AsientoFiltro']);
+      this.router.navigate(['/Asiento']);
     }
 
     transitarModificar(){

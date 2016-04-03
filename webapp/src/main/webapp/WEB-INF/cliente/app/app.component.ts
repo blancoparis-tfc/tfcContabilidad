@@ -15,8 +15,8 @@ import {AsientoFiltroComponent} from './component/pantallas/contabilidad/asiento
   {path: '/Contacto', component: ContactComponent,as:'Contacto'},
   {path: '/Formulario', component: FormularioComponent,as:'Formulario'},
   {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'},
-  {path: '/Asiento', component: AsientoComponent, as:"Asiento"},
-  {path: '/AsientoFiltro', component: AsientoFiltroComponent, as:"AsientoFiltro"}
+  {path: '/AsientoFicha', component: AsientoComponent, as:"AsientoFicha"},
+  {path: '/Asiento', component: AsientoFiltroComponent, as:"Asiento"}
 ])
 @Component({
   selector:'my-app',

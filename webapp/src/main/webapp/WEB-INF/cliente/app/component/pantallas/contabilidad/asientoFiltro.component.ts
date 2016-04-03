@@ -39,10 +39,10 @@ export class AsientoFiltroComponent{
     }
 
     seleccionar(fila:any){
-        this.router.navigate(['/Asiento',{id:fila.id}]);
+        this.router.navigate(['/AsientoFicha',{id:fila.id}]);
     }
 
     crear(){
-        this.router.navigate(['/Asiento']);
+        this.router.navigate(['/AsientoFicha']);
     }
 }
