@@ -15,6 +15,8 @@ import javax.persistence.TableGenerator;
 
 import org.dbp.bom.contabilidad.enums.TipoMovimientoContable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @SuppressWarnings("serial")
 @Entity	
 public class LineaAsiento implements Serializable{
@@ -34,6 +36,7 @@ public class LineaAsiento implements Serializable{
 	
 	private BigDecimal importe;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="asientoId")
 	private Asiento asiento;

@@ -12,7 +12,7 @@ export interface IGenericService <E,ID>{
 }
 
 export class GenericService <E,ID> implements GenericService<E,ID>{
-    private headers;
+    public headers;
     constructor(private http:Http,private url,private mensajeria:Mensajeria){
       this.headers  = new Headers({
           'Content-Type': 'application/json'
@@ -43,6 +43,11 @@ export class GenericService <E,ID> implements GenericService<E,ID>{
           .catch((error)=>{return this.handleError(error,elemento);});
     }
 
+    public obtenerId(id:ID,elemento:ElementRef):Observable<Response>{
+      return this.http
+          .get(this.parserUrlId(id))
+          .catch((error)=>{return this.handleError(error,elemento);});
+    }
 
     public obtenerTodos(elemento:ElementRef):Observable<Response>{
       return this.http
@@ -50,7 +55,7 @@ export class GenericService <E,ID> implements GenericService<E,ID>{
           .catch((error)=>{return this.handleError(error,elemento);});
     }
 
-    private handleError (error:Response,elemento:ElementRef){
+    public handleError (error:Response,elemento:ElementRef){
       console.info('Error de generico ',error);
       this.mensajeria.error(elemento,error.text());
       return Observable.throw(error);

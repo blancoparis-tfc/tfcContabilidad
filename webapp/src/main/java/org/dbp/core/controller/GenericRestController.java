@@ -59,6 +59,7 @@ public class GenericRestController <E extends Serializable,ID>{
 		return service.obtenerTodos();
 	}
 	
+	@Transactional
 	@RequestMapping(value="/{identificador}",method=RequestMethod.GET)
 	public E obtenerId(@PathVariable final ID identificador){
 			return service.obtenerId(identificador);

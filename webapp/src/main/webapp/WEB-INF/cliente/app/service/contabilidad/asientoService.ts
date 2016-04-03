@@ -1,8 +1,9 @@
 import {Injectable,ElementRef} from 'angular2/core';
-import {Http,Response} from 'angular2/http';
+import {Http,Response,URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {GenericService,IGenericService} from '../core/GenericService';
 import {Asiento} from '../../model/contabilidad/asiento';
+import {AsientoFiltro} from '../../model/contabilidad/asientoFiltro';
 import {Mensajeria} from '../../core/mensajeria/mensajeria';
 
 @Injectable()
@@ -29,9 +30,23 @@ export class AsientoService implements IGenericService<Asiento,number>{
         return this.genericService.eliminar(id,elemento);
     }
 
+    public obtenerId(id:number,elemento:ElementRef):Observable<Response>{
+      return this.genericService.obtenerId(id,elemento);
+    }
+
     public obtenerTodos(elemento:ElementRef):Observable<Response>{
         return this.genericService.obtenerTodos(elemento);
     }
 
+    public filtrar(filtro:AsientoFiltro,elemento:ElementRef):Observable<Response>{
+      var search:URLSearchParams=new URLSearchParams();
+      search.append('id',filtro.id);
+      search.append('descripcion',filtro.descripcion);
+      search.append('cuenta',filtro.cuenta);
+      search.append('concepto',filtro.concepto)
+      return this.http
+          .get(this.url+"/filtro",{search:search})
+          .catch((error)=>{return this.genericService.handleError(error,elemento);});
+    }
 
 }

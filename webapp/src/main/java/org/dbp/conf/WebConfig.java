@@ -19,6 +19,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -45,6 +47,9 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 @Import({SeguridadConfig.class,JpaConfig.class}) 
 public class WebConfig extends WebMvcConfigurerAdapter{
 
+	@Autowired
+	private LocalContainerEntityManagerFactoryBean containerEntityManagerFactoryBean;
+	
 	@Autowired private Environment env;
 	
 	@Bean
@@ -70,6 +75,9 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	public void addInterceptors(final InterceptorRegistry registry) {
 		super.addInterceptors(registry);
 		registry.addInterceptor(new LogInterceptor());
+		OpenEntityManagerInViewInterceptor interceptor = new OpenEntityManagerInViewInterceptor();
+		interceptor.setEntityManagerFactory(containerEntityManagerFactoryBean.getObject());
+		registry.addWebRequestInterceptor(interceptor); // Es para el lazy, en los json, a la hora de parsear.
 	}
 	
 	

@@ -1,4 +1,6 @@
 import {Component,ElementRef} from 'angular2/core';
+import {Response} from 'angular2/http';
+import {Router,RouteParams} from 'angular2/router';
 import {Asiento} from '../../../model/contabilidad/asiento';
 import {AsientoService} from '../../../service/contabilidad/asientoService';
 import {DbpDialogo,DbpDialogoBaseConf,DbpDialogoConfirmarConf} from '../../../core/modal/dialogo';
@@ -9,11 +11,8 @@ import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE,TiposEditables,Acciones} from '..
 import {LineaAsiento} from '../../../model/contabilidad/lineaAsiento';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
 import {CuentaContableComponent} from './cuentaContable.component';
-import {Response} from 'angular2/http';
+
 import {AutoFocus} from '../../../core/directivas/autofocus.directive';
-
-
-
 @Component({
     selector:'asiento',
     templateUrl:'app/component/pantallas/contabilidad/asiento.component.html',
@@ -28,8 +27,20 @@ export class AsientoComponent {
     columnas:Array<Columna>;
 
     constructor(private asientoService:AsientoService, private elemento:ElementRef
-               , private dialogo:DbpDialogo, private mensajeria:Mensajeria){
+               , private dialogo:DbpDialogo, private mensajeria:Mensajeria,private router:Router
+               ,params:RouteParams){
+
+        var identificador:string=params.get("id");
+
+        console.info('Id',identificador);
         this.transitarCrear();
+        if(identificador!=null){
+            this.asientoService.obtenerId(Number(identificador),this.elemento).subscribe(res=>{
+                console.info('Cargar los datos',res);
+                this.parser(res);
+                this.transitarModificar();
+            })
+        }
         this.columnas=this.getColumnas();
         this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService);
     }
@@ -118,6 +129,10 @@ export class AsientoComponent {
 
     isModificar():boolean{
       return this.estado == Estado.MODIFICAR;
+    }
+
+    volver(){
+      this.router.navigate(['/AsientoFiltro']);
     }
 
     transitarModificar(){

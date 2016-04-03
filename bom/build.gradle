@@ -4,5 +4,15 @@ dependencies {
     compile 'org.hsqldb:hsqldb:2.3.3'
     compile 'org.hibernate:hibernate-core:5.1.0.Final'
     compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
+    
+    	// Jackson
+	compile 'com.fasterxml.jackson.core:jackson-core:2.6.5'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.6.5'
+	// Jackson soporte xml
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.6.5'
+	compile 'org.codehaus.woodstox:woodstox-core-asl:4.4.1'
+	
+		// Jackson integracion con el JSR-310 (Para las fechas)
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.3'
 }
 
