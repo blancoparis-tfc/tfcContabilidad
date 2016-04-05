@@ -1,7 +1,11 @@
 import {Component,ElementRef} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {AsientoFiltro,ResumenAsiento} from '../../../model/contabilidad/asientoFiltro';
+import {Asiento} from '../../../model/contabilidad/asiento';
 import {AsientoService} from '../../../service/contabilidad/asientoService';
+import {OperacionesUtils,Estado} from '../../../core/utils/components/operacionesUtil';
+import {DbpDialogo,DbpDialogoBaseConf,DbpDialogoConfirmarConf} from '../../../core/modal/dialogo';
+import {Mensajeria} from '../../../core/mensajeria/mensajeria';
 
 
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
@@ -16,11 +20,13 @@ export class AsientoFiltroComponent{
     modelo:AsientoFiltro;
     lineas:Array<ResumenAsiento>;
     columnas:Array<Columna>;
+    operacionesAsiento:OperacionesUtils<Asiento,number>;
     constructor(private asientoService:AsientoService,private elemento:ElementRef
-    ,private router:Router){
+    ,private router:Router, private mensajeria:Mensajeria, dialogo:DbpDialogo){
       this.modelo = new AsientoFiltro('','','','');
       this.lineas = [];
       this.columnas =this.getColumnas();
+      this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService);
     }
 
     onSubmit(){
@@ -45,4 +51,15 @@ export class AsientoFiltroComponent{
     crear(){
         this.router.navigate(['/AsientoFicha']);
     }
+
+    eliminarLinea(elemento:any){
+        var idx = this.lineas.indexOf(elemento);
+        this.operacionesAsiento.eliminar(
+          new DbpDialogoConfirmarConf('¿Ser va eliminar el asiento '+elemento.id+'?','Asiento'),elemento.id
+          ,(res)=>{
+            this.mensajeria.success(this.elemento,'Se ha eliminado el asiento ('+elemento.id+') correctamente.');
+            this.lineas.splice(idx,1);
+          });
+    }
+
 }
