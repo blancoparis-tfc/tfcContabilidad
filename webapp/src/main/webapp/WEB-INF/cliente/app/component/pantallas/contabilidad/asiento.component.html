@@ -5,11 +5,11 @@
 <p class="lead">Esta la operación del asiento.</p>
 <form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
   <div class="row">
-      <div class="form-group" class="col-md-6">
+      <div class="col-md-6 form-group">
           <label>id</label>
           <p class="form-control-static">{{modelo.id}}</p>
       </div>
-      <div class="form-group" class="col-md-6">
+      <div  class="col-md-6 form-group">
           <label>Descripción</label>
           <input type="text" class="form-control"
           [(ngModel)]="modelo.descripcion"

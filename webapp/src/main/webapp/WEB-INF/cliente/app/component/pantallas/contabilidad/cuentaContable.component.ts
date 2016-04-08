@@ -19,6 +19,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
   modelo:CuentaContable;
   lineas:Array<CuentaContable>;
   columnas:Array<Columna>;
+  pintarCabecera:boolean;
   constructor(
                  private elemento:ElementRef
                 ,private dialogo:DbpDialogo
@@ -33,6 +34,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
     this.modelo = new CuentaContable("","");
     this.columnas=this.getColumnas();
     this.lineas = [];
+    this.pintarCabecera = this.dbpDialogoRef==null;
   }
 
   ngOnInit() {

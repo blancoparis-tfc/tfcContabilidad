@@ -1,11 +1,11 @@
-<div class="page-header">
+<div class="page-header" *ngIf="pintarCabecera">
   <h1>Cuenta contable</h1>
 </div>
 <div #mensajeria></div>
-<p class="lead">En esta pantalla vamos a establecer los valores de una cuenta contable.</p>
+<p class="lead" *ngIf="pintarCabecera">En esta pantalla vamos a establecer los valores de una cuenta contable.</p>
 <form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
     <div class="row">
-        <div class="form-group" class="col-md-6">
+        <div  class="col-md-6 form-group">
             <label>id</label>
             <input type="text" class="form-control"
             [(ngModel)]="modelo.cuenta"
@@ -17,15 +17,15 @@
                 El nombre es obligatorio
             </div>
         </div>
-        <div class="form-group" class="col-md-6">
+        <div  class="col-md-6 form-group">
             <label>Descripción</label>
             <input type="text" class="form-control"
             [(ngModel)]="modelo.descripcion"
             />
         </div>
     </div>
-    <button type="button" class="btn btn-default" (click)="consultar()"> Consultar </button>
-    <button type="submit" class="btn btn-default"> Crear </button>
+    <button type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
+    <button type="submit" class="btn btn-success"> Crear </button>
     <dbp-grid [columnas]="columnas" [filas]="lineas"
       (eliminar)="eliminar($event)"
       (seleccionar)="seleccionar($event)"></dbp-grid>
