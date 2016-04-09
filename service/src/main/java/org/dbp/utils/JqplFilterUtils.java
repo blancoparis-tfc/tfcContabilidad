@@ -61,8 +61,8 @@ public class JqplFilterUtils {
 		this.parametros.get(root).add(new ParametrosCriteria<C>(param,operador,valor));
 		return this;
 	}
-	public TypedQuery<ResumenAsiento>  trasladarLosParametros(
-			final TypedQuery<ResumenAsiento> entityQuery) {
+	public <C> TypedQuery<C>  trasladarLosParametros(
+			final TypedQuery<C> entityQuery) {
 		for(Map.Entry<From<?,?>,List<ParametrosCriteria<?>>> tabla:parametros.entrySet()){
 			for(ParametrosCriteria<?> parametro:tabla.getValue()){
 				entityQuery.setParameter(parametro.parametro.getName(),parametro.valor);
@@ -90,6 +90,8 @@ public class JqplFilterUtils {
 				
 				if(  parametro.valor instanceof Long ){
 					return parameterMayor(tabla,(ParametrosCriteria<Long>) parametro);
+				}else if(parametro.valor instanceof Integer){
+					return parameterMayor(tabla,(ParametrosCriteria<Integer>) parametro);
 				}else if(parametro.valor instanceof Double){
 					return parameterMayor(tabla,(ParametrosCriteria<Double>) parametro);
 				}else if(parametro.valor instanceof BigDecimal){
@@ -103,6 +105,8 @@ public class JqplFilterUtils {
 				
 				if(  parametro.valor instanceof Long ){
 					return parameterMayorIgual(tabla,(ParametrosCriteria<Long>) parametro);
+				}else if(parametro.valor instanceof Integer){
+					return parameterMayorIgual(tabla,(ParametrosCriteria<Integer>) parametro);
 				}else if(parametro.valor instanceof Double){
 					return parameterMayorIgual(tabla,(ParametrosCriteria<Double>) parametro);
 				}else if(parametro.valor instanceof BigDecimal){
@@ -115,6 +119,8 @@ public class JqplFilterUtils {
 			case MENOR:{
 				if(  parametro.valor instanceof Long ){
 					return parameterMenor(tabla,(ParametrosCriteria<Long>) parametro);
+				}else if(parametro.valor instanceof Integer){
+					return parameterMenor(tabla,(ParametrosCriteria<Integer>) parametro);
 				}else if(parametro.valor instanceof Double){
 					return parameterMenor(tabla,(ParametrosCriteria<Double>) parametro);
 				}else if(parametro.valor instanceof BigDecimal){
@@ -127,6 +133,8 @@ public class JqplFilterUtils {
 			case MENORIGUAL:{
 				if(  parametro.valor instanceof Long ){
 					return parameterMenorIgual(tabla,(ParametrosCriteria<Long>) parametro);
+				}else if(parametro.valor instanceof Integer){
+					return parameterMenorIgual(tabla,(ParametrosCriteria<Integer>) parametro);
 				}else if(parametro.valor instanceof Double){
 					return parameterMenorIgual(tabla,(ParametrosCriteria<Double>) parametro);
 				}else if(parametro.valor instanceof BigDecimal){

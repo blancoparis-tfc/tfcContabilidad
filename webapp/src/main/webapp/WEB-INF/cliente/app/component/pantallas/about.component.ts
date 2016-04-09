@@ -1,5 +1,7 @@
 import {Component,ElementRef,DynamicComponentLoader,Injector,provide} from 'angular2/core';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../core/modal/dialogo';
+import {PaisService} from '../../service/localizacion/paisService';
+import {PaisComponent} from './localizacion/pais.component';
 
 @Component({
   selector:'about',
@@ -10,7 +12,10 @@ export class AboutComponent{
   constructor(private elemento:ElementRef
               ,private dialogo:DbpDialogo
               ,private cargador: DynamicComponentLoader
-              ,private injector: Injector){}
+              ,private paisService: PaisService
+              ,private injector: Injector){
+              
+              }
 
   abrirModal(){
     console.info('Abrir una modal');
@@ -29,6 +34,15 @@ export class AboutComponent{
 abrirComponente(){
   var id=[provide(ParamId, {useValue:new ParamId(2)})]
   this.dialogo.abrir(EjemploFormularioComponent,this.elemento,new DbpDialogoBaseConf('Ejemplo para'),id).then(dialogoRef=>{
+    console.info('Componente de dentro',dialogoRef.componenteDentro);
+    dialogoRef.cuandoCerramos.then((_)=>{
+      console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
+    });
+    return dialogoRef;
+  });
+}
+abrirPais(){
+  this.dialogo.abrir(PaisComponent,this.elemento,new DbpDialogoBaseConf('Paises')).then(dialogoRef=>{
     console.info('Componente de dentro',dialogoRef.componenteDentro);
     dialogoRef.cuandoCerramos.then((_)=>{
       console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);

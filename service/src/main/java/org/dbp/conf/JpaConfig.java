@@ -64,7 +64,7 @@ public class JpaConfig {
 				setProperty("hibernate.jdbc.batch_size", "20");
 				setProperty("hibernate.show_sql", "true");
 				setProperty("hibernate.dialect","org.hibernate.dialect.HSQLDialect");
-				setProperty("hibernate.hbm2ddl.import_files","classpath:/META-INF/inicializar.sql");
+				setProperty("hibernate.hbm2ddl.import_files","classpath:/META-INF/inicializar.sql,/META-INF/paises.sql");
 			}
 		};
 	}

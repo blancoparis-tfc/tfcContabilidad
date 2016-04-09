@@ -1,0 +1,32 @@
+<div #mensajeria></div>
+<form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
+    <div class="row">
+        <div  class="col-md-6 form-group">
+            <label>idAlfa2</label>
+            <input type="text" class="form-control" [(ngModel)]="modelo.idAlfa2"/>
+        </div>
+        <div  class="col-md-6 form-group">
+          <label>codAlfa3</label>
+          <input type="text" class="form-control" [(ngModel)]="modelo.codAlfa3"/>
+        </div>
+    </div>
+    <div class="row">
+        <div  class="col-md-6 form-group">
+          <label>codNumerico</label>
+          <input type="text" class="form-control" [(ngModel)]="modelo.codNumerico"/>
+        </div>
+        <div  class="col-md-6 form-group">
+          <label>nombreComun</label>
+          <input type="text" class="form-control" [(ngModel)]="modelo.nombreComun"/>
+        </div>
+    </div>
+    <div class="row">
+        <div  class="col-md-6 form-group">
+          <label>nombreOficial</label>
+          <input type="text" class="form-control" [(ngModel)]="modelo.nombreOficial"/>
+        </div>
+        <button type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
+    </div>
+
+    <dbp-grid [columnas]="columnas" [filas]="lineas"></dbp-grid>
+</form>
