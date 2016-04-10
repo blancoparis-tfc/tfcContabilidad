@@ -42,7 +42,7 @@ export class Grid implements OnInit,OnChanges,DoCheck{
       console.info('Changes ha cambiado',changes);
       if(Object.keys(changes).some(element => element == 'filas')){
           this.paginacion.inicializarPaginacion(this.filas);
-          this.paginar(1);
+            this.procesarPaginacion(1);
       }
   }
 
@@ -52,18 +52,23 @@ export class Grid implements OnInit,OnChanges,DoCheck{
             if(this.paginas.length==0){
                 this.paginacion.inicializarPaginacion(this.filas);   // Lo ponemos para el caso que no existia la paginación.
             }
-            this.paginar(1);
+            this.procesarPaginacion(1);
         }
   }
 
-  paginar(pagina:number){
+  paginar(pagina:number,event:Event){
+      event.preventDefault();
+      this.procesarPaginacion(pagina);
+  }
+
+  procesarPaginacion(pagina:number){
       this.ventana = this.paginacion.paginar(pagina,this.filas);
   }
 
   ordenar(columna:Columna){
     this.columnaActiva=columna;
     this.algoritmoOrdenar.ordernar(columna,this.filas);
-    this.paginar(this.paginacion.pagina);
+    this.procesarPaginacion(this.paginacion.pagina);
   }
 
   onHelp(){

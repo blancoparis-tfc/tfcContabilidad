@@ -1,13 +1,13 @@
 <nav>
   <ul class="pagination">
     <li>
-      <a href="#" (click)="paginar(1)" aria-label="Previous">
+      <a href="#" (click)="paginar(1,$event)" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li *ngFor="#pag of paginas"><a href="#" (click)="paginar(pag)">{{pag}}</a></li>
+    <li *ngFor="#pag of paginas"><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
     <li>
-      <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas)">
+      <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas,$event)">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
