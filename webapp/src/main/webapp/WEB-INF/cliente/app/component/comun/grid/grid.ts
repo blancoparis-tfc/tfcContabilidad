@@ -20,6 +20,7 @@ export class Grid implements OnInit,OnChanges,DoCheck{
   paginacion:Paginar;
   get paginas(){return this.paginacion.paginas;}
   get numeroDePaginas(){return this.paginacion.numeroDePaginas;}
+  get pagina(){return this.paginacion.pagina;}
 
 // Fin variables paginación.
   ventana:Array<any>;
@@ -52,7 +53,7 @@ export class Grid implements OnInit,OnChanges,DoCheck{
             if(this.paginas.length==0){
                 this.paginacion.inicializarPaginacion(this.filas);   // Lo ponemos para el caso que no existia la paginación.
             }
-            this.procesarPaginacion(1);
+            this.procesarPaginacion(this.pagina);
         }
   }
 
@@ -62,6 +63,7 @@ export class Grid implements OnInit,OnChanges,DoCheck{
   }
 
   procesarPaginacion(pagina:number){
+      console.info('pagina',pagina);
       this.ventana = this.paginacion.paginar(pagina,this.filas);
   }
 

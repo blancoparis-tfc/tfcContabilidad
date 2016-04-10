@@ -5,7 +5,7 @@
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li *ngFor="#pag of paginas"><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
+    <li *ngFor="#pag of paginas" [class.active]="pagina==pag" ><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
     <li>
       <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas,$event)">
         <span aria-hidden="true">&raquo;</span>

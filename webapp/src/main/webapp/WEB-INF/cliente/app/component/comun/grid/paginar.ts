@@ -33,7 +33,7 @@ export class Paginar{
       if(this.isCambiarVentana(pagina)){
           this.establecerPaginas(pagina);
       }else if(pagina<=this.margenPaginas){
-          this.inicializarPaginacion(filas);
+          this.inicializarPaginas(filas);
       }
       return filas.slice(limite - this.paginasVentana,limite);
     }
