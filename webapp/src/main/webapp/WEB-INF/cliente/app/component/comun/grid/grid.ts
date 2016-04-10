@@ -1,4 +1,4 @@
-import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange} from 'angular2/core';
+import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange,DoCheck,IterableDiffers} from 'angular2/core';
 import {Columna,TiposEditables} from './columna';
 import {Ordenar} from './ordernar';
 import {DbpDialogo,DbpDialogoBaseConf} from '../../../core/modal/dialogo';
@@ -7,7 +7,7 @@ import {Paginar} from './paginar';
     selector: 'dbp-grid',
     templateUrl:'app/component/comun/grid/grid.html'
 })
-export class Grid implements OnInit,OnChanges{
+export class Grid implements OnInit,OnChanges,DoCheck{
   @Input() columnas:Array<Columna>;
   @Input() filas:Array<any>;
 
@@ -24,22 +24,36 @@ export class Grid implements OnInit,OnChanges{
 // Fin variables paginación.
   ventana:Array<any>;
   columnaActiva:Columna;
+  differ: any;
 
   private algoritmoOrdenar:Ordenar = new Ordenar();
 
   constructor( private elemento:ElementRef
-              ,private dialogo:DbpDialogo){
+              ,private dialogo:DbpDialogo
+              ,private differs: IterableDiffers){
         this.ventana=[];
         this.paginacion = new Paginar();
+        this.differ = this.differs.find([]).create(null);
   }
 
   ngOnInit() { }
 
   ngOnChanges(changes: {[propertyName: string]: SimpleChange}){
+      console.info('Changes ha cambiado',changes);
       if(Object.keys(changes).some(element => element == 'filas')){
           this.paginacion.inicializarPaginacion(this.filas);
           this.paginar(1);
       }
+  }
+
+  ngDoCheck(){
+        var cambios=this.differ.diff(this.filas);
+        if(cambios){
+            if(this.paginas.length==0){
+                this.paginacion.inicializarPaginacion(this.filas);   // Lo ponemos para el caso que no existia la paginación.
+            }
+            this.paginar(1);
+        }
   }
 
   paginar(pagina:number){
