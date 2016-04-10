@@ -1,41 +1,59 @@
-import {Component,Input,Output,EventEmitter,OnInit,ElementRef} from 'angular2/core';
+import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange} from 'angular2/core';
 import {Columna,TiposEditables} from './columna';
 import {Ordenar} from './ordernar';
 import {DbpDialogo,DbpDialogoBaseConf} from '../../../core/modal/dialogo';
+import {Paginar} from './paginar';
 @Component({
     selector: 'dbp-grid',
     templateUrl:'app/component/comun/grid/grid.html'
 })
-export class Grid implements OnInit{
+export class Grid implements OnInit,OnChanges{
   @Input() columnas:Array<Columna>;
   @Input() filas:Array<any>;
-  //@Input() crearNuevaLinea:()=>void;
 
   @Output() crearNuevaLinea= new EventEmitter();
   @Output() accion=new EventEmitter();
   @Output() eliminar = new EventEmitter();
   @Output() seleccionar = new EventEmitter();
 
+ // Inicio variables paginacion
+  paginacion:Paginar;
+  get paginas(){return this.paginacion.paginas;}
+  get numeroDePaginas(){return this.paginacion.numeroDePaginas;}
+
+// Fin variables paginación.
+  ventana:Array<any>;
   columnaActiva:Columna;
 
   private algoritmoOrdenar:Ordenar = new Ordenar();
 
-  constructor(private elemento:ElementRef
+  constructor( private elemento:ElementRef
               ,private dialogo:DbpDialogo){
-
+        this.ventana=[];
+        this.paginacion = new Paginar();
   }
 
-  ngOnInit() {
-      console.info('Entro en el grid');
+  ngOnInit() { }
 
+  ngOnChanges(changes: {[propertyName: string]: SimpleChange}){
+      if(Object.keys(changes).some(element => element == 'filas')){
+          this.paginacion.inicializarPaginacion(this.filas);
+          this.paginar(1);
+      }
+  }
+
+  paginar(pagina:number){
+      this.ventana = this.paginacion.paginar(pagina,this.filas);
+  }
+
+  ordenar(columna:Columna){
+    this.columnaActiva=columna;
+    this.algoritmoOrdenar.ordernar(columna,this.filas);
+    this.paginar(this.paginacion.pagina);
   }
 
   onHelp(){
-      console.info('Ayuda');
-      //this.crearNuevaLinea=()=>{};
-      this.dialogo.abrir(AyudaGridComponent,this.elemento,new DbpDialogoBaseConf('Teclas de acción')).then(dialogoRef=>{
-          return dialogoRef;
-      });
+      this.dialogo.abrir(AyudaGridComponent,this.elemento,new DbpDialogoBaseConf('Teclas de acción')).then(dialogoRef=>{ return dialogoRef;});
   }
 
   onSeleccionar(item:any){
@@ -48,11 +66,6 @@ export class Grid implements OnInit{
 
   onCambio(item:any){
       item.estado='MODIFICADO';
-  }
-
-  ordenar(columna:Columna){
-    this.columnaActiva=columna;
-    this.algoritmoOrdenar.ordernar(columna,this.filas);
   }
 
   esColumnaActiva(columna:Columna){

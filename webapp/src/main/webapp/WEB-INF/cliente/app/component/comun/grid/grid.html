@@ -1,3 +1,18 @@
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" (click)="paginar(1)" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li *ngFor="#pag of paginas"><a href="#" (click)="paginar(pag)">{{pag}}</a></li>
+    <li>
+      <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas)">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 <table class="table table-striped">
     <thead>
       <tr>
@@ -17,7 +32,7 @@
           <th> Estado </th>
       </tr>
     </thead>
-    <tr *ngFor="#fila of filas" (dblclick)="onSeleccionar(fila)">
+    <tr *ngFor="#fila of ventana" (dblclick)="onSeleccionar(fila)">
         <td *ngFor="#columna of columnas"
           (keyup.control.F6)="accionF6(columna,fila)"
           (keyup.control.Delete)="onEliminar(fila)"
