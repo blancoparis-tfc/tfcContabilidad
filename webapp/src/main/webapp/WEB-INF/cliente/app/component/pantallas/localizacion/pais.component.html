@@ -25,7 +25,10 @@
           <label>nombreOficial</label>
           <input type="text" class="form-control" [(ngModel)]="modelo.nombreOficial"/>
         </div>
-        <button type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
+        <div  class="col-md-6 form-group">
+          <br/>
+          <button type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
+        </div>
     </div>
 
     <dbp-grid [columnas]="columnas" [filas]="lineas"></dbp-grid>

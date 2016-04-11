@@ -1,18 +1,27 @@
-<nav>
-  <ul class="pagination">
-    <li>
-      <a href="#" (click)="paginar(1,$event)" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li *ngFor="#pag of paginas" [class.active]="pagina==pag" ><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
-    <li>
-      <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas,$event)">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<div class="row">
+    <div  class="col-md-6">
+      <nav>
+        <ul class="pagination">
+          <li>
+            <a href="#" (click)="paginar(1,$event)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li *ngFor="#pag of paginas" [class.active]="pagina==pag" ><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
+          <li>
+            <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas,$event)">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div  class="col-md-6">
+      <br/>
+       Pagina <span class="badge">{{pagina}}</span> de <span class="badge">{{numeroDePaginas}}</span> Elementos <span class="badge">{{filas.length}}</span>
+      
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
       <tr>
