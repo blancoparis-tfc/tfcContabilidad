@@ -29,7 +29,6 @@
         "component/comun/cuerpo.component.ts",
         "component/comun/grid/columna.ts",
         "component/comun/grid/grid.ts",
-        "component/comun/grid/grid.v2.ts",
         "component/comun/grid/ordernar.ts",
         "component/comun/grid/paginar.ts",
         "component/comun/pie.component.ts",
