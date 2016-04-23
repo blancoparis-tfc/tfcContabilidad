@@ -13,6 +13,7 @@ import {CuentaContableService} from './service/contabilidad/cuentaContableServic
 import {AsientoService} from './service/contabilidad/asientoService';
 import {PaisService} from './service/localizacion/paisService';
 import {ComunidadAutonomaService} from './service/localizacion/ComunidadAutonomaService';
+import {ProvinciaService} from './service/localizacion/ProvinciaService';
 
 //DbpDialogoRef
 
@@ -24,6 +25,6 @@ bootstrap(AppComponent,[
     , provide(DbpDialogoRef,{useValue:null})// Correción del error a la hora de cargar el objeto dinamicamente (Es el objeto que cargamos dinamicamente en una modal.).
     , DbpDialogo, Mensajeria
     , CuentaContableService, AsientoService
-    , PaisService, ComunidadAutonomaService
+    , PaisService, ComunidadAutonomaService, ProvinciaService
     ]
 );

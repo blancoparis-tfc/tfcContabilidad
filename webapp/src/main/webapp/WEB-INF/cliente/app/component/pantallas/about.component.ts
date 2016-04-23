@@ -3,6 +3,7 @@ import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseCon
 import {PaisService} from '../../service/localizacion/paisService';
 import {PaisComponent} from './localizacion/pais.component';
 import {ComunidadAutonomaComponent} from './localizacion/ComunidadAutonoma.component';
+import {ProvinciaComponent} from './localizacion/Provincia.component';
 
 @Component({
   selector:'about',
@@ -60,6 +61,16 @@ abrirComunidad(){
     return dialogoRef;
   });
 
+}
+
+abrirProvincia(){
+  this.dialogo.abrir(ProvinciaComponent,this.elemento,new DbpDialogoBaseConf('Provincias')).then(dialogoRef=>{
+    console.info('Componente de dentro',dialogoRef.componenteDentro);
+    dialogoRef.cuandoCerramos.then((_)=>{
+      console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
+    });
+    return dialogoRef;
+  });
 }
 /*
 abrirComponenteComplejo(){
