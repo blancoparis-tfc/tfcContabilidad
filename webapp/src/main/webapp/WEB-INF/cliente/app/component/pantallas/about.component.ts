@@ -4,6 +4,7 @@ import {PaisService} from '../../service/localizacion/paisService';
 import {PaisComponent} from './localizacion/pais.component';
 import {ComunidadAutonomaComponent} from './localizacion/ComunidadAutonoma.component';
 import {ProvinciaComponent} from './localizacion/Provincia.component';
+import {MunicipioComponent} from './localizacion/Municipio.component';
 
 @Component({
   selector:'about',
@@ -72,6 +73,17 @@ abrirProvincia(){
     return dialogoRef;
   });
 }
+
+abrirMunicipio(){
+  this.dialogo.abrir(MunicipioComponent,this.elemento,new DbpDialogoBaseConf('Municipio')).then(dialogoRef=>{
+    console.info('Componente de dentro',dialogoRef.componenteDentro);
+    dialogoRef.cuandoCerramos.then((_)=>{
+      console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
+    });
+    return dialogoRef;
+  });
+}
+
 /*
 abrirComponenteComplejo(){
   this.dialogo.abrir(AsientoComponent,this.elemento,new DbpDialogoBaseConf('Ejemplo para')).then(dialogoRef=>{
