@@ -12,6 +12,8 @@ import {Mensajeria} from './core/mensajeria/mensajeria';
 import {CuentaContableService} from './service/contabilidad/cuentaContableService';
 import {AsientoService} from './service/contabilidad/asientoService';
 import {PaisService} from './service/localizacion/paisService';
+import {ComunidadAutonomaService} from './service/localizacion/ComunidadAutonomaService';
+
 //DbpDialogoRef
 
 enableProdMode();
@@ -22,6 +24,6 @@ bootstrap(AppComponent,[
     , provide(DbpDialogoRef,{useValue:null})// Correción del error a la hora de cargar el objeto dinamicamente (Es el objeto que cargamos dinamicamente en una modal.).
     , DbpDialogo, Mensajeria
     , CuentaContableService, AsientoService
-    , PaisService
+    , PaisService, ComunidadAutonomaService
     ]
 );

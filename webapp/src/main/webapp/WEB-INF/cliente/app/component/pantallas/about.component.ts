@@ -2,6 +2,7 @@ import {Component,ElementRef,DynamicComponentLoader,Injector,provide} from 'angu
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../core/modal/dialogo';
 import {PaisService} from '../../service/localizacion/paisService';
 import {PaisComponent} from './localizacion/pais.component';
+import {ComunidadAutonomaComponent} from './localizacion/ComunidadAutonoma.component';
 
 @Component({
   selector:'about',
@@ -14,7 +15,7 @@ export class AboutComponent{
               ,private cargador: DynamicComponentLoader
               ,private paisService: PaisService
               ,private injector: Injector){
-              
+
               }
 
   abrirModal(){
@@ -49,6 +50,16 @@ abrirPais(){
     });
     return dialogoRef;
   });
+}
+abrirComunidad(){
+  this.dialogo.abrir(ComunidadAutonomaComponent,this.elemento,new DbpDialogoBaseConf('Comunidades Autonomas')).then(dialogoRef=>{
+    console.info('Componente de dentro',dialogoRef.componenteDentro);
+    dialogoRef.cuandoCerramos.then((_)=>{
+      console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
+    });
+    return dialogoRef;
+  });
+
 }
 /*
 abrirComponenteComplejo(){
