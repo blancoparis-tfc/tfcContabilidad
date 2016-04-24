@@ -8,5 +8,7 @@ export class Provincia{
 export class ProvinciaFiltro{
   constructor(
   	  public  id: string,
-  	  public  nombre: string  ){}
+  	  public  nombre: string ,
+      public comunidadAutonoma:string
+    ){} 
 }

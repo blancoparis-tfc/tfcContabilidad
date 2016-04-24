@@ -43,6 +43,7 @@ export class ProvinciaService implements IGenericService<Provincia,number>{
       var search:URLSearchParams=new URLSearchParams();
   	  search.append('id',filtro.id);
   	  search.append('nombre',filtro.nombre);
+      search.append('comunidadAutonoma',filtro.comunidadAutonoma);
       return this.http
           .get(this.url+"/filtro",{search:search})
           .catch((error)=>{return this.genericService.handleError(error,elemento);});
