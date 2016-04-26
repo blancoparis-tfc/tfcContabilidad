@@ -1,4 +1,4 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -19,6 +19,7 @@ export class PaisComponent{
       private elemento:ElementRef
       ,private dialogo:DbpDialogo
       ,private paisService:PaisService
+      ,private viewContainerRef:ViewContainerRef
     ){
       this.modelo = new PaisFiltro("","","","","");
       this.lineas=[];
@@ -26,7 +27,7 @@ export class PaisComponent{
     }
 
     consultar(){
-      this.paisService.filtrar(this.modelo,this.elemento)
+      this.paisService.filtrar(this.modelo,this.viewContainerRef)
       //  .map(res => Object.assign(new Pais(),res.json()))
         .subscribe(res=>{
         //console.info('Pais',res.json());

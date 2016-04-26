@@ -45,6 +45,7 @@
         "core/directivas/autofocus.directive.ts",
         "core/keycode.ts",
         "core/mensajeria/mensajeria.ts",
+        "core/modal/dialogo.beta16.ts",
         "core/modal/dialogo.ts",
         "core/utils/components/operacionesUtil.ts",
         "model/contabilidad/asiento.ts",

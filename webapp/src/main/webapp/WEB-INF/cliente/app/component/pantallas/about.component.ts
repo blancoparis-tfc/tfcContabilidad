@@ -1,4 +1,4 @@
-import {Component,ElementRef,DynamicComponentLoader,Injector,provide} from 'angular2/core';
+import {Component,ElementRef,DynamicComponentLoader,Injector,provide,ViewContainerRef} from 'angular2/core';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../core/modal/dialogo';
 import {PaisService} from '../../service/localizacion/paisService';
 import {PaisComponent} from './localizacion/pais.component';
@@ -16,27 +16,28 @@ export class AboutComponent{
               ,private dialogo:DbpDialogo
               ,private cargador: DynamicComponentLoader
               ,private paisService: PaisService
-              ,private injector: Injector){
+              ,private injector: Injector
+              ,private viewContainerRef: ViewContainerRef){
 
               }
 
   abrirModal(){
     console.info('Abrir una modal');
-    this.dialogo.alert(this.elemento,new DbpDialogoAlertConf('Mensajeasdaf a ag ggds hfdhsdfhsdghsgfhjsgfjgsfjgfjghjhdjhgjhgj h hg hjj djdhgj hdjd hfg jfghj fd jgj','Titulo')).then(dialogoRef=>{
+    this.dialogo.alert(this.viewContainerRef,new DbpDialogoAlertConf('Mensajeasdaf a ag ggds hfdhsdfhsdghsgfhjsgfjgsfjgfjghjhdjhgjhgj h hg hjj djdhgj hdjd hfg jfghj fd jgj','Titulo')).then(dialogoRef=>{
       dialogoRef.cuandoCerramos.then((_)=>{console.info('Se ha cerrado el alert')});
       return dialogoRef;
     });
   }
 
   abrirConfirmar(){
-  this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('Mensaje de confirmar','Ejemplo de confirmar')).then(dialogoComponent=>{
+  this.dialogo.confirmar(this.viewContainerRef,new DbpDialogoConfirmarConf('Mensaje de confirmar','Ejemplo de confirmar')).then(dialogoComponent=>{
       dialogoComponent.instance.cuandoOk.then((_)=>{console.info(' despues Ok 234');});
       dialogoComponent.instance.cuandoCancelar.then((_)=>{console.info(' despues cancelar 234');});
   });
 }
 abrirComponente(){
   var id=[provide(ParamId, {useValue:new ParamId(2)})]
-  this.dialogo.abrir(EjemploFormularioComponent,this.elemento,new DbpDialogoBaseConf('Ejemplo para'),id).then(dialogoRef=>{
+  this.dialogo.abrir(EjemploFormularioComponent,this.viewContainerRef,new DbpDialogoBaseConf('Ejemplo para'),id).then(dialogoRef=>{
     console.info('Componente de dentro',dialogoRef.componenteDentro);
     dialogoRef.cuandoCerramos.then((_)=>{
       console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
@@ -45,7 +46,7 @@ abrirComponente(){
   });
 }
 abrirPais(){
-  this.dialogo.abrir(PaisComponent,this.elemento,new DbpDialogoBaseConf('Paises')).then(dialogoRef=>{
+  this.dialogo.abrir(PaisComponent,this.viewContainerRef,new DbpDialogoBaseConf('Paises')).then(dialogoRef=>{
     console.info('Componente de dentro',dialogoRef.componenteDentro);
     dialogoRef.cuandoCerramos.then((_)=>{
       console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
@@ -54,7 +55,7 @@ abrirPais(){
   });
 }
 abrirComunidad(){
-  this.dialogo.abrir(ComunidadAutonomaComponent,this.elemento,new DbpDialogoBaseConf('Comunidades Autonomas')).then(dialogoRef=>{
+  this.dialogo.abrir(ComunidadAutonomaComponent,this.viewContainerRef,new DbpDialogoBaseConf('Comunidades Autonomas')).then(dialogoRef=>{
     console.info('Componente de dentro',dialogoRef.componenteDentro);
     dialogoRef.cuandoCerramos.then((_)=>{
       console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
@@ -65,7 +66,7 @@ abrirComunidad(){
 }
 
 abrirProvincia(){
-  this.dialogo.abrir(ProvinciaComponent,this.elemento,new DbpDialogoBaseConf('Provincias')).then(dialogoRef=>{
+  this.dialogo.abrir(ProvinciaComponent,this.viewContainerRef,new DbpDialogoBaseConf('Provincias')).then(dialogoRef=>{
     console.info('Componente de dentro',dialogoRef.componenteDentro);
     dialogoRef.cuandoCerramos.then((_)=>{
       console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
@@ -75,7 +76,7 @@ abrirProvincia(){
 }
 
 abrirMunicipio(){
-  this.dialogo.abrir(MunicipioComponent,this.elemento,new DbpDialogoBaseConf('Municipio')).then(dialogoRef=>{
+  this.dialogo.abrir(MunicipioComponent,this.viewContainerRef,new DbpDialogoBaseConf('Municipio')).then(dialogoRef=>{
     console.info('Componente de dentro',dialogoRef.componenteDentro);
     dialogoRef.cuandoCerramos.then((_)=>{
       console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);

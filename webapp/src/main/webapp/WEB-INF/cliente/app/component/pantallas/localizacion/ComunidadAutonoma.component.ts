@@ -1,4 +1,4 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -19,15 +19,16 @@ export class ComunidadAutonomaComponent{
       private elemento:ElementRef
       ,private dialogo:DbpDialogo
       ,private ComunidadAutonomaService:ComunidadAutonomaService
+      ,private viewContainerRef:ViewContainerRef
     ){
-    
+
       this.modelo = new ComunidadAutonomaFiltro("","");
       this.lineas=[];
       this.columnas=this.getColumnas();
     }
 
     consultar(){
-      this.ComunidadAutonomaService.filtrar(this.modelo,this.elemento)
+      this.ComunidadAutonomaService.filtrar(this.modelo,this.viewContainerRef)
         .subscribe(res=>{
         this.lineas=res.json();
       });
@@ -36,7 +37,7 @@ export class ComunidadAutonomaComponent{
     private getColumnas():Array<Columna>{
       return [
 			new Columna('id','id',TIPO_NO_EDITABLE),
-			new Columna('nombre','nombre',TIPO_NO_EDITABLE)        
+			new Columna('nombre','nombre',TIPO_NO_EDITABLE)
       ];
     }
 }

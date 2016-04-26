@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {RouteConfig,RouterOutlet,Location} from 'angular2/router';
-
+import {RouteConfig,RouterOutlet} from 'angular2/router';
+import {Location} from 'angular2/platform/common';
 import {CabeceraComponent} from './component/comun/cabecera.component';
 import {PieComponent} from './component/comun/pie.component';
 import {AboutComponent} from './component/pantallas/about.component';

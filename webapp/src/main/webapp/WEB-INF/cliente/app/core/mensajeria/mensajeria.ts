@@ -1,4 +1,4 @@
-import {Injectable,ElementRef,Component,DynamicComponentLoader,ComponentRef} from 'angular2/core';
+import {Injectable,ElementRef,Component,DynamicComponentLoader,ComponentRef,ViewContainerRef} from 'angular2/core';
 import {PromiseWrapper} from 'angular2/src/facade/promise';
 @Injectable()
 export class Mensajeria{
@@ -7,31 +7,31 @@ export class Mensajeria{
 
   constructor(private cargador: DynamicComponentLoader){}
 
-  public success(elemento:ElementRef,mensaje:string){
-      this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{
+  public success(elemento:ViewContainerRef,mensaje:string){
+      this.cargador.loadAsRoot(DbpMensaje,'#mensajeria',elemento.injector).then(containerRef=>{
         containerRef.instance.mensaje=mensaje;
         containerRef.instance.clase='alert-success';
         containerRef.instance.elemento=containerRef;
-        setTimeout(()=>{containerRef.dispose();},this.intervalo);
+        setTimeout(()=>{containerRef.destroy();},this.intervalo);
       });
   }
 
-  public warning(elemento:ElementRef,mensaje:string){
-    this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{
+  public warning(elemento:ViewContainerRef,mensaje:string){
+    this.cargador.loadAsRoot(DbpMensaje,'#mensajeria',elemento.injector).then(containerRef=>{
       containerRef.instance.mensaje=mensaje;
       containerRef.instance.clase='alert-warning';
       containerRef.instance.elemento=containerRef;
-      setTimeout(()=>{containerRef.dispose();},this.intervalo);
+      setTimeout(()=>{containerRef.destroy();},this.intervalo);
     });
   }
 
 
-  public error(elemento:ElementRef,mensaje:string){
-    this.cargador.loadIntoLocation(DbpMensaje,elemento,'mensajeria').then(containerRef=>{
+  public error(elemento:ViewContainerRef,mensaje:string){
+    this.cargador.loadAsRoot(DbpMensaje,'#mensajeria',elemento.injector).then(containerRef=>{
       containerRef.instance.mensaje=mensaje;
       containerRef.instance.clase='alert-danger';
       containerRef.instance.elemento=containerRef;
-      setTimeout(()=>{containerRef.dispose();},this.intervalo);
+      setTimeout(()=>{containerRef.destroy();},this.intervalo);
     });
   }
 }
@@ -49,7 +49,7 @@ export class DbpMensaje{
   elemento:ComponentRef;
   cerrarMensaje(){
     console.info('Cerramos el elemento');
-    this.elemento.dispose();
+    this.elemento.destroy()
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -20,6 +20,7 @@ export class MunicipioComponent{
       private elemento:ElementRef
       ,private dialogo:DbpDialogo
       ,private MunicipioService:MunicipioService
+      ,private viewContainerRef:ViewContainerRef
     ){
 
       this.modelo = new MunicipioFiltro("","");
@@ -28,7 +29,7 @@ export class MunicipioComponent{
     }
 
     consultar(){
-      this.MunicipioService.filtrar(this.modelo,this.elemento)
+      this.MunicipioService.filtrar(this.modelo,this.viewContainerRef)
         .subscribe(res=>{
         this.lineas=res.json();
       });

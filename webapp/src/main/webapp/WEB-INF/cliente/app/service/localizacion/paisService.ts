@@ -1,4 +1,4 @@
-import {Injectable,ElementRef} from 'angular2/core';
+import {Injectable,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Http,Response,URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {GenericService,IGenericService} from '../core/GenericService';
@@ -15,31 +15,31 @@ export class PaisService implements IGenericService<Pais,string>{
       this.genericService=new GenericService<Pais,string>(http,this.url,mensajeria);
   }
 
-  public crear(asiento:Pais,elemento:ElementRef):Observable<Response>{
+  public crear(asiento:Pais,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.crear(asiento,elemento);
   }
 
-  public actualizar(asiento:Pais,elemento:ElementRef):Observable<Response>{
+  public actualizar(asiento:Pais,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.actualizar(asiento,elemento);
   }
 
-  public actualizarLista(asiento:Array<Pais>,elemento:ElementRef):Observable<Response>{
+  public actualizarLista(asiento:Array<Pais>,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.actualizarLista(asiento,elemento);
   }
 
-  public eliminar(id:string,elemento:ElementRef):Observable<Response>{
+  public eliminar(id:string,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:string,elemento:ElementRef):Observable<Response>{
+  public obtenerId(id:string,elemento:ViewContainerRef):Observable<Response>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ElementRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.obtenerTodos(elemento);
   }
 
-  public filtrar(filtro:PaisFiltro, elemento:ElementRef):Observable<Response>{
+  public filtrar(filtro:PaisFiltro, elemento:ViewContainerRef):Observable<Response>{
       var search:URLSearchParams=new URLSearchParams();
       search.append('idAlfa2',filtro.idAlfa2);
       search.append('codAlfa3',filtro.codAlfa3);

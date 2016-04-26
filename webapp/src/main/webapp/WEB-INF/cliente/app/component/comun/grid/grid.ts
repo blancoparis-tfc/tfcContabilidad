@@ -1,4 +1,4 @@
-import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange,DoCheck,IterableDiffers} from 'angular2/core';
+import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange,DoCheck,IterableDiffers,ViewContainerRef} from 'angular2/core';
 import {Columna,TiposEditables} from './columna';
 import {Ordenar} from './ordernar';
 import {DbpDialogo,DbpDialogoBaseConf} from '../../../core/modal/dialogo';
@@ -31,7 +31,8 @@ export class Grid implements OnInit,OnChanges,DoCheck{
 
   constructor( private elemento:ElementRef
               ,private dialogo:DbpDialogo
-              ,private differs: IterableDiffers){
+              ,private differs: IterableDiffers
+              ,private viewContainerRef:ViewContainerRef){
         this.ventana=[];
         this.paginacion = new Paginar();
         this.differ = this.differs.find([]).create(null);
@@ -74,7 +75,7 @@ export class Grid implements OnInit,OnChanges,DoCheck{
   }
 
   onHelp(){
-      this.dialogo.abrir(AyudaGridComponent,this.elemento,new DbpDialogoBaseConf('Teclas de acción')).then(dialogoRef=>{ return dialogoRef;});
+      this.dialogo.abrir(AyudaGridComponent,this.viewContainerRef,new DbpDialogoBaseConf('Teclas de acción')).then(dialogoRef=>{ return dialogoRef;});
   }
 
   onSeleccionar(item:any){

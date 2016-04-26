@@ -1,4 +1,4 @@
-import {Injectable,ElementRef} from 'angular2/core';
+import {Injectable,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Http,Response,URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {GenericService,IGenericService} from '../core/GenericService';
@@ -16,31 +16,31 @@ export class ComunidadAutonomaService implements IGenericService<ComunidadAutono
       this.genericService=new GenericService<ComunidadAutonoma,number>(http,this.url,mensajeria);
   }
 
-  public crear(comunidadAutonoma:ComunidadAutonoma,elemento:ElementRef):Observable<Response>{
+  public crear(comunidadAutonoma:ComunidadAutonoma,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.crear(comunidadAutonoma,elemento);
   }
 
-  public actualizar(comunidadAutonoma:ComunidadAutonoma,elemento:ElementRef):Observable<Response>{
+  public actualizar(comunidadAutonoma:ComunidadAutonoma,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.actualizar(comunidadAutonoma,elemento);
   }
 
-  public actualizarLista(comunidadAutonoma:Array<ComunidadAutonoma>,elemento:ElementRef):Observable<Response>{
+  public actualizarLista(comunidadAutonoma:Array<ComunidadAutonoma>,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.actualizarLista(comunidadAutonoma,elemento);
   }
 
-  public eliminar(id:number,elemento:ElementRef):Observable<Response>{
+  public eliminar(id:number,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:number,elemento:ElementRef):Observable<Response>{
+  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Response>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ElementRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.obtenerTodos(elemento);
   }
 
-  public filtrar(filtro:ComunidadAutonomaFiltro, elemento:ElementRef):Observable<Response>{
+  public filtrar(filtro:ComunidadAutonomaFiltro, elemento:ViewContainerRef):Observable<Response>{
       var search:URLSearchParams=new URLSearchParams();
   	  search.append('id',filtro.id);
   	  search.append('nombre',filtro.nombre);

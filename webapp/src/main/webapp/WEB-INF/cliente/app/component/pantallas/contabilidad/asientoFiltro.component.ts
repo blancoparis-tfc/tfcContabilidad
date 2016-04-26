@@ -1,4 +1,4 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {AsientoFiltro,ResumenAsiento} from '../../../model/contabilidad/asientoFiltro';
 import {Asiento} from '../../../model/contabilidad/asiento';
@@ -22,16 +22,17 @@ export class AsientoFiltroComponent{
     columnas:Array<Columna>;
     operacionesAsiento:OperacionesUtils<Asiento,number>;
     constructor(private asientoService:AsientoService,private elemento:ElementRef
-    ,private router:Router, private mensajeria:Mensajeria, dialogo:DbpDialogo){
+    ,private router:Router, private mensajeria:Mensajeria, dialogo:DbpDialogo
+    ,private viewContainerRef:ViewContainerRef){
       this.modelo = new AsientoFiltro('','','','');
       this.lineas = [];
       this.columnas =this.getColumnas();
-      this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService);
+      this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService,this.viewContainerRef);
     }
 
     onSubmit(){
       console.info('Los nuevos datos ',this.modelo);
-      this.asientoService.filtrar(this.modelo,this.elemento).subscribe(res=>{
+      this.asientoService.filtrar(this.modelo,this.viewContainerRef).subscribe(res=>{
           this.lineas=res.json();
       });
     }
@@ -57,7 +58,7 @@ export class AsientoFiltroComponent{
         this.operacionesAsiento.eliminar(
           new DbpDialogoConfirmarConf('¿Ser va eliminar el asiento '+elemento.id+'?','Asiento'),elemento.id
           ,(res)=>{
-            this.mensajeria.success(this.elemento,'Se ha eliminado el asiento ('+elemento.id+') correctamente.');
+            this.mensajeria.success(this.viewContainerRef,'Se ha eliminado el asiento ('+elemento.id+') correctamente.');
             this.lineas.splice(idx,1);
           });
     }

@@ -1,4 +1,4 @@
-import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy} from 'angular2/core';
+import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy,ViewContainerRef} from 'angular2/core';
 import {FormBuilder} from 'angular2/common';
 import {Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
@@ -29,6 +29,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
                 ,private cuentaContableService:CuentaContableService
                 ,private formBuilder:FormBuilder
                 ,private dbpDialogoRef:DbpDialogoRef
+                ,private viewContainerRef:ViewContainerRef
   ){
     console.info('construir');
     this.modelo = new CuentaContable("","");
@@ -39,7 +40,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
 
   ngOnInit() {
       console.info('ngOnInit');
-      this.cuentaContableService.obtenerTodos(this.elemento).subscribe(res=>{
+      this.cuentaContableService.obtenerTodos(this.viewContainerRef).subscribe(res=>{
           this.lineas=res.json();
       });
   }
@@ -53,7 +54,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
         var lineasActualizadas:Array<CuentaContable>;
         lineasActualizadas=this.lineas.filter(elemento=>elemento.estado === 'MODIFICADO');
         console.info('Las lineas',lineasActualizadas);
-        this.cuentaContableService.actualizarLista(lineasActualizadas,this.elemento).subscribe(res=>{
+        this.cuentaContableService.actualizarLista(lineasActualizadas,this.viewContainerRef).subscribe(res=>{
             console.info('Se ha actualizado correctamente');
         });
   }
@@ -86,9 +87,9 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
       console.info('eliminar',elemento);
       console.info('posicion',idx);
       if(idx != -1){
-        this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quieres eliminar la cuenta ('+elemento.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
+        this.dialogo.confirmar(this.viewContainerRef,new DbpDialogoConfirmarConf('¿Quieres eliminar la cuenta ('+elemento.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
             dialogoComponent.instance.cuandoOk.then((_)=>{
-                this.cuentaContableService.eliminar(elemento.cuenta,this.elemento).subscribe(res=>{
+                this.cuentaContableService.eliminar(elemento.cuenta,this.viewContainerRef).subscribe(res=>{
                     this.lineas.splice(idx,1);
                 });
             });
@@ -98,12 +99,12 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
 
   onSubmit(){
     console.info('Modelo',this.modelo);
-    this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
+    this.dialogo.confirmar(this.viewContainerRef,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
-            this.cuentaContableService.crear(this.modelo,this.elemento).subscribe(res=>{
+            this.cuentaContableService.crear(this.modelo,this.viewContainerRef).subscribe(res=>{
                 this.lineas.push(res.json());
                 console.info('nos ha devuelto esto ', res.json());
-                this.mensajeria.success(this.elemento,'Se han guardado los datos correctamente.');
+                this.mensajeria.success(this.viewContainerRef,'Se han guardado los datos correctamente.');
             },
             err=>{
                 console.info('Procesar el error de segundas');

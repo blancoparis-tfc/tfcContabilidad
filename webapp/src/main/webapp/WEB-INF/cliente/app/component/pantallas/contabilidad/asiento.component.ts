@@ -1,4 +1,4 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Response} from 'angular2/http';
 import {Router,RouteParams} from 'angular2/router';
 import {Asiento} from '../../../model/contabilidad/asiento';
@@ -28,21 +28,22 @@ export class AsientoComponent {
 
     constructor(private asientoService:AsientoService, private elemento:ElementRef
                , private dialogo:DbpDialogo, private mensajeria:Mensajeria,private router:Router
-               ,params:RouteParams){
+               ,params:RouteParams
+               ,private viewContainerRef:ViewContainerRef){
 
         var identificador:string=params.get("id");
 
         console.info('Id',identificador);
         this.transitarCrear();
         if(identificador!=null){
-            this.asientoService.obtenerId(Number(identificador),this.elemento).subscribe(res=>{
+            this.asientoService.obtenerId(Number(identificador),this.viewContainerRef).subscribe(res=>{
                 console.info('Cargar los datos',res);
                 this.parser(res);
                 this.transitarModificar();
             })
         }
         this.columnas=this.getColumnas();
-        this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService);
+        this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService,this.viewContainerRef);
     }
 
     inicializarModelo():Asiento{
@@ -55,7 +56,7 @@ export class AsientoComponent {
 
     accion(evento:[Columna,any]){
       if(evento[0].nombre==='cuentaContable'){
-        this.dialogo.abrir(CuentaContableComponent,this.elemento,new DbpDialogoBaseConf('Cuenta contable')).then(dialogoRef=>{
+        this.dialogo.abrir(CuentaContableComponent,this.viewContainerRef,new DbpDialogoBaseConf('Cuenta contable')).then(dialogoRef=>{
           dialogoRef.cuandoCerramos.then((_)=>{
             evento[1].cuenta=dialogoRef.componenteDentro.instance.modelo;
           });
@@ -91,7 +92,7 @@ export class AsientoComponent {
         new DbpDialogoConfirmarConf('¿Quiere crear un nuevo asiento?','Asiento'),this.modelo
         ,(res)=>{
           this.parser(res);
-          this.mensajeria.success(this.elemento,'Se actualizado el asiento ('+res.json().id+') correctamente.');
+          this.mensajeria.success(this.viewContainerRef,'Se actualizado el asiento ('+res.json().id+') correctamente.');
           this.transitarModificar();
         });
     }
@@ -101,7 +102,7 @@ export class AsientoComponent {
         new DbpDialogoConfirmarConf('¿Quiere actualizar el asiento?','Asiento'),this.modelo
         ,(res)=>{
           this.parser(res);
-          this.mensajeria.success(this.elemento,'Se actualizado el asiento ('+res.json().id+') correctamente.');
+          this.mensajeria.success(this.viewContainerRef,'Se actualizado el asiento ('+res.json().id+') correctamente.');
         });
     }
 
@@ -115,7 +116,7 @@ export class AsientoComponent {
       this.operacionesAsiento.eliminar(
         new DbpDialogoConfirmarConf('¿Ser va eliminar el asiento '+id+'?','Asiento'),id
         ,(res)=>{
-          this.mensajeria.success(this.elemento,'Se ha eliminado el asiento ('+id+') correctamente.');
+          this.mensajeria.success(this.viewContainerRef,'Se ha eliminado el asiento ('+id+') correctamente.');
           this.transitarCrear();
         });
     }

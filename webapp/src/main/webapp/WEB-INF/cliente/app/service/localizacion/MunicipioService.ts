@@ -1,4 +1,4 @@
-import {Injectable,ElementRef} from 'angular2/core';
+import {Injectable,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Http,Response,URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {GenericService,IGenericService} from '../core/GenericService';
@@ -15,31 +15,31 @@ export class MunicipioService implements IGenericService<Municipio,number>{
       this.genericService=new GenericService<Municipio,number>(http,this.url,mensajeria);
   }
 
-  public crear(municipio:Municipio,elemento:ElementRef):Observable<Response>{
+  public crear(municipio:Municipio,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.crear(municipio,elemento);
   }
 
-  public actualizar(municipio:Municipio,elemento:ElementRef):Observable<Response>{
+  public actualizar(municipio:Municipio,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.actualizar(municipio,elemento);
   }
 
-  public actualizarLista(municipio:Array<Municipio>,elemento:ElementRef):Observable<Response>{
+  public actualizarLista(municipio:Array<Municipio>,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.actualizarLista(municipio,elemento);
   }
 
-  public eliminar(id:number,elemento:ElementRef):Observable<Response>{
+  public eliminar(id:number,elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:number,elemento:ElementRef):Observable<Response>{
+  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Response>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ElementRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.obtenerTodos(elemento);
   }
 
-  public filtrar(filtro:MunicipioFiltro, elemento:ElementRef):Observable<Response>{
+  public filtrar(filtro:MunicipioFiltro, elemento:ViewContainerRef):Observable<Response>{
       var search:URLSearchParams=new URLSearchParams();
   	  search.append('id',filtro.id);
   	  search.append('municipio',filtro.municipio);
