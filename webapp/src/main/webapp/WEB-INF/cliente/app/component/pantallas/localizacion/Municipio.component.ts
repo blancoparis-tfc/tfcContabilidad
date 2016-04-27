@@ -1,4 +1,4 @@
-import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from 'angular2/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -17,8 +17,7 @@ export class MunicipioComponent{
     lineas:Array<Municipio>;
     columnas:Array<Columna>;
     constructor(
-      private elemento:ElementRef
-      ,private dialogo:DbpDialogo
+       private dialogo:DbpDialogo
       ,private MunicipioService:MunicipioService
       ,private viewContainerRef:ViewContainerRef
     ){

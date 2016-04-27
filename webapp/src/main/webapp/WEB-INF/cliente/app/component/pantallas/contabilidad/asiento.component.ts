@@ -1,4 +1,4 @@
-import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from 'angular2/core';
 import {Response} from 'angular2/http';
 import {Router,RouteParams} from 'angular2/router';
 import {Asiento} from '../../../model/contabilidad/asiento';
@@ -26,10 +26,12 @@ export class AsientoComponent {
     operacionesAsiento:OperacionesUtils<Asiento,number>;
     columnas:Array<Columna>;
 
-    constructor(private asientoService:AsientoService, private elemento:ElementRef
-               , private dialogo:DbpDialogo, private mensajeria:Mensajeria,private router:Router
-               ,params:RouteParams
-               ,private viewContainerRef:ViewContainerRef){
+    constructor( private asientoService:AsientoService 
+               , private dialogo:DbpDialogo
+               , private mensajeria:Mensajeria
+               , private router:Router
+               , params:RouteParams
+               , private viewContainerRef:ViewContainerRef){
 
         var identificador:string=params.get("id");
 
@@ -43,7 +45,7 @@ export class AsientoComponent {
             })
         }
         this.columnas=this.getColumnas();
-        this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService,this.viewContainerRef);
+        this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,asientoService,this.viewContainerRef);
     }
 
     inicializarModelo():Asiento{

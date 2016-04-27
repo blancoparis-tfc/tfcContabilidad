@@ -1,4 +1,4 @@
-import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from 'angular2/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -16,12 +16,10 @@ export class ProvinciaComponent{
     lineas:Array<Provincia>;
     columnas:Array<Columna>;
     constructor(
-      private elemento:ElementRef
-      ,private dialogo:DbpDialogo
+       private dialogo:DbpDialogo
       ,private ProvinciaService:ProvinciaService
       ,private viewContainerRef:ViewContainerRef
     ){
-
       this.modelo = new ProvinciaFiltro("","","");
       this.lineas=[];
       this.columnas=this.getColumnas();
@@ -29,9 +27,7 @@ export class ProvinciaComponent{
 
     consultar(){
       this.ProvinciaService.filtrar(this.modelo,this.viewContainerRef)
-        .subscribe(res=>{
-        this.lineas=res.json();
-      });
+        .subscribe(res=>{this.lineas=res.json(); });
     }
 
     private getColumnas():Array<Columna>{

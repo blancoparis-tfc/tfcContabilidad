@@ -1,4 +1,4 @@
-import {Component,ElementRef,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {AsientoFiltro,ResumenAsiento} from '../../../model/contabilidad/asientoFiltro';
 import {Asiento} from '../../../model/contabilidad/asiento';
@@ -21,13 +21,16 @@ export class AsientoFiltroComponent{
     lineas:Array<ResumenAsiento>;
     columnas:Array<Columna>;
     operacionesAsiento:OperacionesUtils<Asiento,number>;
-    constructor(private asientoService:AsientoService,private elemento:ElementRef
-    ,private router:Router, private mensajeria:Mensajeria, dialogo:DbpDialogo
-    ,private viewContainerRef:ViewContainerRef){
+    constructor(
+      private asientoService:AsientoService
+     , private router:Router
+     , private mensajeria:Mensajeria
+     , dialogo:DbpDialogo
+     , private viewContainerRef:ViewContainerRef){
       this.modelo = new AsientoFiltro('','','','');
       this.lineas = [];
       this.columnas =this.getColumnas();
-      this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,elemento,asientoService,this.viewContainerRef);
+      this.operacionesAsiento = new OperacionesUtils<Asiento,number>(dialogo,asientoService,this.viewContainerRef);
     }
 
     onSubmit(){

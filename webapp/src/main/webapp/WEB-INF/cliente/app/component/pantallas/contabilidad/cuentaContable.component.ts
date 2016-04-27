@@ -1,4 +1,4 @@
-import {Component,ElementRef,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy,ViewContainerRef} from 'angular2/core';
+import {Component,DynamicComponentLoader,Injector,provide,OnInit,OnDestroy,ViewContainerRef} from 'angular2/core';
 import {FormBuilder} from 'angular2/common';
 import {Response,Headers} from 'angular2/http';
 import {CuentaContable} from '../../../model/contabilidad/cuentaContable';
@@ -21,8 +21,8 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
   columnas:Array<Columna>;
   pintarCabecera:boolean;
   constructor(
-                 private elemento:ElementRef
-                ,private dialogo:DbpDialogo
+
+                private dialogo:DbpDialogo
                 ,private mensajeria:Mensajeria
                 ,private cargador: DynamicComponentLoader
                 ,private injector: Injector

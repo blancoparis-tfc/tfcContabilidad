@@ -1,4 +1,4 @@
-import {Injectable,ElementRef,ViewContainerRef} from 'angular2/core';
+import {Injectable,ViewContainerRef} from 'angular2/core';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {IGenericService} from '../../../service/core/GenericService';
 import {Response} from 'angular2/http';
@@ -10,7 +10,7 @@ export enum Estado {
 
 export class OperacionesUtils <E,ID>{
 
-  constructor(private dialogo:DbpDialogo,private elemento:ElementRef,
+  constructor(private dialogo:DbpDialogo,
   private service:IGenericService<E,ID>,
   private viewContainerRef:ViewContainerRef){
 
