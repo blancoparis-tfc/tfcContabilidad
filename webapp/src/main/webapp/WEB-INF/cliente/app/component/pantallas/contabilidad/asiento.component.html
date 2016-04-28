@@ -1,7 +1,12 @@
 <div class="page-header">
   <h1>Asiento contable</h1>
 </div>
-<div id="mensajeria"></div>
+<div id="mensajeria">
+  <div class="alert alert-success"  role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+            Prueba los datos
+  </div>
+</div>
 <p class="lead">Esta la operación del asiento.</p>
 <form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
   <div class="row">
