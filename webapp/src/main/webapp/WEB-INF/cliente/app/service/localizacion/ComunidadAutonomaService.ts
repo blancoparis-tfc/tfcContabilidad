@@ -16,15 +16,15 @@ export class ComunidadAutonomaService implements IGenericService<ComunidadAutono
       this.genericService=new GenericService<ComunidadAutonoma,number>(http,this.url,mensajeria);
   }
 
-  public crear(comunidadAutonoma:ComunidadAutonoma,elemento:ViewContainerRef):Observable<Response>{
+  public crear(comunidadAutonoma:ComunidadAutonoma,elemento:ViewContainerRef):Observable<ComunidadAutonoma>{
       return this.genericService.crear(comunidadAutonoma,elemento);
   }
 
-  public actualizar(comunidadAutonoma:ComunidadAutonoma,elemento:ViewContainerRef):Observable<Response>{
+  public actualizar(comunidadAutonoma:ComunidadAutonoma,elemento:ViewContainerRef):Observable<ComunidadAutonoma>{
       return this.genericService.actualizar(comunidadAutonoma,elemento);
   }
 
-  public actualizarLista(comunidadAutonoma:Array<ComunidadAutonoma>,elemento:ViewContainerRef):Observable<Response>{
+  public actualizarLista(comunidadAutonoma:Array<ComunidadAutonoma>,elemento:ViewContainerRef):Observable<ComunidadAutonoma>{
       return this.genericService.actualizarLista(comunidadAutonoma,elemento);
   }
 
@@ -32,11 +32,11 @@ export class ComunidadAutonomaService implements IGenericService<ComunidadAutono
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Response>{
+  public obtenerId(id:number,elemento:ViewContainerRef):Observable<ComunidadAutonoma>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<ComunidadAutonoma[]>{
       return this.genericService.obtenerTodos(elemento);
   }
 

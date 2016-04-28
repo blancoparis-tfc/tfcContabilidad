@@ -13,15 +13,15 @@ export class CuentaContableService {
       this.genericService=new GenericService<CuentaContable,String>(http,this.url,mensajeria);
   }
 
-  public crear(cuentaContable:CuentaContable,elemento:ViewContainerRef):Observable<Response>{
+  public crear(cuentaContable:CuentaContable,elemento:ViewContainerRef):Observable<CuentaContable>{
       return this.genericService.crear(cuentaContable,elemento);
   }
 
-  public actualizar(cuentaContable:CuentaContable,elemento:ViewContainerRef):Observable<Response>{
+  public actualizar(cuentaContable:CuentaContable,elemento:ViewContainerRef):Observable<CuentaContable>{
       return this.genericService.actualizar(cuentaContable,elemento);
   }
 
-  public actualizarLista(cuentasContables:Array<CuentaContable>,elemento:ViewContainerRef):Observable<Response>{
+  public actualizarLista(cuentasContables:Array<CuentaContable>,elemento:ViewContainerRef):Observable<CuentaContable>{
       return this.genericService.actualizarLista(cuentasContables,elemento);
   }
 
@@ -29,7 +29,7 @@ export class CuentaContableService {
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<CuentaContable[]>{
       return this.genericService.obtenerTodos(elemento);
   }
 

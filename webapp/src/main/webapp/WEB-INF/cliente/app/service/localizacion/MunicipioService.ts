@@ -15,15 +15,15 @@ export class MunicipioService implements IGenericService<Municipio,number>{
       this.genericService=new GenericService<Municipio,number>(http,this.url,mensajeria);
   }
 
-  public crear(municipio:Municipio,elemento:ViewContainerRef):Observable<Response>{
+  public crear(municipio:Municipio,elemento:ViewContainerRef):Observable<Municipio>{
       return this.genericService.crear(municipio,elemento);
   }
 
-  public actualizar(municipio:Municipio,elemento:ViewContainerRef):Observable<Response>{
+  public actualizar(municipio:Municipio,elemento:ViewContainerRef):Observable<Municipio>{
       return this.genericService.actualizar(municipio,elemento);
   }
 
-  public actualizarLista(municipio:Array<Municipio>,elemento:ViewContainerRef):Observable<Response>{
+  public actualizarLista(municipio:Array<Municipio>,elemento:ViewContainerRef):Observable<Municipio>{
       return this.genericService.actualizarLista(municipio,elemento);
   }
 
@@ -31,11 +31,11 @@ export class MunicipioService implements IGenericService<Municipio,number>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Response>{
+  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Municipio>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<Municipio[]>{
       return this.genericService.obtenerTodos(elemento);
   }
 

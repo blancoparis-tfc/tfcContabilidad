@@ -26,7 +26,7 @@ export class AsientoComponent {
     operacionesAsiento:OperacionesUtils<Asiento,number>;
     columnas:Array<Columna>;
 
-    constructor( private asientoService:AsientoService 
+    constructor( private asientoService:AsientoService
                , private dialogo:DbpDialogo
                , private mensajeria:Mensajeria
                , private router:Router
@@ -93,8 +93,9 @@ export class AsientoComponent {
       this.operacionesAsiento.crear(
         new DbpDialogoConfirmarConf('¿Quiere crear un nuevo asiento?','Asiento'),this.modelo
         ,(res)=>{
+          console.info('Crear',res);
           this.parser(res);
-          this.mensajeria.success(this.viewContainerRef,'Se actualizado el asiento ('+res.json().id+') correctamente.');
+          this.mensajeria.success(this.viewContainerRef,'Se actualizado el asiento ('+res.id+') correctamente.');
           this.transitarModificar();
         });
     }
@@ -104,13 +105,13 @@ export class AsientoComponent {
         new DbpDialogoConfirmarConf('¿Quiere actualizar el asiento?','Asiento'),this.modelo
         ,(res)=>{
           this.parser(res);
-          this.mensajeria.success(this.viewContainerRef,'Se actualizado el asiento ('+res.json().id+') correctamente.');
+          this.mensajeria.success(this.viewContainerRef,'Se actualizado el asiento ('+res.id+') correctamente.');
         });
     }
 
-    parser(res:Response){
+    parser(res:any){
       // TODO: Apaño por al recuperar los objetos no los instancia al objeto que nos interesa.
-      this.modelo=res.json();
+      this.modelo=res;
       this.modelo.lineas=this.modelo.lineas.map((linea)=>new LineaAsiento(linea.id,linea.cuenta,linea.tipoMovimientoContable,linea.importe,linea.concepto));
     }
 

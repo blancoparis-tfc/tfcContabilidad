@@ -15,15 +15,15 @@ export class PaisService implements IGenericService<Pais,string>{
       this.genericService=new GenericService<Pais,string>(http,this.url,mensajeria);
   }
 
-  public crear(asiento:Pais,elemento:ViewContainerRef):Observable<Response>{
+  public crear(asiento:Pais,elemento:ViewContainerRef):Observable<Pais>{
       return this.genericService.crear(asiento,elemento);
   }
 
-  public actualizar(asiento:Pais,elemento:ViewContainerRef):Observable<Response>{
+  public actualizar(asiento:Pais,elemento:ViewContainerRef):Observable<Pais>{
       return this.genericService.actualizar(asiento,elemento);
   }
 
-  public actualizarLista(asiento:Array<Pais>,elemento:ViewContainerRef):Observable<Response>{
+  public actualizarLista(asiento:Array<Pais>,elemento:ViewContainerRef):Observable<Pais>{
       return this.genericService.actualizarLista(asiento,elemento);
   }
 
@@ -31,11 +31,11 @@ export class PaisService implements IGenericService<Pais,string>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:string,elemento:ViewContainerRef):Observable<Response>{
+  public obtenerId(id:string,elemento:ViewContainerRef):Observable<Pais>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<Pais[]>{
       return this.genericService.obtenerTodos(elemento);
   }
 

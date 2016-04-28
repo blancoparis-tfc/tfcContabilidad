@@ -41,7 +41,7 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
   ngOnInit() {
       console.info('ngOnInit');
       this.cuentaContableService.obtenerTodos(this.viewContainerRef).subscribe(res=>{
-          this.lineas=res.json();
+          this.lineas=res;
       });
   }
 
@@ -101,9 +101,9 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
     console.info('Modelo',this.modelo);
     this.dialogo.confirmar(this.viewContainerRef,new DbpDialogoConfirmarConf('¿Quiere crear la cuenta contable ('+this.modelo.cuenta+')?','Cuenta contable')).then(dialogoComponent=>{
         dialogoComponent.instance.cuandoOk.then((_)=>{
-            this.cuentaContableService.crear(this.modelo,this.viewContainerRef).subscribe(res=>{
-                this.lineas.push(res.json());
-                console.info('nos ha devuelto esto ', res.json());
+            this.cuentaContableService.crear(this.modelo,this.viewContainerRef).subscribe(data=>{
+                console.info('nos ha devuelto esto ', data);
+                this.lineas.push(data);
                 this.mensajeria.success(this.viewContainerRef,'Se han guardado los datos correctamente.');
             },
             err=>{

@@ -19,7 +19,7 @@ export class OperacionesUtils <E,ID>{
   crear(
           dialogoConf:DbpDialogoConfirmarConf,
           modelo:E,
-          procesarResponse: (value:Response) => void,
+          procesarResponse: (value:E) => void,
           pprocesarCancelar?:(_)=>void
               ){
 
@@ -28,6 +28,7 @@ export class OperacionesUtils <E,ID>{
                         dialogoComponent.instance.cuandoOk.then((_)=>{
                           this.service.crear(modelo,this.viewContainerRef)
                           .subscribe((res)=>{
+                            console.info('Res',res);
                             procesarResponse(res);
                           })
                         });
@@ -37,7 +38,7 @@ export class OperacionesUtils <E,ID>{
 
   actualizar(
           dialogoConf:DbpDialogoConfirmarConf,modelo:E,
-          procesarResponse: (value:Response) => void,
+          procesarResponse: (value:E) => void,
           pprocesarCancelar?:(_)=>void
               ){
                 this.dialogo.confirmar(this.viewContainerRef,dialogoConf)

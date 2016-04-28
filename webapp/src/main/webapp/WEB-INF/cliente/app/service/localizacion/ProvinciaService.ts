@@ -15,15 +15,15 @@ export class ProvinciaService implements IGenericService<Provincia,number>{
       this.genericService=new GenericService<Provincia,number>(http,this.url,mensajeria);
   }
 
-  public crear(provincia:Provincia,elemento:ViewContainerRef):Observable<Response>{
+  public crear(provincia:Provincia,elemento:ViewContainerRef):Observable<Provincia>{
       return this.genericService.crear(provincia,elemento);
   }
 
-  public actualizar(provincia:Provincia,elemento:ViewContainerRef):Observable<Response>{
+  public actualizar(provincia:Provincia,elemento:ViewContainerRef):Observable<Provincia>{
       return this.genericService.actualizar(provincia,elemento);
   }
 
-  public actualizarLista(provincia:Array<Provincia>,elemento:ViewContainerRef):Observable<Response>{
+  public actualizarLista(provincia:Array<Provincia>,elemento:ViewContainerRef):Observable<Provincia>{
       return this.genericService.actualizarLista(provincia,elemento);
   }
 
@@ -31,11 +31,11 @@ export class ProvinciaService implements IGenericService<Provincia,number>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Response>{
+  public obtenerId(id:number,elemento:ViewContainerRef):Observable<Provincia>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<Provincia[]>{
       return this.genericService.obtenerTodos(elemento);
   }
 

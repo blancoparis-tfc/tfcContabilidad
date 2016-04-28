@@ -14,15 +14,15 @@ export class AsientoService implements IGenericService<Asiento,number>{
         this.genericService=new GenericService<Asiento,number>(http,this.url,mensajeria);
     }
 
-    public crear(asiento:Asiento,elemento:ViewContainerRef):Observable<Response>{
+    public crear(asiento:Asiento,elemento:ViewContainerRef):Observable<Asiento>{
         return this.genericService.crear(asiento,elemento);
     }
 
-    public actualizar(asiento:Asiento,elemento:ViewContainerRef):Observable<Response>{
+    public actualizar(asiento:Asiento,elemento:ViewContainerRef):Observable<Asiento>{
         return this.genericService.actualizar(asiento,elemento);
     }
 
-    public actualizarLista(asiento:Array<Asiento>,elemento:ViewContainerRef):Observable<Response>{
+    public actualizarLista(asiento:Array<Asiento>,elemento:ViewContainerRef):Observable<Asiento>{
         return this.genericService.actualizarLista(asiento,elemento);
     }
 
@@ -30,11 +30,11 @@ export class AsientoService implements IGenericService<Asiento,number>{
         return this.genericService.eliminar(id,elemento);
     }
 
-    public obtenerId(id:number,elemento:ViewContainerRef):Observable<Response>{
+    public obtenerId(id:number,elemento:ViewContainerRef):Observable<Asiento>{
       return this.genericService.obtenerId(id,elemento);
     }
 
-    public obtenerTodos(elemento:ViewContainerRef):Observable<Response>{
+    public obtenerTodos(elemento:ViewContainerRef):Observable<Asiento[]>{
         return this.genericService.obtenerTodos(elemento);
     }
 
