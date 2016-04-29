@@ -80,7 +80,7 @@ export class GenericService <E,ID> implements GenericService<E,ID>{
       console.info('Error',error);
       let errMsg = error.text() || 'Server error';
       console.error(errMsg);
-      this.mensajeria.error(elemento,'Prueba '+errMsg);
+      this.mensajeria.error(elemento,errMsg);
       return Observable.throw(errMsg);
     }
 

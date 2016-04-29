@@ -20,13 +20,32 @@ export class Mensajeria{
     this.crearMensaje(elemento,mensaje,'alert-danger');
   }
 
-  private crearMensaje(elemento:ViewContainerRef, mensaje:string,clase:String){
+  private crearMensaje(elemento:ViewContainerRef, mensaje:string,clase:string){
+    console.info('Inicio');
+    this.notificacionHtml5(mensaje,clase);
     this.cargador.loadNextToLocation(DbpMensaje,elemento).then(containerRef=>{
         containerRef.instance.mensaje=mensaje;
         containerRef.instance.clase=clase;
         containerRef.instance.elemento=containerRef;
         setTimeout(()=>{containerRef.destroy();},this.intervalo);
     });
+  }
+
+  private notificacionHtml5(mensaje:string,titulo:string){
+      if(!("Notification" in window)){
+          console.info('El navegador no soporta las notificaciones de html 5');
+      }else{
+        let _Notification = window["Notification"];
+        if(_Notification.permission === "granted"){
+            var notification = new _Notification(titulo,mensaje);
+        }else if (_Notification.permission !== 'denied') {
+            _Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+              var notification = new _Notification(titulo,mensaje);
+            }
+          });
+        }
+      }
   }
 }
 
