@@ -5,37 +5,28 @@ export class Mensajeria{
 
   private intervalo:number=10000;
 
-  constructor(private cargador: DynamicComponentLoader, private appRef : ApplicationRef ){}
+  constructor(private cargador: DynamicComponentLoader){}
 
   public success(elemento:ViewContainerRef,mensaje:string){
-      console.info('success',this.appRef);
-      /*this.cargador.loadAsRoot(DbpMensaje,'#mensajeria',elemento.injector).then(containerRef=>{
-        containerRef.instance.mensaje=mensaje;
-        containerRef.instance.clase='alert-success';
-        containerRef.instance.elemento=containerRef;
-      //  setTimeout(()=>{containerRef.destroy();},this.intervalo);
-    });*/
+    this.crearMensaje(elemento,mensaje,'alert-success');
   }
 
   public warning(elemento:ViewContainerRef,mensaje:string){
-    console.info('warning',this.appRef);
-    /*this.cargador.loadAsRoot(DbpMensaje,'#mensajeria',elemento.injector).then(containerRef=>{
-      containerRef.instance.mensaje=mensaje;
-      containerRef.instance.clase='alert-warning';
-      containerRef.instance.elemento=containerRef;
-    //  setTimeout(()=>{containerRef.destroy();},this.intervalo);
-  });*/
+    this.crearMensaje(elemento,mensaje,'alert-warning');
   }
 
 
   public error(elemento:ViewContainerRef,mensaje:string){
-    console.info('error',this.appRef);
-    /*this.cargador.loadAsRoot(DbpMensaje,'#mensajeria',elemento.injector).then(containerRef=>{
-      containerRef.instance.mensaje=mensaje;
-      containerRef.instance.clase='alert-danger';
-      containerRef.instance.elemento=containerRef;
-    //  setTimeout(()=>{containerRef.destroy();},this.intervalo);
-  });*/
+    this.crearMensaje(elemento,mensaje,'alert-danger');
+  }
+
+  private crearMensaje(elemento:ViewContainerRef, mensaje:string,clase:String){
+    this.cargador.loadNextToLocation(DbpMensaje,elemento).then(containerRef=>{
+        containerRef.instance.mensaje=mensaje;
+        containerRef.instance.clase=clase;
+        containerRef.instance.elemento=containerRef;
+        setTimeout(()=>{containerRef.destroy();},this.intervalo);
+    });
   }
 }
 

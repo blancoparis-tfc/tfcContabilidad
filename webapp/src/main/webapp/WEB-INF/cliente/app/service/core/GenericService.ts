@@ -23,41 +23,41 @@ export class GenericService <E,ID> implements GenericService<E,ID>{
       return this.http
         .post(this.url,JSON.stringify(cuentaContable),{headers:this.headers})
         .map(this.extractData)
-        .catch(this.handleErrorV2);
+        .catch((error)=>this.handleError(error,elemento));
     }
 
     public eliminar(id:ID,elemento:ViewContainerRef):Observable<Response>{
       return this.http
         .delete(this.parserUrlId(id),{headers:this.headers})
-        .catch(this.handleErrorV2);
+        .catch((error)=>this.handleError(error,elemento));
     }
 
     public actualizarLista(cuentasContables:Array<E>,elemento:ViewContainerRef):Observable<E>{
       return this.http
           .put(this.url+'/lista',JSON.stringify(cuentasContables),{headers:this.headers})
           .map(this.extractData)
-          .catch(this.handleErrorV2);
+          .catch((error)=>this.handleError(error,elemento));
     }
 
     public actualizar(cuentaContable:E,elemento:ViewContainerRef):Observable<E>{
       return this.http
           .put(this.url,JSON.stringify(cuentaContable),{headers:this.headers})
           .map(this.extractData)
-          .catch(this.handleErrorV2);
+          .catch((error)=>this.handleError(error,elemento));
     }
 
     public obtenerId(id:ID,elemento:ViewContainerRef):Observable<E>{
       return this.http
           .get(this.parserUrlId(id))
           .map(this.extractData)
-          .catch(this.handleErrorV2);
+          .catch((error)=>this.handleError(error,elemento));
     }
 
     public obtenerTodos(elemento:ViewContainerRef):Observable<E[]>{
       return this.http
           .get(this.url)
           .map(this.extractData)
-          .catch(this.handleErrorV2);
+          .catch((error)=>this.handleError(error,elemento));
     }
 
     private extractData(res: Response) {
@@ -68,18 +68,20 @@ export class GenericService <E,ID> implements GenericService<E,ID>{
       return body || { };
     }
 
-    private handleErrorV2(error:Response){
+    /*private handleErrorV2(error:Response){
       console.info('Error',error);
       let errMsg = error.text() || 'Server error';
       console.error(errMsg);
+      this.mensajeria.consola('Prueba '+errMsg);
       return Observable.throw(errMsg);
-    }
+    }*/
 
     public handleError (error:Response,elemento:ViewContainerRef){
-      console.info('Error de generico ',error);
-      console.info('Mensaje de error',error.text());
-      //this.mensajeria.error(elemento,error.text());
-      return Observable.throw(error.text());
+      console.info('Error',error);
+      let errMsg = error.text() || 'Server error';
+      console.error(errMsg);
+      this.mensajeria.error(elemento,'Prueba '+errMsg);
+      return Observable.throw(errMsg);
     }
 
     private parserUrlId(id:ID){
