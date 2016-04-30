@@ -8,5 +8,7 @@ export class Municipio{
 export class MunicipioFiltro{
   constructor(
   	  public  id: string,
-  	  public  municipio: string  ){}
+  	  public  municipio: string ,
+      public  provincia: string ,
+      public  comunidadAutonoma:string){}
 }

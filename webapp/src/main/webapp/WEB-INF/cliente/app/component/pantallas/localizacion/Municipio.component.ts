@@ -22,7 +22,7 @@ export class MunicipioComponent{
       ,private viewContainerRef:ViewContainerRef
     ){
 
-      this.modelo = new MunicipioFiltro("","");
+      this.modelo = new MunicipioFiltro("","","","");
       this.lineas=[];
       this.columnas=this.getColumnas();
     }

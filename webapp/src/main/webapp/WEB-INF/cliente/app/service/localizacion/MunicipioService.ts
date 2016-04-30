@@ -43,6 +43,8 @@ export class MunicipioService implements IGenericService<Municipio,number>{
       var search:URLSearchParams=new URLSearchParams();
   	  search.append('id',filtro.id);
   	  search.append('municipio',filtro.municipio);
+      search.append('provincia',filtro.provincia);
+      search.append('comunidadAutonoma',filtro.comunidadAutonoma);
       return this.http
           .get(this.url+"/filtro",{search:search})
           .catch((error)=>{return this.genericService.handleError(error,elemento);});
