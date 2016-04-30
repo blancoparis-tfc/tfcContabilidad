@@ -7,7 +7,7 @@
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li *ngFor="#pag of paginas" [class.active]="pagina==pag" ><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
+          <li *ngFor="let pag of paginas" [class.active]="pagina==pag" ><a href="#" (click)="paginar(pag,$event)">{{pag}}</a></li>
           <li>
             <a href="#" aria-label="Next" (click)="paginar(numeroDePaginas,$event)">
               <span aria-hidden="true">&raquo;</span>
@@ -19,14 +19,14 @@
     <div  class="col-md-6">
       <br/>
        Pagina <span class="badge">{{pagina}}</span> de <span class="badge">{{numeroDePaginas}}</span> Elementos <span class="badge">{{filas.length}}</span>
-      
+
     </div>
 </div>
 <table class="table table-striped">
     <thead>
       <tr>
 
-          <th *ngFor="#columna of columnas">
+          <th *ngFor="let columna of columnas">
               <a (click)="ordenar(columna)" >{{columna.descripcion}}
               <span
                   class="glyphicon"
@@ -41,8 +41,8 @@
           <th> Estado </th>
       </tr>
     </thead>
-    <tr *ngFor="#fila of ventana" (dblclick)="onSeleccionar(fila)">
-        <td *ngFor="#columna of columnas"
+    <tr *ngFor="let fila of ventana" (dblclick)="onSeleccionar(fila)">
+        <td *ngFor="let columna of columnas"
           (keyup.control.F6)="accionF6(columna,fila)"
           (keyup.control.Delete)="onEliminar(fila)"
           (keyup.control.F1)="onHelp()"
@@ -51,7 +51,7 @@
           <input *ngIf="esInput(columna)" type="text" class="form-control" [(ngModel)]="fila[columna.nombre]"
             (change)="onCambio(fila)" (keyup.control.enter)="nuevaLinea(columna)" />
           <select *ngIf="esSelect(columna)"  class="form-control" [(ngModel)]="fila[columna.nombre]">
-              <option *ngFor="#elemento of columna.valores" value="{{elemento}}">{{elemento}}</option>
+              <option *ngFor="let elemento of columna.valores" value="{{elemento}}">{{elemento}}</option>
           </select>
         </td>
         <td>

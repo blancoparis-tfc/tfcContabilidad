@@ -37,11 +37,11 @@ export class Mensajeria{
       }else{
         let _Notification = window["Notification"];
         if(_Notification.permission === "granted"){
-            var notification = new _Notification(titulo,mensaje);
+            var notification = new _Notification(mensaje);
         }else if (_Notification.permission !== 'denied') {
             _Notification.requestPermission(function (permission) {
             if (permission === "granted") {
-              var notification = new _Notification(titulo,mensaje);
+              var notification = new _Notification(mensaje);
             }
           });
         }
