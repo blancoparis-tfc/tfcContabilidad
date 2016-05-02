@@ -63,7 +63,7 @@ export class DatosDeContactoComponent{
           this.mensajeria.success(this.elemento,'Se ha creado la datosDeContacto ('+data.id+') correctamente.');
           this.lineas.push(data);
         });
-    }
+   }
 
    modificar(){
       this.operaciones.actualizar(

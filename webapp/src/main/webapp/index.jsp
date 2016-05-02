@@ -10,7 +10,7 @@
       <script src="node_modules/es6-shim/es6-shim.min.js"></script>
       <script src="node_modules/systemjs/dist/system.src.js"></script>
       <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
-      <script src="node_modules/angular2/bundles/angular2.min.js"></script>
+      <script src="node_modules/angular2/bundles/angular2.js"></script>
       <script src="node_modules/angular2/bundles/router.min.js"></script>
       <script src="node_modules/angular2/bundles/http.min.js"></script>
 

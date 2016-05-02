@@ -112,6 +112,21 @@ export class DireccionComponent{
       return dialogoRef;
     });
   }
+  	isResetearSeleccionado():boolean{
+  		return this.modelo.municipio.municipio!=null;
+   	}
+  
+  	resetearMunicipio(){
+  		this.modelo.municipio=new Municipio(null,null);
+  	}
+  
+	municipioSeleccionado():string{
+		if(this.modelo.municipio.municipio!=null){
+			return this.modelo.municipio.municipio;
+		}else{
+			return 'desconocido';
+		}
+	}
 
 	private transitarFiltro(){ this.estado=this.eFiltro; }
 	private transitarCrear(){ this.estado=this.eCrear; }

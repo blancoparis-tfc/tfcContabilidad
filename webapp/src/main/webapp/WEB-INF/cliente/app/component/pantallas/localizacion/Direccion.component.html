@@ -1,7 +1,7 @@
 <div [hidden]="dbpDialogoRef!=null" class="page-header">
   <h1>Direccion</h1>
 </div>
-<p class="lead" [hidden]="dbpDialogoRef!=null" >Esta la operaciï¿½n del Direccion.</p>
+<p class="lead" [hidden]="dbpDialogoRef!=null" >Esta la operación del Direccion.</p>
 <form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
 	<div [hidden]="estado!=eFiltro" class="row">
 		<div  class="col-md-6 form-group">
@@ -26,9 +26,19 @@
   <div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
     <div  class="col-md-6 form-group">
       <label>municipio</label>
-      <input type="text" class="form-control" [(ngModel)]="modelo.municipio.municipio"
-        (keyup.control.F6)="buscarMunicipio()"/>
+      <button  type="button" class="btn btn-info" 
+      	(click)="buscarMunicipio()" (keyup.control.F6)="buscarMunicipio()"> 
+      		{{municipioSeleccionado()}}
+      	</button> 
+      	
+		<button *ngIf="isResetearSeleccionado()" 
+			type="button" class="btn btn-default" aria-label="Left Align"
+			(click)="resetearMunicipio()"
+			>
+		  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		</button>
     </div>
+
   </div>
 	<div [hidden]="estado!=eFiltro"  class="row">
 		<div  class="col-md-6 form-group">
