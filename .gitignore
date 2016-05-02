@@ -8,3 +8,4 @@ bom/build
 bom/.classpath
 service/.classpath
 /webapp/src/main/webapp/WEB-INF/cliente/node_modules
+webapp/src/main/webapp/WEB-INF/cliente/.idea/workspace.xml
