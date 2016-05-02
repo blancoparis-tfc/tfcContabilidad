@@ -6,6 +6,7 @@ import {ComunidadAutonomaComponent} from './localizacion/ComunidadAutonoma.compo
 import {ProvinciaComponent} from './localizacion/Provincia.component';
 import {MunicipioComponent} from './localizacion/Municipio.component';
 import {DireccionComponent} from './localizacion/Direccion.component';
+import {DatosDeContactoComponent} from "./localizacion/DatosDeContacto.component";
 
 @Component({
   selector:'about',
@@ -96,6 +97,15 @@ abrirDireccion(){
   });
 }
 
+  abrirDatosDeContacto(){
+    this.dialogo.abrir(DatosDeContactoComponent,this.viewContainerRef,new DbpDialogoBaseConf('Direccion')).then(dialogoRef=>{
+      console.info('Componente de dentro',dialogoRef.componenteDentro);
+      dialogoRef.cuandoCerramos.then((_)=>{
+        console.info('Se cerro el componente',dialogoRef.componenteDentro.instance);
+      });
+      return dialogoRef;
+    });
+  }
 
 /*
 abrirComponenteComplejo(){
