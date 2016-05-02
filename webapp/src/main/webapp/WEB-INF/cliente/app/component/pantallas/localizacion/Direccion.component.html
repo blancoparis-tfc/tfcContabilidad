@@ -1,0 +1,59 @@
+<div [hidden]="dbpDialogoRef!=null" class="page-header">
+  <h1>Direccion</h1>
+</div>
+<p class="lead" [hidden]="dbpDialogoRef!=null" >Esta la operaci�n del Direccion.</p>
+<form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
+	<div [hidden]="estado!=eFiltro" class="row">
+		<div  class="col-md-6 form-group">
+			<label>id</label>
+			<input type="text" class="form-control" [(ngModel)]="filtro.id"/>
+		</div>
+		<div  class="col-md-6 form-group">
+			<label>direccion</label>
+			<input type="text" class="form-control" [(ngModel)]="filtro.direccion"/>
+		</div>
+	</div>
+	<div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
+		<div  class="col-md-6 form-group">
+			<label>id</label>
+			<span>{{modelo.id}}</span>
+		</div>
+		<div  class="col-md-6 form-group">
+			<label>direccion</label>
+			<input type="text" class="form-control" [(ngModel)]="modelo.direccion"/>
+		</div>
+	</div>
+  <div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
+    <div  class="col-md-6 form-group">
+      <label>municipio</label>
+      <input type="text" class="form-control" [(ngModel)]="modelo.municipio.municipio"
+        (keyup.control.F6)="buscarMunicipio()"/>
+    </div>
+  </div>
+	<div [hidden]="estado!=eFiltro"  class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+			<button  type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
+			<button  type="button" class="btn btn-success" (click)="crear()"> Crear </button>
+		</div>
+	</div>
+	<div [hidden]="!(estado==eCrear && estado!=eFiltro && estado!=eModificar)"   class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+			<button  type="button" class="btn btn-success" (click)="guardar()"> guardar </button>
+			<button  type="button" class="btn btn-info" (click)="cancelar()"> cancelar </button>
+		</div>
+	</div>
+	<div [hidden]="!(estado!=eCrear && estado!=eFiltro && estado==eModificar)"   class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+			<button  type="button" class="btn btn-success" (click)="modificar()"> guardar </button>
+			<button  type="button" class="btn btn-danger" (click)="eliminarOp(modelo.id)"> eliminar </button>
+			<button  type="button" class="btn btn-info" (click)="cancelar()"> cancelar </button>
+		</div>
+	</div>
+	<dbp-grid [columnas]="columnas" [filas]="lineas"
+		(eliminar)="eliminar($event)"
+		(seleccionar)="seleccionar($event)">
+	</dbp-grid>
+</form>

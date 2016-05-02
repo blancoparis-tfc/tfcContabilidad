@@ -18,6 +18,8 @@ import {ComunidadAutonomaService} from './service/localizacion/ComunidadAutonoma
 import {ProvinciaService} from './service/localizacion/ProvinciaService';
 import {MunicipioService} from './service/localizacion/MunicipioService';
 
+
+
 //DbpDialogoRef
 
 enableProdMode();
@@ -29,5 +31,6 @@ bootstrap(AppComponent,[
     , DbpDialogo, Mensajeria
     , CuentaContableService, AsientoService
     , PaisService, ComunidadAutonomaService, ProvinciaService, MunicipioService
+
     ]
 );

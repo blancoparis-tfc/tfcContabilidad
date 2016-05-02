@@ -14,12 +14,14 @@ import {MunicipioService} from '../../../service/localizacion/MunicipioService';
 })
 export class MunicipioComponent{
     modelo:MunicipioFiltro;
+    seleccion:Municipio;
     lineas:Array<Municipio>;
     columnas:Array<Columna>;
     constructor(
        private dialogo:DbpDialogo
       ,private MunicipioService:MunicipioService
       ,private viewContainerRef:ViewContainerRef
+      ,private dbpDialogoRef:DbpDialogoRef
     ){
 
       this.modelo = new MunicipioFiltro("","","","");
@@ -33,6 +35,15 @@ export class MunicipioComponent{
         this.lineas=res.json();
       });
     }
+
+    seleccionar(fila:any){
+        console.info('Seleccionar un elemento en la cuenta contable',fila);
+        this.seleccion=fila;
+        if(this.dbpDialogoRef!=null){
+            this.dbpDialogoRef.cerrar();
+        }
+    }
+
 
     private getColumnas():Array<Columna>{
       return [

@@ -9,6 +9,7 @@ import {FormularioComponent} from './component/pantallas/formulario.component';
 import {CuentaContableComponent} from "./component/pantallas/contabilidad/cuentaContable.component";
 import {AsientoComponent} from './component/pantallas/contabilidad/asiento.component';
 import {AsientoFiltroComponent} from './component/pantallas/contabilidad/asientoFiltro.component';
+import {DireccionComponent} from './component/pantallas/localizacion/Direccion.component';
 
 @RouteConfig([
   {path: '/About', component: AboutComponent, as:'About'},
@@ -16,15 +17,16 @@ import {AsientoFiltroComponent} from './component/pantallas/contabilidad/asiento
   {path: '/Formulario', component: FormularioComponent,as:'Formulario'},
   {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'},
   {path: '/AsientoFicha', component: AsientoComponent, as:"AsientoFicha"},
-  {path: '/Asiento', component: AsientoFiltroComponent, as:"Asiento"}
+  {path: '/Asiento', component: AsientoFiltroComponent, as:"Asiento"},
+  {path: '/Direccion', component:DireccionComponent, as:"Direccion"}
 ])
+
 @Component({
   selector:'my-app',
   templateUrl:'app/app.component.html',
   directives:[CabeceraComponent,RouterOutlet,PieComponent]
 })
 export class AppComponent{
-
   constructor(private location:Location){
      location.go('/About');
   }

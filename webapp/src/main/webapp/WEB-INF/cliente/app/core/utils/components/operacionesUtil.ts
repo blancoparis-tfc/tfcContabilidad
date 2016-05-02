@@ -4,7 +4,7 @@ import {IGenericService} from '../../../service/core/GenericService';
 import {Response} from 'angular2/http';
 
 export enum Estado {
-  CREAR,MODIFICAR
+  CREAR,MODIFICAR,FILTRO
 }
 
 
