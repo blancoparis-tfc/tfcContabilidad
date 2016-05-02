@@ -6,6 +6,9 @@ import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 import {Mensajeria} from '../../../core/mensajeria/mensajeria';
 import {OperacionesUtils,Estado} from '../../../core/utils/components/operacionesUtil';
 
+import {MunicipioComponent} from './Municipio.component';
+import {Municipio} from '../../../model/localizacion/Municipio';
+import {Direccion} from '../../../model/localizacion/Direccion';
 import {DatosDeContacto,DatosDeContactoFiltro} from '../../../model/localizacion/DatosDeContacto';
 import {DatosDeContactoService} from '../../../service/localizacion/DatosDeContactoService';
 
@@ -33,7 +36,7 @@ export class DatosDeContactoComponent{
       ,private dbpDialogoRef:DbpDialogoRef
     ){
       this.filtro = new DatosDeContactoFiltro("","","","");
-      this.modelo = new DatosDeContacto(null,null,null,null);
+      this.modelo = new DatosDeContacto(null,null,null,null,new Direccion(null,null,new Municipio(null,null)));
       this.lineas=[];
       this.columnas=this.getColumnas();
       this.transitarFiltro();
@@ -47,9 +50,9 @@ export class DatosDeContactoComponent{
       });
     }
 
-    crear(){ 
+    crear(){
 		this.transitarCrear();
-		this.modelo = new DatosDeContacto(null,null,null,null);
+		this.modelo = new DatosDeContacto(null,null,null,null,new Direccion(null,null,new Municipio(null,null)));
 	}
 
 	cancelar(){
@@ -73,7 +76,7 @@ export class DatosDeContactoComponent{
           this.transitarFiltro();
         });
     }
-    
+
 	seleccionar(fila:any){
 		this.modelo=fila;
 		this.transitarModificar();
@@ -103,6 +106,33 @@ export class DatosDeContactoComponent{
       }
 	}
 
+  // TODO: Esto lo tenemos que poder poner en comun.
+  buscarMunicipio(){
+    this.dialogo.abrir(MunicipioComponent,this.elemento,new DbpDialogoBaseConf('Municipio')).then(dialogoRef=>{
+      console.info('Componente de dentro',dialogoRef.componenteDentro);
+      dialogoRef.cuandoCerramos.then((_)=>{
+        this.modelo.direccion.municipio=Object.assign(this.modelo.direccion.municipio,dialogoRef.componenteDentro.instance.seleccion)
+        console.info('Seleccion municipio 3',this.modelo.direccion.municipio);
+      });
+      return dialogoRef;
+    });
+  }
+  	isResetearSeleccionado():boolean{
+  		return this.modelo.direccion.municipio.municipio!=null;
+   	}
+
+  	resetearMunicipio(){
+  		this.modelo.direccion.municipio=new Municipio(null,null);
+  	}
+
+	municipioSeleccionado():string{
+  		if(this.modelo.direccion.municipio.municipio!=null){
+  			return this.modelo.direccion.municipio.municipio;
+  		}else{
+  			return 'desconocido';
+  		}
+	}
+
 	private transitarFiltro(){ this.estado=this.eFiltro; }
 	private transitarCrear(){ this.estado=this.eCrear; }
 	private transitarModificar(){ this.estado=this.eModificar; }
@@ -112,7 +142,7 @@ export class DatosDeContactoComponent{
 			new Columna('id','id',TIPO_NO_EDITABLE),
 			new Columna('telefono','telefono',TIPO_NO_EDITABLE),
 			new Columna('nombre','nombre',TIPO_NO_EDITABLE),
-			new Columna('direccionDeCorreo','direccionDeCorreo',TIPO_NO_EDITABLE)        
+			new Columna('direccionDeCorreo','direccionDeCorreo',TIPO_NO_EDITABLE)
       ];
     }
 }

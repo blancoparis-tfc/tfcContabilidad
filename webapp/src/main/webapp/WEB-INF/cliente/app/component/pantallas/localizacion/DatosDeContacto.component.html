@@ -43,6 +43,26 @@
 			<input type="text" class="form-control" [(ngModel)]="modelo.direccionDeCorreo"/>
 		</div>
 	</div>
+	<div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
+		<div  class="col-md-6 form-group">
+			<label>direccion</label>
+			<input type="text" class="form-control" [(ngModel)]="modelo.direccion.direccion"/>
+		</div>
+	    <div  class="col-md-6 form-group">
+	      <label>municipio</label>
+	      <button  type="button" class="btn btn-info" 
+	      	(click)="buscarMunicipio()" (keyup.control.F6)="buscarMunicipio()"> 
+	      		{{municipioSeleccionado()}}
+	      	</button> 
+	      	
+			<button *ngIf="isResetearSeleccionado()" 
+				type="button" class="btn btn-default" aria-label="Left Align"
+				(click)="resetearMunicipio()"
+				>
+			  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			</button>
+	    </div>
+	</div>
 	<div [hidden]="estado!=eFiltro"  class="row">
 		<div  class="col-md-6 form-group">
 			<br/>
