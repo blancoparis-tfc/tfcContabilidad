@@ -1,5 +1,5 @@
-import {ElementRef,ViewContainerRef} from 'angular2/core';
-import {Http,Headers,Response} from 'angular2/http';
+import {ElementRef,ViewContainerRef} from '@angular/core';
+import {Http,Headers,Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Mensajeria} from '../../core/mensajeria/mensajeria';
 

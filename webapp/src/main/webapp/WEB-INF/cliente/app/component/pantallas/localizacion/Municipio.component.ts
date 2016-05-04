@@ -1,4 +1,4 @@
-import {Component,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from '@angular/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';

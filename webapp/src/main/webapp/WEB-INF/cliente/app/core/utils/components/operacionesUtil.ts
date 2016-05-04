@@ -1,7 +1,7 @@
-import {Injectable,ViewContainerRef} from 'angular2/core';
+import {Injectable,ViewContainerRef} from '@angular/core';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {IGenericService} from '../../../service/core/GenericService';
-import {Response} from 'angular2/http';
+import {Response} from '@angular/http';
 
 export enum Estado {
   CREAR,MODIFICAR,FILTRO

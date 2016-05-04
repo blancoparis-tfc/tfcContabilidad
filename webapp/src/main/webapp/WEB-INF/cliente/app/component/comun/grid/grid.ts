@@ -1,4 +1,4 @@
-import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange,DoCheck,IterableDiffers,ViewContainerRef} from 'angular2/core';
+import {Component,Input,Output,EventEmitter,OnInit,ElementRef,OnChanges,SimpleChange,DoCheck,IterableDiffers,ViewContainerRef} from '@angular/core';
 import {Columna,TiposEditables} from './columna';
 import {Ordenar} from './ordernar';
 import {DbpDialogo,DbpDialogoBaseConf} from '../../../core/modal/dialogo';

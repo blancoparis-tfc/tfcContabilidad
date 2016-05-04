@@ -1,4 +1,4 @@
-import {Component,ElementRef,DynamicComponentLoader,Injector,provide,ViewContainerRef} from 'angular2/core';
+import {Component,ElementRef,DynamicComponentLoader,Injector,provide,ViewContainerRef} from '@angular/core';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../core/modal/dialogo';
 import {PaisService} from '../../service/localizacion/paisService';
 import {PaisComponent} from './localizacion/pais.component';

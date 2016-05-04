@@ -3,11 +3,10 @@ import {
      ElementRef,Injector,provide,ViewEncapsulation,Component,ComponentRef,Provider
     ,ViewContainerRef
     ,ReflectiveInjector }
-     from 'angular2/core';
-import {PromiseWrapper} from 'angular2/src/facade/promise';
-import {Type,isPresent} from 'angular2/src/facade/lang';
-import { KeyboardEvent} from 'angular2/src/facade/browser';
-import {CONST} from 'angular2/src/facade/lang';
+     from '@angular/core';
+import {PromiseWrapper} from '../../../node_modules/@angular/core/src/facade/promise';
+import {Type,isPresent} from '../../../node_modules/@angular/core/src/facade/lang';
+import { KeyboardEvent} from '../../../node_modules/@angular/platform-browser/esm/src/facade/browser';
 import {KeyCodes} from '../keycode';
 import {AutoFocus} from '../directivas/autofocus.directive';
 
@@ -28,8 +27,8 @@ export class DbpDialogo{
       });
   }
 
-  public confirmar(elemento:ViewContainerRef,dialogoConf:DbpDialogoConfirmarConf):Promise<ComponentRef>{
-      var dbpDialogoRef:DbpDialogoRef=new DbpDialogoRef();
+  public confirmar(elemento:ViewContainerRef,dialogoConf:DbpDialogoConfirmarConf):Promise<ComponentRef<any>>{
+      var dbpDialogoRef:DbpDialogoRef=new DbpDialogoRef()
       var ocultarPromesa=  this.cargador.loadNextToLocation(BlockDialogoComponent,elemento);
       return this.cargador.loadNextToLocation(DialogoConfirarComponent,elemento).then(containerRef =>{
         this.fill(containerRef,dbpDialogoRef,dialogoConf,ocultarPromesa);
@@ -59,7 +58,7 @@ export class DbpDialogo{
     });
   }
 
-  private fill(containerRef:ComponentRef,dbpDialogoRef:DbpDialogoRef,dialogoConf:DbpDialogoBaseConf,ocultarPromesa:Promise<ComponentRef>){
+  private fill(containerRef:ComponentRef<any>,dbpDialogoRef:DbpDialogoRef,dialogoConf:DbpDialogoBaseConf,ocultarPromesa:Promise<ComponentRef<any>>){
     containerRef.instance.configuacion=dialogoConf;
     containerRef.instance.dbpDialogoRef=dbpDialogoRef;
     ocultarPromesa.then(ocultarRef=>{
@@ -77,8 +76,8 @@ export class DbpDialogo{
 **/
 export class DbpDialogoRef{
 
-    _contentRef:ComponentRef; // Representa al componente de la ventana.
-    componenteDentro:ComponentRef; // Representa al componente que hay dentro de la ventana.
+    _contentRef:ComponentRef<any>; // Representa al componente de la ventana.
+    componenteDentro:ComponentRef<any>; // Representa al componente que hay dentro de la ventana.
     elementRefContenedor: ViewContainerRef; // Es elemento ref del contenedor de la ventana modal.
     private isCerrado:Boolean; // Nos indica se venta se ha cerrado.
     contentRefDeferred:any; // Lo usaremos, para sincronizar los datos.
@@ -91,7 +90,7 @@ export class DbpDialogoRef{
       this.cuandoCerramosDeferred=PromiseWrapper.completer();
     }
 
-    set contentRef(valor:ComponentRef){
+    set contentRef(valor:ComponentRef<any>){
         this._contentRef = valor;
         this.contentRefDeferred.resolve(valor);
     }

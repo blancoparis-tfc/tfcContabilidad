@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {Http,Response} from 'angular2/http';
+import {Component} from '@angular/core';
+import {Http,Response} from '@angular/http';
 import {Formulario} from '../../model/formulario';
 import {AutoFocus} from '../../core/directivas/autofocus.directive';
 @Component({

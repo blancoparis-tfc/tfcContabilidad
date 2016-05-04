@@ -1,5 +1,5 @@
-import {Component,ViewContainerRef} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component,ViewContainerRef} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 import {AsientoFiltro,ResumenAsiento} from '../../../model/contabilidad/asientoFiltro';
 import {Asiento} from '../../../model/contabilidad/asiento';
 import {AsientoService} from '../../../service/contabilidad/asientoService';

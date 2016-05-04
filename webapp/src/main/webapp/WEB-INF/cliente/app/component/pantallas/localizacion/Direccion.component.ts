@@ -1,4 +1,4 @@
-import {Component,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from '@angular/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -115,11 +115,11 @@ export class DireccionComponent{
   	isResetearSeleccionado():boolean{
   		return this.modelo.municipio.municipio!=null;
    	}
-  
+
   	resetearMunicipio(){
   		this.modelo.municipio=new Municipio(null,null);
   	}
-  
+
 	municipioSeleccionado():string{
 		if(this.modelo.municipio.municipio!=null){
 			return this.modelo.municipio.municipio;

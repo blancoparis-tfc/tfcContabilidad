@@ -1,5 +1,5 @@
-import {Injectable,ElementRef,Component,DynamicComponentLoader,ComponentRef,ViewContainerRef,ApplicationRef} from 'angular2/core';
-import {PromiseWrapper} from 'angular2/src/facade/promise';
+import {Injectable,ElementRef,Component,DynamicComponentLoader,ComponentRef,ViewContainerRef,ApplicationRef} from '@angular/core';
+import {PromiseWrapper} from '../../../node_modules/@angular/core/src/facade/promise';
 @Injectable()
 export class Mensajeria{
 
@@ -59,7 +59,7 @@ export class Mensajeria{
 export class DbpMensaje{
   mensaje:String;
   clase:String;
-  elemento:ComponentRef;
+  elemento:ComponentRef<any>;
   cerrarMensaje(){
     console.info('Cerramos el elemento');
     this.elemento.destroy()

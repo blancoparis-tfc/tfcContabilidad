@@ -6,13 +6,10 @@
       <c:url value="/" var="contexto" />
 	  <base href="${contexto}">
       <!-- 1. Cargamos las librerias -->
-      <script src="node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
       <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+      <script src="node_modules/zone.js/dist/zone.js"></script>
+      <script src="node_modules/reflect-metadata/Reflect.js"></script>
       <script src="node_modules/systemjs/dist/system.src.js"></script>
-      <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
-      <script src="node_modules/angular2/bundles/angular2.js"></script>
-      <script src="node_modules/angular2/bundles/router.min.js"></script>
-      <script src="node_modules/angular2/bundles/http.min.js"></script>
 
 
       <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -21,19 +18,11 @@
 
       <!-- 2. Configirar SystemJS -->
       <script>
-        System.config({
-          packages: {
-                  '${contexto}/app': {defaultExtension: 'js' },
-                  '${contexto}/node_modules/rxjs': { defaultExtension: 'js' }
-                },
-                paths: {
-                    'rxjs/observable/*' : '${contexto}/node_modules/rxjs/observable/*.js',
-                    'rxjs/operator/*': '${contexto}/node_modules/rxjs/add/operator/*.js',
-                    'rxjs/*': '${contexto}/node_modules/rxjs/*.js'
-                }
-          });
-        System.import('${contexto}/app/boot')
-              .then(null, console.error.bind(console));
+      var ctx ='${contexto}';
+      </script>
+      <script src="systemjs/system.config.js"></script>
+      <script>
+        	System.import('app').catch(function(err){ console.error(err);  });
       </script>
   </head>
   <body>

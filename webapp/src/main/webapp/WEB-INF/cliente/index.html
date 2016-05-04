@@ -3,33 +3,18 @@
       <title> Angular 2 (Hola mundo)</title>
 
       <!-- 1. Cargamos las librerias -->
-      <script src="node_modules/es6-shim/es6-shim.js"></script>
-      <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+      <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+      <script src="node_modules/zone.js/dist/zone.js"></script>
+      <script src="node_modules/reflect-metadata/Reflect.js"></script>
       <script src="node_modules/systemjs/dist/system.src.js"></script>
-      <script src="node_modules/rxjs/bundles/Rx.js"></script>
-      <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-      <script src="node_modules/angular2/bundles/router.dev.js"></script>
-      <script src="node_modules/angular2/bundles/http.dev.js"></script>
-
 
       <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
       <link rel="stylesheet" href="resources/css/style.css">
 
       <!-- 2. Configirar SystemJS -->
+      <script src="system.config.js"></script>
       <script>
-        System.config({
-          packages: {
-                  'app': {defaultExtension: 'js' },
-                  '../node_modules/rxjs': { defaultExtension: 'js' }
-                },
-                paths: {
-                    'rxjs/observable/*' : '../node_modules/rxjs/observable/*.js',
-                    'rxjs/operator/*': '../node_modules/rxjs/add/operator/*.js',
-                    'rxjs/*': '../node_modules/rxjs/*.js'
-                }
-          });
-        System.import('app/boot')
-              .then(null, console.error.bind(console));
+        System.import('app').catch(function(err){ console.error(err);  });
       </script>
   </head>
   <body>

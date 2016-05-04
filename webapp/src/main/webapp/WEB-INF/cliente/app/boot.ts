@@ -1,13 +1,18 @@
-import 'rxjs/operator/map';
-import 'rxjs/operator/mergeMap';
-import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/operator/publishReplay';
+import 'rxjs/add/operator/catch'
 
-import {bootstrap}    from 'angular2/platform/browser';
+
+import {bootstrap}    from '@angular/platform-browser-dynamic';
 import {AppComponent} from './app.component';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {LocationStrategy,HashLocationStrategy} from 'angular2/platform/common'
-import {provide,enableProdMode} from 'angular2/core';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {LocationStrategy,HashLocationStrategy} from '@angular/common/index'
+import {provide,enableProdMode} from '@angular/core';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 import {DbpDialogo,DbpDialogoRef} from './core/modal/dialogo';
 import {Mensajeria} from './core/mensajeria/mensajeria';
