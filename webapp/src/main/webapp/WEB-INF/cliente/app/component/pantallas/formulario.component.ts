@@ -12,12 +12,12 @@ export class FormularioComponent{
 
   constructor(private http:Http){
     this.modelo = new Formulario(null,null);
-    http.get('./app/tipo.json')
+    /*http.get('./app/tipo.json')
     .map((res: Response)=> res.json())
     .subscribe(res =>{
        this.modelo.id=res.id;
        this.modelo.descripcion=res.descripcion;
-     });
+     });*/
   }
 
   onSubmit(){

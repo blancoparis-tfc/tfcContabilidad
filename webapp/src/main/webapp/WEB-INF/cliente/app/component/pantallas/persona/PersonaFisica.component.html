@@ -1,0 +1,83 @@
+<div [hidden]="dbpDialogoRef!=null" class="page-header">
+  <h1>PersonaFisica</h1>
+</div>
+<p class="lead" [hidden]="dbpDialogoRef!=null" >Esta la operaci�n del PersonaFisica.</p>
+<form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
+	<div [hidden]="estado!=eFiltro" class="row">
+		<div  class="col-md-6 form-group">
+			<label>id</label>
+			<input type="text" class="form-control" [(ngModel)]="filtro.id"/>
+		</div>
+		<div  class="col-md-6 form-group">
+			<label>identificadorFiscal</label>
+			<input type="text" class="form-control" [(ngModel)]="filtro.identificadorFiscal"/>
+		</div>
+	</div>
+	<div [hidden]="estado!=eFiltro" class="row">
+		<div  class="col-md-6 form-group">
+			<label>nombre</label>
+			<input type="text" class="form-control" [(ngModel)]="filtro.nombre"/>
+		</div>
+		<div  class="col-md-6 form-group">
+			<label>apellidos</label>
+			<input type="text" class="form-control" [(ngModel)]="filtro.apellidos"/>
+		</div>
+	</div>
+	<div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
+		<div  class="col-md-6 form-group">
+			<label>id</label>
+			<span>{{modelo.id}}</span>
+		</div>
+    <div  class="col-md-6 form-group">
+			<label>Tipo</label>
+      <select class="form-control" [(ngModel)]="modelo.tipoDeIdentificadorFiscal">
+          <option value="DNI">DNI</option>
+          <option value="CIF">CIF</option>
+      </select>
+		</div>
+	</div>
+	<div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
+    <div  class="col-md-6 form-group">
+      <label>identificadorFiscal</label>
+      <input type="text" class="form-control" [(ngModel)]="modelo.identificadorFiscal"/>
+    </div>
+		<div  class="col-md-6 form-group">
+			<label>nombre</label>
+			<input type="text" class="form-control" [(ngModel)]="modelo.nombre"/>
+		</div>
+	</div>
+
+  <div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
+    <div  class="col-md-6 form-group">
+      <label>apellidos</label>
+      <input type="text" class="form-control" [(ngModel)]="modelo.apellidos"/>
+    </div>
+  </div>
+
+	<div [hidden]="estado!=eFiltro"  class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+			<button  type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
+			<button  type="button" class="btn btn-success" (click)="crear()"> Crear </button>
+		</div>
+	</div>
+	<div [hidden]="!(estado==eCrear && estado!=eFiltro && estado!=eModificar)"   class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+			<button  type="button" class="btn btn-success" (click)="guardar()"> guardar </button>
+			<button  type="button" class="btn btn-info" (click)="cancelar()"> cancelar </button>
+		</div>
+	</div>
+	<div [hidden]="!(estado!=eCrear && estado!=eFiltro && estado==eModificar)"   class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+			<button  type="button" class="btn btn-success" (click)="modificar()"> guardar </button>
+			<button  type="button" class="btn btn-danger" (click)="eliminarOp(modelo.id)"> eliminar </button>
+			<button  type="button" class="btn btn-info" (click)="cancelar()"> cancelar </button>
+		</div>
+	</div>
+	<dbp-grid [columnas]="columnas" [filas]="lineas"
+		(eliminar)="eliminar($event)"
+		(seleccionar)="seleccionar($event)">
+	</dbp-grid>
+</form>

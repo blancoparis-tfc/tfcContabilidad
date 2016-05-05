@@ -44,6 +44,7 @@
         "app/component/pantallas/localizacion/Municipio.component.ts",
         "app/component/pantallas/localizacion/pais.component.ts",
         "app/component/pantallas/localizacion/Provincia.component.ts",
+        "app/component/pantallas/persona/PersonaFisica.component.ts",
         "app/core/directivas/autofocus.directive.ts",
         "app/core/keycode.ts",
         "app/core/mensajeria/mensajeria.ts",
@@ -61,6 +62,7 @@
         "app/model/localizacion/Municipio.ts",
         "app/model/localizacion/pais.ts",
         "app/model/localizacion/Provincia.ts",
+        "app/model/persona/PersonaFisica.ts",
         "app/service/contabilidad/asientoService.ts",
         "app/service/contabilidad/cuentaContableService.ts",
         "app/service/core/GenericService.ts",
@@ -70,6 +72,7 @@
         "app/service/localizacion/MunicipioService.ts",
         "app/service/localizacion/paisService.ts",
         "app/service/localizacion/ProvinciaService.ts",
+        "app/service/persona/PersonaFisicaService.ts",
         "typings/browser.d.ts",
         "typings/browser/ambient/es6-shim/index.d.ts",
         "typings/browser/ambient/jasmine/index.d.ts"
