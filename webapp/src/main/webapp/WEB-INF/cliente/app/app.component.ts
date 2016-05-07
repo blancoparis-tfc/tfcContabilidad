@@ -10,6 +10,9 @@ import {CuentaContableComponent} from "./component/pantallas/contabilidad/cuenta
 import {AsientoComponent} from './component/pantallas/contabilidad/asiento.component';
 import {AsientoFiltroComponent} from './component/pantallas/contabilidad/asientoFiltro.component';
 import {DireccionComponent} from './component/pantallas/localizacion/Direccion.component';
+import {PersonaFisicaComponent} from './component/pantallas/persona/PersonaFisica.component';
+import {PersonaFisicaFichaComponent} from './component/pantallas/persona/PersonaFisicaFicha.component';
+
 
 @RouteConfig([
   {path: '/About', component: AboutComponent, as:'About'},
@@ -18,7 +21,9 @@ import {DireccionComponent} from './component/pantallas/localizacion/Direccion.c
   {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'},
   {path: '/AsientoFicha', component: AsientoComponent, as:"AsientoFicha"},
   {path: '/Asiento', component: AsientoFiltroComponent, as:"Asiento"},
-  {path: '/Direccion', component:DireccionComponent, as:"Direccion"}
+  {path: '/Direccion', component:DireccionComponent, as:"Direccion"},
+  {path: '/PersonaFisica', component:PersonaFisicaComponent, as:"PersonaFisica"},
+  {path: '/PersonaFisicaFicha', component:PersonaFisicaFichaComponent, as:"PersonaFisicaFicha"}
 ])
 
 @Component({

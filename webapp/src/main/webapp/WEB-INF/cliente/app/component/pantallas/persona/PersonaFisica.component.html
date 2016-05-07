@@ -2,58 +2,57 @@
   <h1>PersonaFisica</h1>
 </div>
 <p class="lead" [hidden]="dbpDialogoRef!=null" >Esta la operaci�n del PersonaFisica.</p>
-<form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
-	<div [hidden]="estado!=eFiltro" class="row">
-		<div  class="col-md-6 form-group">
-			<label>id</label>
-			<input type="text" class="form-control" [(ngModel)]="filtro.id"/>
-		</div>
-		<div  class="col-md-6 form-group">
-			<label>identificadorFiscal</label>
-			<input type="text" class="form-control" [(ngModel)]="filtro.identificadorFiscal"/>
-		</div>
-	</div>
-	<div [hidden]="estado!=eFiltro" class="row">
-		<div  class="col-md-6 form-group">
-			<label>nombre</label>
-			<input type="text" class="form-control" [(ngModel)]="filtro.nombre"/>
-		</div>
-		<div  class="col-md-6 form-group">
-			<label>apellidos</label>
-			<input type="text" class="form-control" [(ngModel)]="filtro.apellidos"/>
-		</div>
-	</div>
-	<div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
-		<div  class="col-md-6 form-group">
-			<label>id</label>
-			<span>{{modelo.id}}</span>
-		</div>
-    <div  class="col-md-6 form-group">
-			<label>Tipo</label>
-      <select class="form-control" [(ngModel)]="modelo.tipoDeIdentificadorFiscal">
-          <option value="DNI">DNI</option>
-          <option value="CIF">CIF</option>
-      </select>
-		</div>
-	</div>
-	<div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
-    <div  class="col-md-6 form-group">
-      <label>identificadorFiscal</label>
-      <input type="text" class="form-control" [(ngModel)]="modelo.identificadorFiscal"/>
-    </div>
-		<div  class="col-md-6 form-group">
-			<label>nombre</label>
-			<input type="text" class="form-control" [(ngModel)]="modelo.nombre"/>
-		</div>
-	</div>
-
-  <div [hidden]="estado!=eCrear && estado!=eModificar" class="row">
-    <div  class="col-md-6 form-group">
-      <label>apellidos</label>
-      <input type="text" class="form-control" [(ngModel)]="modelo.apellidos"/>
-    </div>
-  </div>
-
+<form (ngSubmit)="onSubmit()" #formularioForm="ngForm"  class="form-inline">
+  <section [hidden]="estado!=eFiltro" >
+  	<div  class="row">
+  		<div  class="col-md-6 form-group">
+  			<label>id</label>
+  			<input type="text" class="form-control" [(ngModel)]="filtro.id"/>
+  		</div>
+  		<div  class="col-md-6 form-group">
+  			<label>identificadorFiscal</label>
+  			<input type="text" class="form-control" [(ngModel)]="filtro.identificadorFiscal"/>
+  		</div>
+  	</div>
+    <br/>
+  	<div  class="row">
+  		<div  class="col-md-6 form-group">
+  			<label>nombre</label>
+  			<input type="text" class="form-control" [(ngModel)]="filtro.nombre"/>
+  		</div>
+  		<div  class="col-md-6 form-group">
+  			<label>apellidos</label>
+  			<input type="text" class="form-control" [(ngModel)]="filtro.apellidos"/>
+  		</div>
+  	</div>
+  </section>
+  <section [hidden]="estado!=eCrear && estado!=eModificar">
+  	<div  class="row">
+  		<div  class="col-md-6 form-group">
+  			<label>id</label>
+  			<span>{{modelo.id}}</span>
+  		</div>
+      <div  class="col-md-6 form-group">
+        <label>Identificador fiscal</label>
+        <select class="form-control" [(ngModel)]="modelo.tipoDeIdentificadorFiscal">
+            <option value="DNI">DNI</option>
+            <option value="CIF">CIF</option>
+        </select>
+        <input type="text" class="form-control" [(ngModel)]="modelo.identificadorFiscal"/>
+      </div>
+  	</div>
+    <br/>
+  	<div  class="row">
+  		<div  class="col-md-6 form-group">
+  			<label>nombre</label>
+  			<input type="text" class="form-control" [(ngModel)]="modelo.nombre"/>
+  		</div>
+      <div  class="col-md-6 form-group">
+  			<label>apellidos</label>
+  			<input type="text" class="form-control" [(ngModel)]="modelo.apellidos"/>
+  		</div>
+  	</div>
+  </section>
 	<div [hidden]="estado!=eFiltro"  class="row">
 		<div  class="col-md-6 form-group">
 			<br/>

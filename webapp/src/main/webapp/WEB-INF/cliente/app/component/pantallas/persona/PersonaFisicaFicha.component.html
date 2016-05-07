@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit()" #formularioForm="ngForm" class="form-inline">
+<div  class="page-header">
+  <h1>PersonaFisica</h1>
+</div>
+<p class="lead" >Esta la operaci�n del PersonaFisica.</p>
+    	<div class="row">
+    		<div  class="col-md-6 form-group">
+    			<label>id</label>
+    			<span>{{modelo.id}}</span>
+    		</div>
+        <div  class="col-md-6 form-group">
+    			<label>Identificador fiscal</label>
+          <select class="form-control" [(ngModel)]="modelo.tipoDeIdentificadorFiscal">
+              <option value="DNI">DNI</option>
+              <option value="CIF">CIF</option>
+          </select>
+          <input type="text" class="form-control" [(ngModel)]="modelo.identificadorFiscal"/>
+    		</div>
+    	</div>
+    <br/>
+    	<div class="row">
+    		<div  class="col-md-6 form-group">
+    			<label>nombre</label>
+    			<input type="text" class="form-control" [(ngModel)]="modelo.nombre"/>
+    		</div>
+        <div  class="col-md-6 form-group">
+          <label>apellidos</label>
+          <input type="text" class="form-control" [(ngModel)]="modelo.apellidos"/>
+        </div>
+    	</div>
+	<div class="row">
+		<div  class="col-md-6 form-group">
+			<br/>
+				<button type="submit" class="btn btn-success">{{etiquetaEstado}}</button>
+				<button *ngIf="isModificar()" type="button" class="btn btn-danger" (click)="eliminar(modelo.id)"> eliminar </button>
+				<button type="button" class="btn btn-info" (click)="volver()">volver</button>
+		</div>
+	</div>
+  <dbp-grid [columnas]="columnas" [filas]="modelo.datosDeContacto"
+      (crearNuevaLinea)="crearNuevaLinea()"
+      (eliminar)="eliminarLinea($event)">
+  </dbp-grid>
+</form>

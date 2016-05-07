@@ -45,6 +45,7 @@
         "app/component/pantallas/localizacion/pais.component.ts",
         "app/component/pantallas/localizacion/Provincia.component.ts",
         "app/component/pantallas/persona/PersonaFisica.component.ts",
+        "app/component/pantallas/persona/PersonaFisicaFicha.component.ts",
         "app/core/directivas/autofocus.directive.ts",
         "app/core/keycode.ts",
         "app/core/mensajeria/mensajeria.ts",

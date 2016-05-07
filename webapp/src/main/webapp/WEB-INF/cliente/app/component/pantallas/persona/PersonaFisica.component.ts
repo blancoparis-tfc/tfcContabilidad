@@ -1,4 +1,6 @@
 import {Component,ViewContainerRef} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
+
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -31,9 +33,10 @@ export class PersonaFisicaComponent{
       ,private personaFisicaService:PersonaFisicaService
       ,private mensajeria:Mensajeria
       ,private dbpDialogoRef:DbpDialogoRef
+      ,private router:Router
     ){
       this.filtro = new PersonaFisicaFiltro("","","","");
-      this.modelo = new PersonaFisica(null,null,null,null,null);
+      this.modelo = new PersonaFisica(null,null,null,null,null,[]);
       this.lineas=[];
       this.columnas=this.getColumnas();
       this.transitarFiltro();
@@ -48,8 +51,12 @@ export class PersonaFisicaComponent{
     }
 
     crear(){
-		this.transitarCrear();
-		this.modelo = new PersonaFisica(null,null,null,null,null);
+        if(this.dbpDialogoRef!=null){
+			this.transitarCrear();
+			this.modelo = new PersonaFisica(null,null,null,null,null,[]);
+        }else{
+			this.router.navigate(['/PersonaFisicaFicha']);
+        }
 	}
 
 	cancelar(){
@@ -60,8 +67,10 @@ export class PersonaFisicaComponent{
       this.operaciones.crear(
         new DbpDialogoConfirmarConf('¿Quiere crear una nueva personaFisica?','PersonaFisica'),this.modelo
         ,(data)=>{
-          this.mensajeria.success(this.elemento,'Se ha creado la personaFisica ('+data.id+') correctamente.');
+          this.modelo = data;
           this.lineas.push(data);
+          this.transitarModificar();
+          this.mensajeria.success(this.elemento,'Se ha creado la personaFisica ('+data.id+') correctamente.');
         });
     }
 
@@ -69,14 +78,18 @@ export class PersonaFisicaComponent{
       this.operaciones.actualizar(
         new DbpDialogoConfirmarConf('¿Quiere actualizar la personaFisica?','PersonaFisica'),this.modelo
         ,(data)=>{
-          this.mensajeria.success(this.elemento,'Se actualizado la personaFisica ('+data.id+') correctamente.');
           this.transitarFiltro();
+          this.mensajeria.success(this.elemento,'Se actualizado la personaFisica ('+data.id+') correctamente.');
         });
     }
 
 	seleccionar(fila:any){
-		this.modelo=fila;
-		this.transitarModificar();
+    if(this.dbpDialogoRef!=null){
+  		this.modelo=fila;
+  		this.transitarModificar();
+    }else{
+      this.router.navigate(['/PersonaFisicaFicha',{id:fila.id}]);
+    }
 	}
 
     eliminarOp(id:number){
@@ -110,8 +123,7 @@ export class PersonaFisicaComponent{
     private getColumnas():Array<Columna>{
       return [
 			new Columna('id','id',TIPO_NO_EDITABLE),
-      new Columna('tipoDeIdentificadorFiscal','Tipo',TIPO_NO_EDITABLE),
-			new Columna('identificadorFiscal','Identificador Fiscal',TIPO_NO_EDITABLE),
+			new Columna('identificadorFiscal','identificadorFiscal',TIPO_NO_EDITABLE),
 			new Columna('nombre','nombre',TIPO_NO_EDITABLE),
 			new Columna('apellidos','apellidos',TIPO_NO_EDITABLE)
       ];
