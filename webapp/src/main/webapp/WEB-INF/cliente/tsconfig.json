@@ -38,6 +38,7 @@
         "app/component/pantallas/contabilidad/cuentaContable.component.ts",
         "app/component/pantallas/contact.component.ts",
         "app/component/pantallas/formulario.component.ts",
+        "app/component/pantallas/inicio.component.ts",
         "app/component/pantallas/localizacion/ComunidadAutonoma.component.ts",
         "app/component/pantallas/localizacion/DatosDeContacto.component.ts",
         "app/component/pantallas/localizacion/Direccion.component.ts",
