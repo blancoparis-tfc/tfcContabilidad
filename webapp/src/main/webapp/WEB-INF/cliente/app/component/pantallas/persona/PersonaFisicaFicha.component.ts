@@ -9,6 +9,7 @@ import {DatosDeContacto} from '../../../model/localizacion/DatosDeContacto';
 import {Direccion} from '../../../model/localizacion/Direccion';
 import {PersonaFisicaService} from '../../../service/persona/PersonaFisicaService';
 import {Grid} from '../../comun/grid/grid';
+import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE,TiposEditables,Acciones} from '../../comun/grid/columna';
 import {MunicipioComponent} from '../localizacion/Municipio.component';
 import {Municipio} from '../../../model/localizacion/Municipio';
@@ -17,7 +18,7 @@ import {Municipio} from '../../../model/localizacion/Municipio';
   selector:'PersonaFisicaFicha',
   templateUrl:'app/component/pantallas/persona/PersonaFisicaFicha.component.html',
   providers:[PersonaFisicaService],
-  directives:[Grid]
+  directives:[Grid,AutoFocus]
 })
 export class PersonaFisicaFichaComponent{
 

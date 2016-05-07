@@ -7,7 +7,7 @@
   	<div  class="row">
   		<div  class="col-md-6 form-group">
   			<label>id</label>
-  			<input type="text" class="form-control" [(ngModel)]="filtro.id"/>
+  			<input type="text" class="form-control" [(ngModel)]="filtro.id" [autofocus]/>
   		</div>
   		<div  class="col-md-6 form-group">
   			<label>identificadorFiscal</label>
@@ -34,7 +34,7 @@
   		</div>
       <div  class="col-md-6 form-group">
         <label>Identificador fiscal</label>
-        <select class="form-control" [(ngModel)]="modelo.tipoDeIdentificadorFiscal">
+        <select class="form-control" [(ngModel)]="modelo.tipoDeIdentificadorFiscal"  >
             <option value="DNI">DNI</option>
             <option value="CIF">CIF</option>
         </select>
