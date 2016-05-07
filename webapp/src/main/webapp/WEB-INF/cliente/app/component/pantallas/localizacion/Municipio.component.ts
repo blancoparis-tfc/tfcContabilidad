@@ -5,6 +5,7 @@ import {Grid} from '../../comun/grid/grid';
 import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 import {Municipio,MunicipioFiltro} from '../../../model/localizacion/Municipio';
 import {MunicipioService} from '../../../service/localizacion/MunicipioService';
+import {ProvinciaComponent} from './Provincia.component';
 
 
 @Component({
@@ -44,6 +45,14 @@ export class MunicipioComponent{
         }
     }
 
+    buscarProvincia(){
+        this.dialogo.abrir(ProvinciaComponent,this.viewContainerRef,new DbpDialogoBaseConf('Provincia')).then(dialogoRef=>{
+          dialogoRef.cuandoCerramos.then((_)=>{
+              this.modelo.provincia=dialogoRef.componenteDentro.instance.seleccion.nombre;
+          });
+            return dialogoRef;
+        });
+    }
 
     private getColumnas():Array<Columna>{
       return [
