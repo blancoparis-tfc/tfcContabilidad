@@ -13,12 +13,14 @@ import {ComunidadAutonomaService} from '../../../service/localizacion/ComunidadA
 })
 export class ComunidadAutonomaComponent{
     modelo:ComunidadAutonomaFiltro;
+    seleccion:ComunidadAutonoma;
     lineas:Array<ComunidadAutonoma>;
     columnas:Array<Columna>;
     constructor(
       private dialogo:DbpDialogo
       ,private ComunidadAutonomaService:ComunidadAutonomaService
       ,private viewContainerRef:ViewContainerRef
+      ,private dbpDialogoRef:DbpDialogoRef
     ){
 
       this.modelo = new ComunidadAutonomaFiltro("","");
@@ -31,6 +33,13 @@ export class ComunidadAutonomaComponent{
         .subscribe(res=>{
         this.lineas=res.json();
       });
+    }
+
+    seleccionar(fila:any){
+        this.seleccion=fila;
+        if(this.dbpDialogoRef!=null){
+            this.dbpDialogoRef.cerrar();
+        }
     }
 
     private getColumnas():Array<Columna>{

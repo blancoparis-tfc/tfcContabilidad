@@ -6,6 +6,7 @@ import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 import {Municipio,MunicipioFiltro} from '../../../model/localizacion/Municipio';
 import {MunicipioService} from '../../../service/localizacion/MunicipioService';
 import {ProvinciaComponent} from './Provincia.component';
+import {ComunidadAutonomaComponent} from './ComunidadAutonoma.component';
 
 
 @Component({
@@ -52,6 +53,14 @@ export class MunicipioComponent{
           });
             return dialogoRef;
         });
+    }
+    buscarComunidad(){
+      this.dialogo.abrir(ComunidadAutonomaComponent,this.viewContainerRef,new DbpDialogoBaseConf('Comunidad Autonoma')).then(dialogoRef=>{
+        dialogoRef.cuandoCerramos.then((_)=>{
+            this.modelo.comunidadAutonoma=dialogoRef.componenteDentro.instance.seleccion.nombre;
+        });
+          return dialogoRef;
+      });
     }
 
     private getColumnas():Array<Columna>{

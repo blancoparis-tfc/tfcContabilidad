@@ -16,5 +16,7 @@
 			<button type="button" class="btn btn-success" (click)="consultar()"> Consultar </button>
 		</div>
 	</div>
-	<dbp-grid [columnas]="columnas" [filas]="lineas"></dbp-grid>
+	<dbp-grid [columnas]="columnas" [filas]="lineas"
+	(seleccionar)="seleccionar($event)"
+	></dbp-grid>
 </form>
