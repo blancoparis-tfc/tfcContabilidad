@@ -10,6 +10,8 @@ import {Direccion} from '../../../model/localizacion/Direccion';
 import {PersonaFisicaService} from '../../../service/persona/PersonaFisicaService';
 import {Grid} from '../../comun/grid/grid';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE,TiposEditables,Acciones} from '../../comun/grid/columna';
+import {MunicipioComponent} from '../localizacion/Municipio.component';
+import {Municipio} from '../../../model/localizacion/Municipio';
 
 @Component({
   selector:'PersonaFisicaFicha',
@@ -37,7 +39,9 @@ export class PersonaFisicaFichaComponent{
 	 	this.transitarCrear();
 		if(identificador!=null){
 			this.personaFisicaService.obtenerId(Number(identificador),this.viewContainerRef).subscribe(data=>{
-			this.modelo=data;
+      console.info('antes',this.modelo);
+      this.parser(data);
+      console.info('despues',this.modelo);
       if(this.modelo.datosDeContacto.length==0){
         this.crearNuevaLinea();
       }
@@ -48,8 +52,20 @@ export class PersonaFisicaFichaComponent{
 		this.operaciones = new OperacionesUtils<PersonaFisica,number>(dialogo,personaFisicaService,viewContainerRef);
 	  }
 
+    accion(evento:[Columna,any]){
+      if(evento[0].nombre==='municipio'){
+        this.dialogo.abrir(MunicipioComponent,this.viewContainerRef,new DbpDialogoBaseConf('municipio')).then(dialogoRef=>{
+          dialogoRef.cuandoCerramos.then((_)=>{
+          console.info('Obtenemos el municipio');
+            evento[1].direccion.municipio=dialogoRef.componenteDentro.instance.seleccion;
+          });
+          return dialogoRef;
+        });
+      }
+    }
+
     crearNuevaLinea(){
-          this.modelo.datosDeContacto.push(new DatosDeContacto(null,'','','',new Direccion(null,null,null)));
+          this.modelo.datosDeContacto.push(new DatosDeContacto(null,'','','',new Direccion(null,null,new Municipio(null,null))));
     }
 
     eliminarLinea(elemento:any){
@@ -63,7 +79,9 @@ export class PersonaFisicaFichaComponent{
         new Columna('id','id',TIPO_NO_EDITABLE),
         new Columna('telefono','telefono',TIPO_EDITABLE),
         new Columna('nombre','nombre',TIPO_EDITABLE),
-        new Columna('direccionDeCorreo','direccionDeCorreo',TIPO_EDITABLE)
+        new Columna('direccionDeCorreo','direccionDeCorreo',TIPO_EDITABLE),
+        new Columna('direccionDescripcion','direccionDescripcion',TIPO_EDITABLE),
+        new Columna('municipio','Municipio',TIPO_EDITABLE)
         // Faltaria la parte de la dirección
     ];
   }
@@ -84,7 +102,7 @@ export class PersonaFisicaFichaComponent{
 	    this.operaciones.crear(
 	      new DbpDialogoConfirmarConf('¿Quiere crear una nueva personaFisica?','personaFisica'),this.modelo
 	      ,(data)=>{
-          this.modelo=data;
+          this.parser(data);
 	        this.mensajeria.success(this.viewContainerRef,'Se actualizado la personaFisica ('+data.id+') correctamente.');
 	        this.transitarModificar();
 	      });
@@ -94,7 +112,7 @@ export class PersonaFisicaFichaComponent{
 		this.operaciones.actualizar(
 			new DbpDialogoConfirmarConf('¿Quiere actualizar el personaFisica?','personaFisica'),this.modelo
 			,(data)=>{
-        this.modelo=data;
+        this.parser(data);
 				this.mensajeria.success(this.viewContainerRef,'Se actualizado el personaFisica ('+data.id+') correctamente.');
 		});
 	}
@@ -107,6 +125,16 @@ export class PersonaFisicaFichaComponent{
 				this.transitarCrear();
 		});
 	}
+
+  parser(res:any){
+    // TODO: Apaño por al recuperar los objetos no los instancia al objeto que nos interesa.
+    this.modelo=Object.assign(new PersonaFisica(null,null,null,null,null,null),res);
+    this.modelo.datosDeContacto=this.modelo.datosDeContacto.map((linea)=>
+      new DatosDeContacto(linea.id,linea.telefono,linea.nombre,linea.direccionDeCorreo,
+          new Direccion(linea.direccion.id,linea.direccion.direccion,
+              new Municipio(linea.direccion.municipio.id,linea.direccion.municipio.municipio)))
+    );
+  }
 
 	isModificar():boolean{
 		return this.estado == Estado.MODIFICAR;

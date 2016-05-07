@@ -38,6 +38,7 @@
 	</div>
   <dbp-grid [columnas]="columnas" [filas]="modelo.datosDeContacto"
       (crearNuevaLinea)="crearNuevaLinea()"
+      (accion)="accion($event)"
       (eliminar)="eliminarLinea($event)">
   </dbp-grid>
 </form>
