@@ -14,7 +14,11 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter  {
 	public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception { //NOPMD
 		auth
 			.inMemoryAuthentication()
-				.withUser("user").password("password").roles("USER");
+				.withUser("user").password("password").roles("USER","ADMINISTRACION","CONTABLE")
+				.and()
+				.withUser("contable").password("contable").roles("ADMINISTRACION")
+				.and()
+				.withUser("administrador").password("administrador").roles("CONTABLE");
 	}
 
 	@Override
