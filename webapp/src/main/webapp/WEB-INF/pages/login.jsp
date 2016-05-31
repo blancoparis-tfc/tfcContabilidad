@@ -8,7 +8,10 @@
 <body>
 
     <div class="container">
-<form action="${loginUrl}" method="post" class="form-signin">   
+ <% if (request.getParameter("error") != null) {%>
+	<div class="alert alert-danger" role="alert">Los datos de usuario/contraseña no son validos</div>
+ <%} %>
+ <form action="${loginUrl}" method="post" class="form-signin">   
 	<h2 class="form-signin-heading">Login</h2>    
 
 		<label for="username">Usuario</label>

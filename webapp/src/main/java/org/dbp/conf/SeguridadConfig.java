@@ -30,6 +30,7 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter  {
 			.and()
 		.formLogin()	// Configurar el formato de login.
 			.loginPage("/login") // aqui le indicamos donde se encuentra la pagina de login.
+			.failureUrl("/login?error=true")
 			.permitAll();// Aqui le indicamos que la pagina de login es publica.*/
 	}
 	
