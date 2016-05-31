@@ -38,9 +38,13 @@
               </a>
           </th>
           <th> Operaciones</th>
-          <th> Estado </th>
       </tr>
     </thead>
+    <tr *ngIf="ventana.length == 0">
+      <td >
+        No hay datos
+      </td>
+    </tr>
     <tr *ngFor="let fila of ventana" (dblclick)="onSeleccionar(fila)">
         <td *ngFor="let columna of columnas"
           (keyup.control.F6)="accionF6(columna,fila)"
@@ -56,10 +60,6 @@
         </td>
         <td>
           <span class="glyphicon glyphicon-trash" (click)="onEliminar(fila)"></span>
-        </td>
-        <td>
-          Estado
-           {{fila.estado}}
         </td>
     </tr>
 </table>
