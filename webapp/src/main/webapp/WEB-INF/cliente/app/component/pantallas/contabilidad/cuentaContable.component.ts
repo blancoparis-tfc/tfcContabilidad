@@ -77,9 +77,17 @@ export class CuentaContableComponent implements OnInit,OnDestroy{
 
   consultar(){
       //TODO: Falta por asociarlo a un servicio.
-      this.lineas.push(new CuentaContable('0001','p1'));
-      this.lineas.push(new CuentaContable('0002','p2'));
-      this.lineas.push(new CuentaContable('0003','p3'));
+      if(this.modelo.cuenta!=""){
+          this.lineas = [];
+          this.cuentaContableService.obtenerId(this.modelo.cuenta,this.viewContainerRef).subscribe(res=>{
+
+            this.lineas.push(res);
+          })
+      }else{
+          this.cuentaContableService.obtenerTodos(this.viewContainerRef).subscribe(res=>{
+              this.lineas=res;
+          });
+      }
   }
 
   eliminar(elemento:any){

@@ -33,5 +33,8 @@ export class CuentaContableService {
       return this.genericService.obtenerTodos(elemento);
   }
 
+  public obtenerId(id:string,elemento:ViewContainerRef):Observable<CuentaContable>{
+    return this.genericService.obtenerId(id,elemento);
+  }
 
 }
