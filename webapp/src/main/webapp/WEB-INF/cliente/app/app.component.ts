@@ -15,15 +15,15 @@ import {InicioComponent} from './component/pantallas/inicio.component';
 
 
 @RouteConfig([
-  {path: '/About', component: AboutComponent, as:'About'},
-  {path: '/Contacto', component: ContactComponent,as:'Contacto'},
-  {path: '/Formulario', component: FormularioComponent,as:'Formulario'},
-  {path: '/CuentaContable', component: CuentaContableComponent,as:'CuentaContable'},
-  {path: '/AsientoFicha', component: AsientoComponent, as:"AsientoFicha"},
-  {path: '/Asiento', component: AsientoFiltroComponent, as:"Asiento"},
-  {path: '/PersonaFisica', component:PersonaFisicaComponent, as:"PersonaFisica"},
-  {path: '/PersonaFisicaFicha', component:PersonaFisicaFichaComponent, as:"PersonaFisicaFicha"},
-  {path: '/Inicio', component:InicioComponent, as:"Inicio"}
+  {path: '/About', component: AboutComponent, name:'About'},
+  {path: '/Contacto', component: ContactComponent,name:'Contacto'},
+  {path: '/Formulario', component: FormularioComponent,name:'Formulario'},
+  {path: '/CuentaContable', component: CuentaContableComponent,name:'CuentaContable'},
+  {path: '/AsientoFicha', component: AsientoComponent, name:"AsientoFicha"},
+  {path: '/Asiento', component: AsientoFiltroComponent, name:"Asiento"},
+  {path: '/PersonaFisica', component:PersonaFisicaComponent, name:"PersonaFisica"},
+  {path: '/PersonaFisicaFicha', component:PersonaFisicaFichaComponent, name:"PersonaFisicaFicha"},
+  {path: '/Inicio', component:InicioComponent, name:"Inicio"}
 ])
 
 @Component({

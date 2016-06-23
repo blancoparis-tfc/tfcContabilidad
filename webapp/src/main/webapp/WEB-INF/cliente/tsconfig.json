@@ -77,7 +77,8 @@
         "app/service/persona/PersonaFisicaService.ts",
         "typings/browser.d.ts",
         "typings/browser/ambient/es6-shim/index.d.ts",
-        "typings/browser/ambient/jasmine/index.d.ts"
+        "typings/browser/ambient/jasmine/index.d.ts",
+        "typings/index.d.ts"
     ],
     "exclude": [
         "node_modules",
