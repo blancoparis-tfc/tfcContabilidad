@@ -6,7 +6,7 @@
       <c:url value="/" var="contexto" />
 	  <base href="${contexto}">
       <!-- 1. Cargamos las librerias -->
-      <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+      <script src="node_modules/core-js/client/shim.min.js"></script>
       <script src="node_modules/zone.js/dist/zone.min.js"></script>
       <script src="node_modules/reflect-metadata/Reflect.js"></script>
       <script src="node_modules/systemjs/dist/system.js"></script>
