@@ -75,7 +75,6 @@
         "app/service/localizacion/paisService.ts",
         "app/service/localizacion/ProvinciaService.ts",
         "app/service/persona/PersonaFisicaService.ts",
-      
         "typings/globals/core-js/index.d.ts",
         "typings/globals/node/index.d.ts",
         "typings/index.d.ts"

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router-deprecated';
-import {Location} from '@angular/common/index';
+import {Location} from '@angular/common';
 @Component({
   selector:'dpbCabecera',
   templateUrl:'app/component/comun/cabecera.component.html',

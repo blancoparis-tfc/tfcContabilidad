@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {RouteConfig,RouterOutlet} from '@angular/router-deprecated';
-import {Location} from '@angular/common/index';
+import {Location} from '@angular/common';
+
+//import {Location} from '@angular/common/index';
 import {CabeceraComponent} from './component/comun/cabecera.component';
 import {PieComponent} from './component/comun/pie.component';
 import {AboutComponent} from './component/pantallas/about.component';
